@@ -1,0 +1,26 @@
+#HomePage {
+    background-image: url("../../img/BackgroundHomePage.png");
+    background-size: cover;
+
+    & svg {
+
+        // Desktop
+        @media (min-width: 992px) {
+            width: 26.94vw;
+            height: 6.53vw;
+        }
+
+        //Tablet =>
+        @media (min-width: 768px) and (max-width: 991px) {
+            width: 60.54vw;
+            height: 17.38vw;
+        }
+
+        //Mobile =>
+        @media (max-width: 767px) {
+            width: 65.38vw;
+            height: 17.95vw;
+        }
+    }
+
+}

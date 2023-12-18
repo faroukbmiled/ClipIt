@@ -1,0 +1,120 @@
+.layoutAuth {
+    width: 100%;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & .wrapper {
+        width: 100%;
+    }
+
+    // Desktop
+    @media (min-width: 992px) {
+        max-width: 29.65vw;
+    }
+
+    //Tablet & Mobile =>
+    @media (max-width: 992px) {
+        padding: 20px 20px 56px 20px;
+    }
+
+
+}
+
+.auth-layout {
+    height: 100vh;
+
+    & .layout-header {
+        display: none !important;
+    }
+
+    & .ant-form-item {
+        margin: 0 !important;
+    }
+
+    & .layout-wrapper {
+        height: 100%;
+
+        & .layout-content {
+            height: 100%;
+
+            & .content-wrapper {
+                height: 100%;
+            }
+
+            & .left_side {
+                background-color: black;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+
+    //Tablet & Mobile =>
+    @media (max-width: 992px) {
+        & .layout-wrapper {
+            justify-content: space-between;
+
+            & .layout-header {
+                display: flex !important;
+            }
+
+            & .layout-content {
+                flex: unset !important;
+
+                & .left_side {
+                    display: none !important;
+                }
+
+
+                & .content-wrapper {
+                    flex: unset !important;
+                    flex-direction: column;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    //Tablet & Mobile =>
+    @media (max-width: 992px) {
+        .form_header {
+            align-items: flex-start;
+
+            & p {
+                text-align: left !important;
+            }
+        }
+    }
+
+    //Tablet =>
+    @media (min-width: 768px) and (max-width: 991px) {
+        & .layout-header {
+            & svg {
+                width: 30.64vw;
+                height: 10.8vw;
+            }
+        }
+
+        & .ant-form-item-explain-error {
+            font-size: $s12-t;
+        }
+    }
+
+    //Mobile =>
+    @media (max-width: 767px) {
+        & .layout-header {
+            & svg {
+                width: 42.05vw;
+                height: 10.26vw;
+            }
+        }
+
+        & .ant-form-item-explain-error {
+            font-size: $s12-m;
+        }
+    }
+}
