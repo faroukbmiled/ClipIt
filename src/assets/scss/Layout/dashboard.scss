@@ -1,0 +1,98 @@
+#dashboard-layout {
+    width: 100vw;
+
+    overflow: hidden;
+    background-color: white;
+
+    & .layout-wrapper {
+        height: 100%;
+
+        & .navbar-top {
+            border-bottom: $s2-d solid #E0E0E0;
+        }
+
+        & .extended {
+            & .navbar-left {
+                width: 18vw !important;
+
+                & .sideControl {
+                    & svg {
+                        transform: rotate(180deg);
+                        transition: all 0.3s;
+                    }
+                }
+
+                & ul {
+                    & a {
+                        & p {
+                            opacity: 1 !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        & .body-wrapper {
+            // 
+            height: 100%;
+            display: flex;
+
+
+            & .navbar-left {
+                transition: all 0.3s;
+                width: 4.86vw;
+                height: 100%;
+                border-right: $s2-d solid #E0E0E0;
+            }
+
+            & .body-content {
+                width: -webkit-fill-available;
+                height: 100%;
+
+            }
+        }
+    }
+
+    // Desktop
+    @media (min-width: 992px) {
+        height: 100vh;
+
+        & .body-content {
+            height: 90vh !important;
+            overflow-y: scroll;
+            padding-right: unset !important;
+        }
+    }
+
+    //Tablet & Mobile =>
+    @media (max-width: 992px) {
+        background-color: #FEFEFE !important;
+        & .navbar-top {
+            border: unset !important;
+        }
+        & .body-wrapper {
+            
+            // 
+            height: 100%;
+            display: flex;
+            & .body-content {
+                padding-top: unset !important;
+            }
+
+            & .navbar-left {
+                display: none;
+            }
+            & .title_tab {
+                font-size: 32px !important;
+                border-bottom: 2px solid #F1F1F1;
+                padding-bottom: 12px;
+            }
+        }
+    }
+
+    //Tablet =>
+    @media (min-width: 768px) and (max-width: 991px) {}
+
+    //Mobile =>
+    @media (max-width: 767px) {}
+}

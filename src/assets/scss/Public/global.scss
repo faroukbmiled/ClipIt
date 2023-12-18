@@ -1,0 +1,77 @@
+.btn {
+    padding: $s10-d 4.86vw;
+    border-width: $s2-d;
+    border-radius: $s5-d;
+    outline: unset;
+    border-style: solid;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: unset;
+}
+
+.btn-primary {
+    background-color: $primary-color;
+    color: $white-color;
+    border-color: $primary-color;
+}
+
+.btn-light {
+    color: $grey-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-color: $light-grey;
+    background-color: transparent;
+}
+
+.inp_col {
+    gap: $s5-d;
+}
+
+.light-input {
+
+    & label {
+        color: $grey-color;
+    }
+
+    & ::placeholder {
+        color: $placeholder-color;
+    }
+
+    & input {
+        color: $grey-color;
+        text-transform: lowercase;
+    }
+
+    // Desktop
+    @media (min-width: 992px) {
+        font-size: $s14-d;
+
+        & input {
+            padding: $s13-d $s10-d;
+        }
+    }
+
+    //Tablet & Mobile =>
+    @media (max-width: 992px) {}
+
+    //Tablet =>
+    @media (min-width: 768px) and (max-width: 991px) {
+        font-size: $s14-t;
+
+        & input {
+            padding: $s13-t $s10-t;
+        }
+    }
+
+    //Mobile =>
+    @media (max-width: 767px) {
+        font-size: $s14-m;
+
+        & input {
+            padding: $s13-m $s10-m;
+        }
+    }
+}
