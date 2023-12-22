@@ -27,8 +27,32 @@
     }
 
     & .right-side {
+        & .right-side-wrapper {
+
+            // Desktop
+            @media (min-width: 992px) {
+                max-width: 43vw;
+            }
+
+        }
+
         & .logo {
             width: 8vw;
+        }
+
+        & .uploadImg {
+            position: relative;
+            cursor: pointer;
+
+            & input {
+                // opacity: 0;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                cursor: pointer;
+            }
         }
     }
 
@@ -41,12 +65,15 @@
             flex-direction: column;
 
             & p,
-            label,button {
+            label,
+            button {
                 color: $white-color;
             }
+
             .txt_primary {
                 text-decoration: underline;
             }
+
             & .left-side {
                 display: none;
             }
@@ -67,11 +94,9 @@
                         width: 150px !important;
                     }
 
-
-
                     &::after {
                         content: "";
-                        background-color: #00000062;
+                        background-color: #000000c2;
                         position: absolute;
                         left: 0;
                         top: 0;
@@ -89,4 +114,14 @@
 
     //Mobile =>
     @media (max-width: 767px) {}
+}
+
+#register-auth {
+    overflow: hidden;
+    & .right-side {
+        height: 99vh;
+        padding-top: 5vw;
+        margin-bottom: 15vw;
+        overflow: scroll;
+    }
 }
