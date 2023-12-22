@@ -41,44 +41,35 @@ export default function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    const requestBody = {
-      name: username,
-      email,
-      password,
-      country: selectedCountry.label,
-    };
-
+    const formData = new FormData();
+    formData.append("name", username);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("country", selectedCountry.label);
     if (selectedImage) {
-      const reader = new FileReader();
-      reader.readAsDataURL(selectedImage);
-
-      reader.onloadend = function () {
-        const imageData = reader.result.split(",")[1];
-        requestBody.image = imageData;
-
-        sendRegisterRequest(requestBody);
-      };
-    } else {
-      sendRegisterRequest(requestBody);
+      formData.append("image", selectedImage);
     }
+
+    sendRegisterRequest(formData);
   };
 
-  const sendRegisterRequest = async (requestBody) => {
-    const response = await fetch("/api/user/signUp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestBody),
-    });
+  const sendRegisterRequest = async (formData) => {
+    try {
+      const response = await fetch("/api/user/signUp", {
+        method: "POST",
+        body: formData,
+      });
 
-    const result = await response.json();
+      const result = await response.json();
 
-    if (response.ok) {
-      // add something
-    } else {
-      // add something
-      console.error(result.errors);
+      if (response.ok) {
+        // Handle successful registration
+      } else {
+        // Handle registration error
+        console.error(result.errors);
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
     }
   };
 

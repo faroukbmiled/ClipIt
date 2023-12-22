@@ -44,6 +44,7 @@ function Login() {
               {session ? (
                 <>
                   <p>Welcome, {session.user.name}!</p>
+                  <img className="logo" src={session.user.image} alt="" />
                   <button onClick={() => signOut()}>Sign out</button>
                   {/* {router.push("/")} */}
                 </>

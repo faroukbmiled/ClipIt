@@ -1,11 +1,23 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "paths": {
-      "@prismaClient": ["./prisma/generated/client"],
-      "@prismaAuthClient": ["./prisma/generated/auth-client"],
-      "@lib/*": ["./lib/*"],
-      "@UI/*": ["./pages/Components/UI/*"]
+      "@prismaClient": [
+        "./prisma/generated/client"
+      ],
+      "@prismaAuthClient": [
+        "./prisma/generated/auth-client"
+      ],
+      "@lib/*": [
+        "./lib/*"
+      ],
+      "@UI/*": [
+        "./pages/Components/UI/*"
+      ]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -19,8 +31,23 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "target": "es2015",
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/login/index.jsx", "pages/register/index.jsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/login/index.jsx",
+    "pages/register/index.jsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
