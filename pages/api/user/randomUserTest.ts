@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@lib/authPrisma";
-import { Prisma } from "@prismaClient";
+import { Prisma } from "@prismaAuthClient";
 import { hashPassword } from "@lib/passwordUtils";
 import { csrf } from "@lib/CustomCSRF";
 import faker from "faker";
