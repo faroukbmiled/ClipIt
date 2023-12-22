@@ -26,6 +26,7 @@
     "edge-csrf": "^1.0.6",
     "faker": "^5.5.3",
     "font-awesome": "^4.7.0",
+    "formidable": "^3.5.1",
     "isbot": "^3.7.1",
     "iso-3166-1-alpha-2": "^1.0.1",
     "jquery": "^3.7.1",

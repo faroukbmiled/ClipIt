@@ -43,7 +43,8 @@ model User {
   password      String
   emailVerified DateTime?
   image         String?
-  role          String?
+  role          String?   @default("user")
+  country       String?
   accounts      Account[]
   sessions      Session[]
 }
