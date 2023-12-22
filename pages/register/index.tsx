@@ -65,8 +65,8 @@ export default function Register() {
                                             <input className='p12' id='email' type="email" placeholder='mail@clipit.com' />
                                         </div>
                                         <div className='inp_col fl_col fl-1'>
-                                            <label htmlFor="password">Password</label>
-                                            <input className='p12' id='password' type="password" placeholder='*****************' />
+                                            <label htmlFor="username">Username</label>
+                                            <input className='p12' id='username' type="text" placeholder='*****************' />
                                         </div>
                                     </div>
                                     <div className='light-input inp-row gp20'>
