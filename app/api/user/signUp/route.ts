@@ -61,6 +61,13 @@ export async function POST(req: Request, res: Response) {
 
             const file = formData.get('image');
             if (file instanceof Blob) {
+                const maxSizeInBytes = 5 * 1024 * 1024;
+                if (file.size > maxSizeInBytes) {
+                    return NextResponse.json(
+                        { errors: ['Image size exceeds the maximum allowed size (5 MB)'] },
+                        { status: 400 }
+                    );
+                }
                 try {
                     const fileExtension = file.type.split('/').pop() || "invalid";
                     const buffer = Buffer.from(await file.arrayBuffer());
