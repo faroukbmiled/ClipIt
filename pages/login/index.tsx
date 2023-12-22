@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import ClipiTLogo from '../../src/assets/imgs/ClipiT-logo.png';
 import GmailIcon from '../../src/assets/Icons/google.svg';
+import Link from 'next/link';
 export default function Login() {
   return (
     <div className='body fl_row w-100vw'>
@@ -27,7 +28,7 @@ export default function Login() {
                     <p className="p36">Login to your Account</p>
                     <p className="p16">See what is going on with your business</p>
                   </div>
-                  <button className="btn btn-light gp5">
+                  <button className="btn btn-light gp5 p12">
                     <img src={GmailIcon.src} alt="" />
                     Continue with Google
                   </button>
@@ -39,17 +40,17 @@ export default function Login() {
                   <div className='light-input fl_col gp20'>
                     <div className='inp_col fl_col'>
                       <label htmlFor="email">Email</label>
-                      <input id='email' type="email" placeholder='mail@clipit.com' />
+                      <input className='p12' id='email' type="email" placeholder='mail@clipit.com' />
                     </div>
                     <div className='inp_col fl_col'>
                       <label htmlFor="password">Password</label>
-                      <input id='password' type="password" placeholder='*****************' />
+                      <input className='p12' id='password' type="password" placeholder='*****************' />
                     </div>
                   </div>
                   <div className='fl_row jc_s'>
-                    <div className='fl_row gp5'>
-                      <input type="checkbox" name="remmeberme" id="remmeberme" />
-                      <label htmlFor="remmeberme">Remember Me</label>
+                    <div className='fl_row gp5 ai_c'>
+                      <input className='p12' type="checkbox" name="remmeberme" id="remmeberme" />
+                      <label className='p12' htmlFor="remmeberme">Remember Me</label>
                     </div>
                     <a href="">
                       <p className="p12 txt_primary">Forgot Password?</p>
@@ -59,7 +60,7 @@ export default function Login() {
                 <button className='fl_row btn btn-primary p18 mg35-t-b txt_center w-100 jc_c w-500'>Login</button>
                 <div className="fl_row jc_c p15 gp10 p14">
                   <p className='txt_grey'>Not Registered Yet?</p>
-                  <a href=""><p className='txt_primary'>Create an account</p></a>
+                  <Link className='txt_primary' href={'/register'}>Create an account</Link>
                 </div>
               </form>
             </div>

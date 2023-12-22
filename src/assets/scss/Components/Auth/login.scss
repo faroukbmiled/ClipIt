@@ -1,7 +1,26 @@
 #login-auth {
     & .right-side {
         & .right-side-wrapper {
-            max-width: 30vw;
+
+            & .form-header {
+                & .btn {
+                    & img {
+                        // Desktop
+                        @media (min-width: 992px) {
+                            width: $s25-d;
+                            height: $s25-d;
+                        }
+                    }
+                }
+            }
+
+            & #remmeberme {
+                // Desktop
+                @media (min-width: 992px) {
+                    width: $s10-d;
+                    height: $s10-d;
+                }
+            }
         }
     }
 }
