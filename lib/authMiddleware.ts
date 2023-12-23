@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../pages/api/auth/[...nextauth]';
+import { authOptions } from '@lib/authConfig';
 
 export const withAuth = async (req: NextApiRequest, res: NextApiResponse, allowUsers: boolean = false) => {
     try {
@@ -24,7 +24,7 @@ export const withAuth = async (req: NextApiRequest, res: NextApiResponse, allowU
         }
 
         if (!allowUsers) {
-            if (!user && user.role !== 'admin' || user && user.role !== 'admin') {
+            if (!user || (user && user.role !== 'admin')) {
                 res.status(403).json({ error: 'You are not authorized to access this resource.' });
             }
         }
