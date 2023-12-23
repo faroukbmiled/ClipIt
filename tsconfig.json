@@ -39,10 +39,6 @@
     ],
     "strictNullChecks": true
   },
-<<<<<<< HEAD
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/login/index.jsx", "pages/register/index.jsx", "components/user_bar", "pages/index.jsw", "pages/home/index.jsx", "components/HomeBlocks/primary-block.jsx", "components/HomeBlocks/most_followed_users.jsx", "components/header/header.jsx"],
-  "exclude": ["node_modules"]
-=======
   "include": [
     "next-env.d.ts",
     "**/*.ts",
@@ -54,5 +50,4 @@
   "exclude": [
     "node_modules"
   ]
->>>>>>> e2022152b60a3248e29dd593ce5b673116f14947
 }
