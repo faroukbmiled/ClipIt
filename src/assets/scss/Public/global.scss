@@ -26,6 +26,15 @@ a {
     background-color: transparent;
 }
 
+.btn-grey {
+    color: $white-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-color: #2D2343;
+    background-color: #2D2343;
+}
+
 .inp_col {
     gap: $s5-d;
 }

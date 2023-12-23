@@ -1,0 +1,42 @@
+#header {
+    padding-bottom: 7.08vw;
+    & .menu {
+        & .active {
+            position: relative;
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: $s2-d;
+                width: 60%;
+                background-color: $primary-color;
+                transition: all 0.3s;
+                border-radius: 30px;
+            }
+
+            // &::before {
+            //     content: "";
+            //     position: absolute;
+            //     bottom: 0;
+            //     right: 32%;
+            //     height: 0.14vw;
+            //     width: 14%;
+            //     background-color: $primary-color;
+            //     border-radius: 30px;
+            // }
+            &:hover {
+                &::after {
+                    width: 100%;
+                }
+            }
+        }
+
+    }
+
+    & .logo {
+        & img {
+            width: 12.71vw;
+        }
+    }
+}
