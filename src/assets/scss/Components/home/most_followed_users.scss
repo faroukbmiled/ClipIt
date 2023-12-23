@@ -1,6 +1,23 @@
 #MostFollowedUsers {
     padding-top: 15.63vw;
-    & .swiper {
-        width: 100%;
+
+    & .users-listing {
+        & .swiper {
+            width: 100%;
+
+            & .swiper-wrapper {
+                gap: $s20-d
+                ;
+                & .card-user {
+                    & .user-avatar {
+                        & img {
+                            width: 100%;
+                            aspect-ratio: 1/1;
+                            object-fit: cover;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
