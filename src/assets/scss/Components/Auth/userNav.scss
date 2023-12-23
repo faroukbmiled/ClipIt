@@ -1,6 +1,7 @@
 #userNav {
     & .user-menu {
         position: relative;
+
         & .user-avatar {
             object-fit: cover;
             width: 3vw;
@@ -8,23 +9,29 @@
             object-position: center;
             border: $s4-d solid $white-color;
         }
+
         & .user-list-options {
             display: none;
             opacity: 0;
             position: absolute;
             bottom: -10.7vw;
-            right:  0;
+            right: 0;
             width: 8vw;
-            background-color: $primary-color;
-            
+            // background-color: $primary-color;
+            background: linear-gradient(181deg, #150832 0.82%, #000 129.1%);
+            backdrop-filter: blur(7px);
+            border: 2px solid $white-color;
+
             & p {
                 color: $white-color;
+
                 &:hover {
-                    color: $black-color;
+                    color: $primary-color;
                     cursor: pointer;
                 }
             }
         }
+
         &:hover {
             & .user-list-options {
                 opacity: 1;
