@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useSession, signIn, signOut } from "next-auth/react";
+import LoadingSpin from "react-loading-spin";
 import { setup } from "@lib/CustomCSRF";
 import { useRouter } from "next/router";
 import ClipiTLogo from "../../src/assets/imgs/ClipiT-logo.png";
@@ -25,7 +26,9 @@ function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {status === "loading" ? (
-        <div className="loading-spinner">Loading...</div>
+        <div className="jc_c fl_row w-100vw h-100vh ai_c">
+          <LoadingSpin />
+        </div>
       ) : (
         <>
           <main id="login-auth" className="auth-layout w-100vw">

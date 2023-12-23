@@ -1,4 +1,5 @@
 import { NextAuthOptions } from 'next-auth';
+import defaultAvatar from "../src/assets/imgs/default-avatar.jpg";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { comparePassword } from "@lib/passwordUtils";
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -31,6 +32,7 @@ export const authOptions: NextAuthOptions = {
                 }
 
                 const user = exclude(_user, ["password"]);
+                user.image = user.image || defaultAvatar.src;
 
                 if (
                     user &&

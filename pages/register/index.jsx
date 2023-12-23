@@ -1,4 +1,5 @@
 import Head from "next/head";
+import LoadingSpin from "react-loading-spin";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import ClipiTLogo from "../../src/assets/imgs/ClipiT-logo.png";
@@ -68,7 +69,7 @@ export default function Register() {
 
       if (result.created) {
         // more
-        router.push("/");
+        router.push("/login");
       } else {
         // Handle registration error
         console.error(result.errors);
@@ -92,8 +93,10 @@ export default function Register() {
       </Head>
       <main id="register-auth" className="auth-layout w-100vw">
         <div className="auth-wrapper fl_row h-100vh">
-          {status === "loading" ? (
-            <div className="loading-spinner">Loading...</div>
+          {status == "loading" ? (
+            <div className="jc_c fl_row w-100vw h-100vh ai_c">
+              <LoadingSpin />
+            </div>
           ) : (
             <>
               <div className="left-side fl-1 h-100 fl_col gp25 ai_c jc_fe ">
