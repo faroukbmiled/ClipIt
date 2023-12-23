@@ -42,58 +42,50 @@ export async function POST(req: Request, res: Response) {
 
             const hashedPassword = await hashPassword(password);
 
-            const createUserTransaction = await prisma.$transaction([
-                prisma.user.create({
-                    data: {
-                        name: name,
-                        email: email,
-                        password: hashedPassword,
-                        role: 'user',
-                        country: country,
-                    },
-                    select: {
-                        id: true,
-                        name: true,
-                        email: true,
-                        role: true,
-                        country: true,
-                    },
-                }),
-            ]);
-
-            const user = createUserTransaction[0];
+            const user = await prisma.user.create({
+                data: {
+                    name: name,
+                    email: email,
+                    password: hashedPassword,
+                    role: 'user',
+                    country: country,
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    country: true,
+                },
+            });
 
             const file = formData.get('image');
             if (file instanceof Blob) {
                 const maxSizeInBytes = 5 * 1024 * 1024;
                 if (file.size > maxSizeInBytes) {
-                    await prisma.$executeRaw`ROLLBACK`;
+                    await prisma.user.delete({ where: { id: user.id } });
                     return NextResponse.json(
                         { errors: ['Image size exceeds the maximum allowed size (5 MB)'] },
                         { status: 400 }
                     );
                 }
-
                 try {
                     const fileExtension = file.type.split('/').pop() || "invalid";
                     const buffer = Buffer.from(await file.arrayBuffer());
                     const imagePath = saveImage(buffer, user.id.toString(), fileExtension);
 
                     if (imagePath) {
-                        await prisma.$transaction([
-                            prisma.$executeRaw`COMMIT`,
-                            prisma.user.update({
-                                where: { id: user.id },
-                                data: { image: imagePath },
-                            }),
-                        ]);
+                        await prisma.user.update({
+                            where: { id: user.id },
+                            data: { image: imagePath },
+                        });
                     } else {
-                        await prisma.$executeRaw`ROLLBACK`;
+                        await prisma.user.delete({ where: { id: user.id } });
                         return NextResponse.json({ errors: ['Error saving the image'] }, { status: 500 });
                     }
                 } catch (error) {
+                    await prisma.user.delete({ where: { id: user.id } });
                     console.error('Error saving the image:', error);
-                    await prisma.$executeRaw`ROLLBACK`;
                     return NextResponse.json({ errors: ['Error saving the image'] }, { status: 500 });
                 }
             }
@@ -101,7 +93,6 @@ export async function POST(req: Request, res: Response) {
             return NextResponse.json({ user, created: true }, { status: 201 });
 
         } catch (e: any) {
-            await prisma.$executeRaw`ROLLBACK`;
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 if (e.code === 'P2002') {
                     return NextResponse.json({ message: e.message }, { status: 400 });
