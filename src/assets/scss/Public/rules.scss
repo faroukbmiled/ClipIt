@@ -28,7 +28,12 @@ ul {
     padding: 0;
 }
 
-
+li {
+    list-style: none;
+}
+a {
+    color: unset;
+}
 
 // Global classes =>
 
@@ -111,7 +116,9 @@ ul {
 .txt_right {
     text-align: right;
 }
-
+.hide {
+    display: none !important;
+}
 .Xl_hide {
     @media(min-width: 992px) {
         display: none !important;

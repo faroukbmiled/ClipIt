@@ -1,0 +1,22 @@
+#PrimaryBlock {
+    & .wrapper {
+        & .p50 {
+            max-width: 25vw;
+        }
+
+        & .p16 {
+            max-width: 36vw;
+            line-height: 1.7;
+        }
+
+        & .joystick {
+            & img {
+                position: absolute;
+                right: 15.7vw;
+                top: -5vw;
+                width: 31.46vw;
+                object-fit: contain;
+            }
+        }
+    }
+}

@@ -3,12 +3,18 @@
 @import "./Public/typo.scss";
 @import "./Public/rules.scss";
 @import "./Public/global.scss";
+@import "../scss/Public/index.scss";
 // @import "./Layout/dashboard.scss";
 
 
 // Components
 @import "./Components/Auth/layout.scss";
 @import "./Components/Auth/login.scss";
+@import "./Components/Auth/userNav.scss";
+
+// Home Page
+@import "./Components/home/primary_block.scss";
+@import "./Components/home/most_followed_users.scss";
 
 
 //Dashboard
@@ -24,6 +30,11 @@
 // @import "./Layout/auth.scss";
 
 
+//Partials 
+@import './Components/partials/headers.scss';
+@import './Components/partials/footer.scss';
+
 
 // Pages
 // @import "./Components/home_page.scss";
+
