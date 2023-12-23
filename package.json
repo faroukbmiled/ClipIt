@@ -23,7 +23,7 @@
     "country-list": "^2.3.0",
     "crypto-js": "^4.2.0",
     "csrf": "^3.1.0",
-    "edge-csrf": "^1.0.6",
+    "edge-csrf": "^1.0.7",
     "faker": "^5.5.3",
     "font-awesome": "^4.7.0",
     "formidable": "^3.5.1",

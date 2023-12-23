@@ -9,7 +9,12 @@ import { useRouter } from "next/router";
 import Select from "react-select";
 import { getCode, getNames } from "country-list"; // Updated import
 
-export default function Register() {
+export const getServerSideProps = async ({ res }) => {
+  const csrfToken = res.getHeader("x-csrf-token") || "missing";
+  return { props: { csrfToken } };
+};
+
+export default function Register({ csrfToken }) {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -58,11 +63,16 @@ export default function Register() {
     sendRegisterRequest(formData);
   };
 
+
   const sendRegisterRequest = async (formData) => {
+    const headers = new Headers({
+      "X-CSRF-Token": csrfToken,
+    });
     try {
       const response = await fetch("/api/user/signUp", {
         method: "POST",
         body: formData,
+        headers: headers
       });
 
       const result = await response.json();
