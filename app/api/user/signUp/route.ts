@@ -1,6 +1,6 @@
 import prisma from '@lib/authPrisma';
 import { NextResponse } from "next/server";
-import { Prisma } from '@prismaClient';
+import { Prisma } from '@prismaAuthClient';
 import { hashPassword } from '@lib/passwordUtils';
 import { saveImage } from '@lib/imageUtils';
 
