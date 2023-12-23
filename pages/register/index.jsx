@@ -66,8 +66,9 @@ export default function Register() {
 
       const result = await response.json();
 
-      if (response.ok) {
-        // Handle successful registration
+      if (result.created) {
+        // more
+        router.push("/");
       } else {
         // Handle registration error
         console.error(result.errors);
