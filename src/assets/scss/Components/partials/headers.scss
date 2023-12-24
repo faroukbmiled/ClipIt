@@ -1,4 +1,7 @@
 #header {
+    user-select: none;
+    position: relative;
+    z-index: 999;
     padding-bottom: 7.08vw;
     & .menu {
         & .active {

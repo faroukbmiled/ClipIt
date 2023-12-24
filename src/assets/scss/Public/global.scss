@@ -1,96 +1,100 @@
 .btn {
-    padding: $s10-d 4.86vw;
-    border-width: $s2-d;
-    border-radius: $s5-d;
-    outline: unset;
-    border-style: solid;
-    cursor: pointer;
+  padding: $s10-d 4.86vw;
+  border-width: $s2-d;
+  border-radius: $s5-d;
+  outline: unset;
+  border-style: solid;
+  cursor: pointer;
 }
 
 a {
-    text-decoration: unset;
+  text-decoration: unset;
+}
+
+img {
+  -webkit-user-drag: none;
 }
 
 .btn-primary {
-    background-color: $primary-color;
-    color: $white-color;
-    border-color: $primary-color;
+  background-color: $primary-color;
+  color: $white-color;
+  border-color: $primary-color;
 }
 
 .btn-light {
-    color: $grey-color;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-color: $light-grey;
-    background-color: transparent;
+  color: $grey-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color: $light-grey;
+  background-color: transparent;
 }
 
 .btn-grey {
-    color: $white-color;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-color: #2D2343;
-    background-color: #2D2343;
+  color: $white-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color: #2d2343;
+  background-color: #2d2343;
 }
 
 .inp_col {
-    gap: $s5-d;
+  gap: $s5-d;
 }
 
 .light-input {
+  & label {
+    color: $grey-color;
+  }
 
-    & label {
-        color: $grey-color;
-    }
+  & ::placeholder {
+    color: $placeholder-color;
+  }
 
-    & ::placeholder {
-        color: $placeholder-color;
-    }
+  & input {
+    color: $grey-color;
+    text-transform: lowercase;
+  }
+
+  // Desktop
+  @media (min-width: 992px) {
+    font-size: $s14-d;
 
     & input {
-        color: $grey-color;
-        text-transform: lowercase;
+      padding: $s13-d $s10-d;
     }
+  }
 
-    // Desktop
-    @media (min-width: 992px) {
-        font-size: $s14-d;
+  //Tablet & Mobile =>
+  @media (max-width: 992px) {
+  }
 
-        & input {
-            padding: $s13-d $s10-d;
-        }
+  //Tablet =>
+  @media (min-width: 768px) and (max-width: 991px) {
+    font-size: $s14-t;
+
+    & input {
+      padding: $s13-t $s10-t;
     }
+  }
 
-    //Tablet & Mobile =>
-    @media (max-width: 992px) {}
+  //Mobile =>
+  @media (max-width: 767px) {
+    font-size: $s14-m;
 
-    //Tablet =>
-    @media (min-width: 768px) and (max-width: 991px) {
-        font-size: $s14-t;
-
-        & input {
-            padding: $s13-t $s10-t;
-        }
+    & input {
+      padding: $s13-m $s10-m;
     }
-
-    //Mobile =>
-    @media (max-width: 767px) {
-        font-size: $s14-m;
-
-        & input {
-            padding: $s13-m $s10-m;
-        }
-    }
+  }
 }
 
 .inp-row {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 
-    //Tablet & Mobile =>
-    @media (max-width: 992px) {
-        flex-direction: column;
-    }
+  //Tablet & Mobile =>
+  @media (max-width: 992px) {
+    flex-direction: column;
+  }
 }
