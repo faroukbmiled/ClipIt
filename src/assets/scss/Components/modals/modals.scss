@@ -1,0 +1,131 @@
+.modal-post-upload {
+    padding: $s20-d;
+    background-color: $white-color;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30vw;
+    min-height: 450px;
+    z-index: 999;
+    border: 0 !important;
+    border-radius: $s25-d;
+    outline: unset;
+
+
+    & .card-user {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        & .card-content {
+            & .boxUploadSection {
+                & .boxupload {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    gap: $s20-d;
+                    height: 15.28vw;
+                    background-color: #F8F8FF;
+                    border: $s2-d dashed $primary-color;
+                    border-radius: $s25-d;
+                    position: relative;
+
+                    & img {
+                        width: 80px;
+                    }
+
+                    & input {
+                        position: absolute;
+                        opacity: 0;
+                        height: 100%;
+                        width: 100%;
+                        z-index: 2;
+                        cursor: pointer;
+                    }
+
+                }
+
+                & .video-thumbnail {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    gap: $s20-d;
+                    height: 5.28vw;
+                    background-color: #F8F8FF;
+                    border: $s2-d dashed $primary-color;
+                    border-radius: $s25-d;
+                    position: relative;
+                    overflow: hidden;
+
+                    & .ImagePreview {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    & .removeThubmnailImage {
+                        z-index: 4;
+                        color: white;
+                        position: absolute;
+                        top: $s10-d;
+                        right: $s20-d;
+                        cursor: pointer;
+                        width: $s25-d;
+                        height: $s25-d;
+
+                    }
+                    & #Thumbnail {
+                        opacity: 0;
+                        position: absolute;
+                        top:0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 3;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        & .btn-next {
+            // margin-top: $s40;
+        }
+
+        & .boxinputsSection {
+            & input {
+                border-color: $primary-color !important;
+                outline: unset;
+                box-shadow: unset;
+            }
+        }
+    }
+}
+
+//  .PopupUpload {
+//     & .MuiBox-root {
+//         border-radius: 25px;
+//     }
+
+//     & .PopupUpload-content {
+//         height: 20vw;
+//         width: 31vw;
+//         border-radius: 20px;
+//     }
+// }
+
+
+// position: 'absolute',
+// top: '50%',
+// left: '50%',
+// transform: 'translate(-50%, -50%)',
+// width: 540,
+// bgcolor: 'background.paper',
+// boxShadow: 24,
+// p: 4,
