@@ -16,7 +16,7 @@ function Header({ status, session, signOut }) {
         <img src={logoWhite.src} alt="" />
       </div>
       <div className="menu txt_white">
-        <ul className="fl_row gp20 p14" tabIndex="-1">
+        <ul className="fl_row gp40 p14" tabIndex="-1">
           <Link href="#" tabIndex="-1">
             <li className="active">Home</li>
           </Link>

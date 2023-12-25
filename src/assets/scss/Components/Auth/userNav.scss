@@ -1,4 +1,10 @@
 #userNav {
+    & .UploadVideo {
+        & img {
+            width: $s28-d;
+            cursor: pointer;
+        }
+    }
     & .user-menu {
         position: relative;
 
