@@ -74,7 +74,7 @@ function UploadVideoModal({ session, signOut }) {
       if (response.ok) {
         const result = await response.json();
         console.log(result);
-        router.push("/success");
+        router.reload();
       } else {
         const error = await response.json();
         console.error(error);
