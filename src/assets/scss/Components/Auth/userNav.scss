@@ -4,7 +4,16 @@
             width: $s28-d;
             cursor: pointer;
         }
+
+        & .PopupUpload {
+            & .PopupUpload-content {
+                height: 20vw;
+                width: 31vw;
+                border-radius: 20px;
+            }
+        }
     }
+
     & .user-menu {
         position: relative;
 
