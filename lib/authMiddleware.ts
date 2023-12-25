@@ -1,10 +1,17 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@lib/authConfig';
 
-export const withAuth = async (req: NextApiRequest, res: NextApiResponse, allowUsers: boolean = false) => {
+export const withAuth = async (req: any, res: any, allowUsers: boolean = false, app_router: boolean = false) => {
     try {
-        const session = await getServerSession(req, res, authOptions as any);
+
+        let session: any
+
+        if (!app_router) {
+            session = await getServerSession(req, res, authOptions as any);
+        }
+        else {
+            session = await getServerSession(authOptions as any);
+        }
 
         if (!session) {
             return res.status(401).json({ error: 'Unauthorized' });
