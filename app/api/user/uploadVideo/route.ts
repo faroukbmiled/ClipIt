@@ -6,7 +6,6 @@ import { withAuth } from '@lib/authMiddleware';
 export const bodyParser = false;
 
 export async function POST(req: Request, response: Response) {
-    let savedVideo: any;
 
     try {
         const user = await withAuth(req, res, true, true);
@@ -25,7 +24,7 @@ export async function POST(req: Request, response: Response) {
             return res.json({ errors: [`Missing fields: ${missingFields.join(', ')}`] }, { status: 400 });
         }
 
-        savedVideo = await prisma.video.create({
+        const savedVideo = await prisma.video.create({
             data: {
                 title,
                 description,
@@ -51,8 +50,6 @@ export async function POST(req: Request, response: Response) {
         const videoBuffer: Buffer = Buffer.from(await videoFile.arrayBuffer());
         const videoFileExtension: string = videoFile.name.split('.').pop() || '';
 
-        const thumbnailId = videoid;
-
         const videoPath: string | null = saveVideo(videoBuffer, user.id, videoid, videoFileExtension);
         const thumbnailFile = form.get('thumbnail');
 
@@ -63,7 +60,7 @@ export async function POST(req: Request, response: Response) {
 
         const thumbnailBuffer: Buffer = Buffer.from(await thumbnailFile.arrayBuffer());
         const thumbnailExtension = thumbnailFile.type.split('/').pop() || "invalid";
-        const thumbnailPath: string | null = saveThumbnail(thumbnailBuffer, user.id, thumbnailId, thumbnailExtension);
+        const thumbnailPath: string | null = saveThumbnail(thumbnailBuffer, user.id, videoid, thumbnailExtension);
 
         if (!videoPath || !thumbnailPath) {
             await prisma.video.delete({ where: { id: savedVideo.id } });
@@ -90,9 +87,6 @@ export async function POST(req: Request, response: Response) {
         return res.json({ success: true, video: updatedVideo }, { status: 200 });
     } catch (error) {
         console.error('Error uploading video:', error);
-        if (savedVideo) {
-            await prisma.video.delete({ where: { id: savedVideo.id } });
-        }
         return res.json({ success: false, error: 'Internal server error' }, { status: 500 });
     }
 }

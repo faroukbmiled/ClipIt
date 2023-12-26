@@ -6,9 +6,20 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
 function ListingLatestClips({ videosData }) {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openModals, setOpenModals] = useState(
+    Array(videosData?.length).fill(false)
+  );
+  const handleOpen = (index) => {
+    const newOpenModals = [...openModals];
+    newOpenModals[index] = true;
+    setOpenModals(newOpenModals);
+  };
+
+  const handleClose = (index) => {
+    const newOpenModals = [...openModals];
+    newOpenModals[index] = false;
+    setOpenModals(newOpenModals);
+  };
   const videos = videosData || [];
   const style = {
     position: "absolute",
@@ -40,7 +51,11 @@ function ListingLatestClips({ videosData }) {
               </div>
               <div className="card-video-src">
                 <div className="playVideo">
-                  <img onClick={handleOpen} src={playVideo.src} alt="" />
+                  <img
+                    onClick={() => handleOpen(index)}
+                    src={playVideo.src}
+                    alt=""
+                  />
                 </div>
                 <img
                   className="video_thumbnail"
@@ -49,8 +64,8 @@ function ListingLatestClips({ videosData }) {
                 />
                 <Modal
                   className="popupDisplayVideo rd25"
-                  open={open}
-                  onClose={handleClose}
+                  open={openModals[index]}
+                  onClose={() => handleClose(index)}
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                 >
@@ -58,7 +73,7 @@ function ListingLatestClips({ videosData }) {
                     <video
                       controls
                       autoPlay
-                      muted
+                      // muted
                       src={video.video_url}
                     ></video>
                   </Box>
