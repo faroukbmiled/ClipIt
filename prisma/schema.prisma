@@ -36,17 +36,20 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  password      String
-  emailVerified DateTime?
-  image         String?
-  role          String?   @default("user")
-  country       String?
-  accounts      Account[]
-  sessions      Session[]
-  videos        Video[]
+  id             String     @id @default(cuid())
+  name           String?
+  email          String?    @unique
+  password       String
+  emailVerified  DateTime?
+  image          String?
+  role           String?    @default("user")
+  country        String?
+  accounts       Account[]
+  sessions       Session[]
+  videos         Video[]
+  followers      Follower[] @relation("Following")
+  following      Follower[] @relation("Followers")
+  followersCount Int        @default(0)
 
   @@unique([id, email])
 }
@@ -62,6 +65,17 @@ model Video {
   videoLink   String
   thumbnail   String?
   createdAt   DateTime @default(now())
+  views       Int      @default(0)
 
   @@unique([id, userId])
+}
+
+model Follower {
+  id          String @id @default(cuid())
+  followerId  String
+  followingId String
+  follower    User   @relation("Following", fields: [followerId], references: [id])
+  following   User   @relation("Followers", fields: [followingId], references: [id])
+
+  @@unique([followerId, followingId])
 }
