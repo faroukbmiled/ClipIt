@@ -1,4 +1,4 @@
-import { saveVideo, saveThumbnail } from '@lib/videoUtils';
+import { saveVideo, saveThumbnail, deleteVideoAndThumbnail } from '@lib/videoUtils';
 import prisma from '@lib/authPrisma';
 import { NextResponse as res } from 'next/server';
 import { withAuth } from '@lib/authMiddleware';
@@ -54,6 +54,7 @@ export async function POST(req: Request, response: Response) {
         const thumbnailFile = form.get('thumbnail');
 
         if (!(thumbnailFile instanceof Blob)) {
+            deleteVideoAndThumbnail(user.id, videoid, videoFileExtension);
             await prisma.video.delete({ where: { id: savedVideo.id } });
             return res.json({ success: false, error: 'Invalid thumbnail file' }, { status: 400 });
         }
@@ -63,6 +64,7 @@ export async function POST(req: Request, response: Response) {
         const thumbnailPath: string | null = saveThumbnail(thumbnailBuffer, user.id, videoid, thumbnailExtension);
 
         if (!videoPath || !thumbnailPath) {
+            deleteVideoAndThumbnail(user.id, videoid, videoFileExtension, thumbnailExtension);
             await prisma.video.delete({ where: { id: savedVideo.id } });
             return res.json({ success: false, error: 'Error saving video or thumbnail' }, { status: 400 });
         }
