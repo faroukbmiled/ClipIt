@@ -80,10 +80,11 @@
                         height: $s25-d;
 
                     }
+
                     & #Thumbnail {
                         opacity: 0;
                         position: absolute;
-                        top:0;
+                        top: 0;
                         left: 0;
                         width: 100%;
                         height: 100%;
@@ -129,3 +130,20 @@
 // bgcolor: 'background.paper',
 // boxShadow: 24,
 // p: 4,
+
+.popupDisplayVideo {
+    // position: relative;
+    // width: 800px !important;
+    // height: 450px !important;
+    overflow: hidden;
+    border: unset !important;
+    background-color: transparent !important;
+
+    & video {
+        width: 90vw;
+        height: 90vh;
+        object-fit: cover;
+        border: unset !important;
+
+    }
+}

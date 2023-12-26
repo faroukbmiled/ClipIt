@@ -12,6 +12,9 @@
 @import "./Components/Auth/login.scss";
 @import "./Components/Auth/userNav.scss";
 @import "./Components/modals/modals.scss";
+@import "./Components/listing-clips/latest-clips.components.scss";
+@import "./Components/listing-clips/filter-categories.scss";
+@import "./Components/listing-clips/listing-latest-clips.scss";
 
 // Home Page
 @import "./Components/home/primary_block.scss";
@@ -37,5 +40,4 @@
 
 
 // Pages
-// @import "./Components/home_page.scss";
-
+@import "./Components/home_page.scss";

@@ -1,0 +1,16 @@
+#FilterCategory {
+    & .wrapper {
+      & .filter-list {
+        background-color: #281E3D;
+  
+        & .cat-el {
+          transition: background-color 0.3s ease;
+  
+          &.active {
+            background-color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+  
