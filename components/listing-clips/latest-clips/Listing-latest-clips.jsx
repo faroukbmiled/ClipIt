@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FilterCategory from "./filter-category";
-import videoData from '../../data/data.json';
-import playVideo from "../../../src/assets/Icons/play-video.svg"
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-function ListingLatestClips() {
+// import videoData from "../../data/data.json"; //tesing
+import playVideo from "../../../src/assets/Icons/play-video.svg";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+
+function ListingLatestClips({ videosData }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const videos = videoData.videos || [];
+  const videos = videosData || [];
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    bgcolor: 'background.paper',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "background.paper",
   };
+
   return (
     <div id="ListingLatestClips">
       <div className="wrapper gp20">
@@ -40,16 +42,25 @@ function ListingLatestClips() {
                 <div className="playVideo">
                   <img onClick={handleOpen} src={playVideo.src} alt="" />
                 </div>
-                <img className="video_thumbnail" src={video.video_thumbnail} alt="" />
+                <img
+                  className="video_thumbnail"
+                  src={video.video_thumbnail}
+                  alt=""
+                />
                 <Modal
-                className="popupDisplayVideo rd25"
+                  className="popupDisplayVideo rd25"
                   open={open}
                   onClose={handleClose}
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                 >
                   <Box sx={style}>
-                    <video controls autoPlay muted src={video.video_url}></video>
+                    <video
+                      controls
+                      autoPlay
+                      muted
+                      src={video.video_url}
+                    ></video>
                   </Box>
                 </Modal>
               </div>
