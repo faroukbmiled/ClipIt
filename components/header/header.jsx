@@ -5,9 +5,11 @@ import UserNav from "../user_bar/user_bar";
 
 function Header({ status, session, signOut }) {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+  const [isAuthLoading, setisAuthLoading] = useState(false); // TODO: use for lazy loader
 
   useEffect(() => {
     setIsUserAuthenticated(status === "authenticated");
+    setisAuthLoading(status === "loading");
   }, [status]);
 
   return (

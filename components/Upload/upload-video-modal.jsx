@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -66,21 +67,25 @@ function UploadVideoModal({ session, signOut }) {
       formData.append("video", event.target.elements.video.files[0]);
       formData.append("thumbnail", event.target.elements.thumbnail.files[0]);
 
-      const response = await fetch("/api/user/uploadVideo", {
-        method: "POST",
-        body: formData,
+      const response = await axios.post("/api/user/uploadVideo", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        onUploadProgress: (progressEvent) => { // mahdouch use this to show upload progress
+          const percentComplete = (progressEvent.loaded / progressEvent.total) * 100;
+          console.log("Upload Progress: " + percentComplete + "%");
+        },
       });
 
-      if (response.ok) {
-        const result = await response.json();
+      if (response.status === 200) {
+        const result = response.data;
         console.log(result);
         router.reload();
       } else {
-        const error = await response.json();
-        console.error(error);
+        console.error("Error uploading video:", response.statusText);
       }
     } catch (error) {
-      console.error("Error uploading video:", error);
+      console.error("Error uploading video:", error.message);
     }
   };
 
