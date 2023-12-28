@@ -8,6 +8,14 @@ import { exclude } from "@lib/filterUser";
 
 const prisma = new PrismaClient()
 
+interface User {
+    id?: string;
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+    role?: string | null;
+}
+
 export const authOptions: NextAuthOptions = {
     // adapter: PrismaAdapter(prisma),
     providers: [
@@ -63,8 +71,22 @@ export const authOptions: NextAuthOptions = {
             return token;
         },
         async session({ session, token }) {
-            session.user = token.user as any;
-            return session;
-        },
+            let _user: any
+            const { user } = token as { user?: User };
+            if (user) {
+                session.user = user;
+                _user = await prisma.user.findUnique({
+                    where: {
+                        id: user.id,
+                    },
+                });
+                if (_user) {
+                    session.user = token.user as any;
+                    return session;
+                }
+            }
+
+            return _user;
+        }
     },
 };
