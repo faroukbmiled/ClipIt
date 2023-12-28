@@ -16,6 +16,7 @@ interface User {
     email?: string | null;
     image?: string | null;
     role?: string | null;
+    rememberMe?: string | null;
 }
 
 export const authOptions: NextAuthOptions = {
@@ -26,6 +27,7 @@ export const authOptions: NextAuthOptions = {
             credentials: {
                 email: { label: "Email", type: "text" },
                 password: { label: "Password", type: "password" },
+                rememberMe: { label: "Remember Me", type: "checkbox" },
             },
             authorize: async (credentials) => {
                 if (!credentials?.email || !credentials?.password) {
@@ -48,7 +50,7 @@ export const authOptions: NextAuthOptions = {
                     user &&
                     (await comparePassword(credentials.password, _user.password))
                 ) {
-                    return user;
+                    return { ...user, rememberMe: credentials.rememberMe };
                 } else {
                     return null;
                 }
