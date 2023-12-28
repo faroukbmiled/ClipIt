@@ -5,6 +5,8 @@ import { comparePassword } from "@lib/passwordUtils";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prismaAuthClient"
 import { exclude } from "@lib/filterUser";
+import fs from 'fs';
+import path from 'path';
 
 const prisma = new PrismaClient()
 
@@ -82,6 +84,13 @@ export const authOptions: NextAuthOptions = {
                 });
                 if (_user) {
                     session.user = token.user as any;
+                    const publicFolderPath = path.join(process.cwd(), 'public');
+                    if (session.user && session.user.image) {
+                        const imagePath = path.join(publicFolderPath, session.user.image);
+                        if (!fs.existsSync(imagePath)) {
+                            session.user.image = defaultAvatar.src;
+                        }
+                    }
                     return session;
                 }
             }
