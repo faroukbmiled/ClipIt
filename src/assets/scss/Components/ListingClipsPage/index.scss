@@ -1,0 +1,30 @@
+.listingClips-Page {
+    min-height: 100vh;
+    // overflow: hidden;
+    & #header {
+        padding-bottom: 5vw ;
+    }
+
+    & #body {
+        // height: 100%;
+
+        & #ListingClips {
+            // height: 100%;
+
+            & .ListingClips-wrapper {
+                // height: 100%;
+
+                & .nav-bar {
+                    width: 16vw;
+                    & hr {
+                        border-color: #303030;
+                    }
+                }
+
+                & .listing-clips {
+                    flex: 1;
+                }
+            }
+        }
+    }
+}

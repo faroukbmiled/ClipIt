@@ -1,0 +1,99 @@
+#ListingClips {
+    & .ListingClips-wrapper {
+        & .clips-format-display {
+            & img {
+                cursor: pointer;
+                width: $s20-d;
+                aspect-ratio: 1/1;
+                transition: all 0.3s;
+
+                &:hover {
+                    transform: rotate(90deg);
+                }
+            }
+        }
+
+        & .List {
+            transition: all 0.3s;
+            grid-template-columns: repeat(2, 1fr) !important;
+
+            & .video-display {
+                & .video-thumbnail {
+                    height: 20vw !important;
+                }
+            }
+        }
+
+        & .clips-listing {
+            transition: all 0.3s;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            row-gap: $s40-d;
+            column-gap: $s20-d;
+
+            & .video-card {
+                & .video-clip {
+                    position: relative;
+
+                    & .video-display {
+                        position: relative;
+                        & .play-video {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%,-50%);
+                            width: 4vw;
+                            height: 4vw;
+                            transition: all 0.3s;
+                            cursor: pointer;
+                            &:hover {
+                                transform: translate(-50%,-50%) scale(1.1);
+                            }
+                        }
+                        & .video-thumbnail {
+                            width: 100%;
+                            height: 10.76vw;
+                            object-fit: cover;
+
+                            & video {}
+                        }
+                    }
+
+                    & .video-time {
+                        position: absolute;
+                        right: $s10-d;
+                        bottom: $s10-d;
+                        background-color: $black-color;
+                        color: $white-color;
+                        padding: $s4-d $s4-d;
+                        display: flex;
+                        line-height: 1;
+                    }
+                }
+
+                & .video-info {
+                    & .user-avatar {
+                        & img {
+                            width: $s36-d;
+                            height: $s36-d;
+                            aspect-ratio: 1/1;
+                            object-fit: cover;
+                        }
+                    }
+
+                    & .info-box {
+                        & .video-title {}
+                    }
+
+                    & .video-footer {
+                        & .username {}
+
+                        & .video-views {
+                            & .post-video-date {}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

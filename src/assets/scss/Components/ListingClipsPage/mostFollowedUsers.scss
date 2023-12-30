@@ -1,0 +1,21 @@
+#MostFollowedUsersListing {
+    & .MostFollowedUsersListing-wrapper {
+        & .header-wrapper {
+            & p {
+                color: #AAAAAA;
+            }
+        }
+
+        & .body-wrapper {
+            & .users-listing {
+                & .card-user {
+                    & img {
+                        width: $s28-d;
+                        height: $s28-d;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+    }
+}

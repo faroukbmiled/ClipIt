@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import ListingLatestClips from "./latest-clips/Listing-latest-clips";
-import FilterCategory from "./latest-clips/filter-category";
+import FilterCategory from "./filter-category";
+import ListingLatestClips from "./Listing-latest-clips";
 
 function LatestClips() {
   const [videosData, setVideosData] = useState(null);
