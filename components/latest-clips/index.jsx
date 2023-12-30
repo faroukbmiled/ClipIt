@@ -16,7 +16,7 @@ function LatestClipsComponent() {
   useEffect(() => {
     const fetchLatestClips = async () => {
       try {
-        const response = await axios.get("/api/videos/latestClips");
+        const response = await axios.get("/api/videos/getLatestClips");
         setVideosData(response.data);
       } catch (error) {
         console.error("Error fetching latest clips:", error);
