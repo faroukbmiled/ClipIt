@@ -5,8 +5,19 @@ import { comparePassword } from "@lib/passwordUtils";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prismaAuthClient"
 import { exclude } from "@lib/filterUser";
+import fs from 'fs';
+import path from 'path';
 
 const prisma = new PrismaClient()
+
+interface User {
+    id?: string;
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+    role?: string | null;
+    rememberMe?: string | null;
+}
 
 export const authOptions: NextAuthOptions = {
     // adapter: PrismaAdapter(prisma),
@@ -16,6 +27,7 @@ export const authOptions: NextAuthOptions = {
             credentials: {
                 email: { label: "Email", type: "text" },
                 password: { label: "Password", type: "password" },
+                rememberMe: { label: "Remember Me", type: "checkbox" },
             },
             authorize: async (credentials) => {
                 if (!credentials?.email || !credentials?.password) {
@@ -38,7 +50,7 @@ export const authOptions: NextAuthOptions = {
                     user &&
                     (await comparePassword(credentials.password, _user.password))
                 ) {
-                    return user;
+                    return { ...user, rememberMe: credentials.rememberMe };
                 } else {
                     return null;
                 }
@@ -63,8 +75,29 @@ export const authOptions: NextAuthOptions = {
             return token;
         },
         async session({ session, token }) {
-            session.user = token.user as any;
-            return session;
-        },
+            let _user: any
+            const { user } = token as { user?: User };
+            if (user) {
+                session.user = user;
+                _user = await prisma.user.findUnique({
+                    where: {
+                        id: user.id,
+                    },
+                });
+                if (_user) {
+                    session.user = token.user as any;
+                    const publicFolderPath = path.join(process.cwd(), 'public');
+                    if (session.user && session.user.image) {
+                        const imagePath = path.join(publicFolderPath, session.user.image);
+                        if (!fs.existsSync(imagePath)) {
+                            session.user.image = defaultAvatar.src;
+                        }
+                    }
+                    return session;
+                }
+            }
+
+            return _user;
+        }
     },
 };

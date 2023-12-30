@@ -1,4 +1,5 @@
 import Head from "next/head";
+import React, { useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import LoadingSpin from "react-loading-spin";
 import { setup } from "@lib/CustomCSRF";
@@ -8,6 +9,7 @@ import GmailIcon from "../../src/assets/Icons/google.svg";
 
 function Login() {
   const { data: session, status } = useSession();
+  const [rememberMe, setRememberMe] = useState(false);
   const router = useRouter();
 
   function handleSignIn(event) {
@@ -16,7 +18,12 @@ function Login() {
     const password = event.target.password.value;
     const returnUrl =
       new URLSearchParams(window.location.search).get("returnUrl") || "/";
-    signIn("credentials", { email, password, callbackUrl: returnUrl });
+    signIn("credentials", {
+      email,
+      password,
+      rememberMe: rememberMe.toString(),
+      callbackUrl: returnUrl,
+    });
   }
 
   return (
@@ -100,6 +107,8 @@ function Login() {
                                 type="checkbox"
                                 name="remmeberme"
                                 id="remmeberme"
+                                checked={rememberMe}
+                                onChange={() => setRememberMe(!rememberMe)}
                               />
                               <label htmlFor="remmeberme">Remember Me</label>
                             </div>
