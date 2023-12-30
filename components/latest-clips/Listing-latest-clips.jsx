@@ -30,7 +30,7 @@ function ListingLatestClips({ videosData }) {
   };
 
   return (
-    <div id="ListingLatestClips">
+    <div className="fl_col gp40" id="ListingLatestClips">
       <div className="wrapper gp20">
         {videos.map((video, index) => (
           <div className="card-video rd25" key={index}>

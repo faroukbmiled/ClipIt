@@ -38,7 +38,7 @@ function ListingClipsComponents() {
                                     onLoadedMetadata={(e) => handleMetadataLoaded(index, e.target.duration)}
                                 ></video>
                                 <p className="p10 video-time">
-                                    {videoDurations[index] ? formatVideoTime(videoDurations[index]) : 'Video Time Placeholder'}
+                                    {videoDurations[index] ? formatVideoTime(videoDurations[index]) : '00:00'}
                                 </p>
                             </div>
                             <div className="video-info fl_row gp12">

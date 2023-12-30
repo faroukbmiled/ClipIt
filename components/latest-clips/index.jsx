@@ -3,7 +3,7 @@ import axios from "axios";
 import FilterCategory from "./filter-category";
 import ListingLatestClips from "./Listing-latest-clips";
 
-function LatestClips() {
+function LatestClipsComponent() {
   const [videosData, setVideosData] = useState(null);
   const [filteredCategory, setFilteredCategory] = useState(null);
 
@@ -52,4 +52,4 @@ function LatestClips() {
   );
 }
 
-export default LatestClips;
+export default LatestClipsComponent;
