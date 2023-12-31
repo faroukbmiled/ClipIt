@@ -25,6 +25,7 @@ async function getLatestClips(req: NextApiRequest, res: NextApiResponse) {
 
         const formattedData = {
             videos: videos.map((video) => ({
+                userId: video.user.id,
                 username: video.user.name,
                 user_avatar: video.user.image,
                 game_category: video.category,

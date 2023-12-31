@@ -46,7 +46,7 @@
     "pages/login/index.jsx",
     "pages/register/index.jsx",
     ".next/types/**/*.ts"
-, "components/user_bar/user_bar.jsx"  ],
+, "components/user_bar/user_bar.jsx", "pages/user/[userId]/index.jsx"  ],
   "exclude": [
     "node_modules"
   ]
