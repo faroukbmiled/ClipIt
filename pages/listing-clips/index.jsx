@@ -3,7 +3,7 @@ import { useSession, signOut } from "next-auth/react";
 import axios from "axios";
 import FilterListingClips from "../../components/Listing-clips/filter-listing-clips";
 import ListingClipsComponents from "../../components/Listing-clips/listing-clips.components";
-import MostFollowedUsersListing from "../../components/Listing-clips/most-followed-users";
+import UserFollowingList from "../../components/Listing-clips/user-following-list";
 import NavOptions from "../../components/Listing-clips/nav-options";
 import Header from "../../components/header/header";
 
@@ -51,7 +51,7 @@ function ListingClipsPage() {
             <div className="nav-bar">
               <NavOptions></NavOptions>
               <hr className="mg20-t-b rd25" />
-              <MostFollowedUsersListing></MostFollowedUsersListing>
+              <UserFollowingList></UserFollowingList>
             </div>
             <div className="listing-clips fl_col gp40">
               <FilterListingClips onSearch={handleSearch} />
