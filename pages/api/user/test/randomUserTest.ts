@@ -40,6 +40,8 @@ async function createUserHandler(req: NextApiRequest, res: NextApiResponse) {
                 email: email,
                 password: hashedPassword,
                 role: role,
+                image: "/userdata/default/default-avatar.jpg",
+                cover: "/userdata/default/default-cover.png"
             },
             select: {
                 id: true,

@@ -1,99 +1,63 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function FollowingProfile() {
+  const [followingData, setFollowingData] = useState([]);
+  const [followingCount, setFollowingCount] = useState();
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    axios
+      .get("/api/user/getFollowing")
+      .then((response) => {
+        setFollowingData(response.data.following);
+        setFollowingCount(response.data.followingCount);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching following:", error);
+        setLoading(false);
+      });
+  }, []);
 
-    return (
-        <div id="FollowingProfile" className="fl_col gp40">
-            <p className="p20 title-block txt_center pd40-b">Following</p>
-            <div className="listing-profiles">
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/100" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/250" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/210" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/152" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/145" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/124" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/145" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/254" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/234" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/127" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/354" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/324" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/124" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/224" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/114" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
-                <div className="user-data pd20 fl_row gp20 ai_c rd15">
-                    <p className=" unfollow-user">x</p>
-                    <img src="https://i.pravatar.cc/117" alt="" />
-                    <p className="p14">James Gouse</p>
-                </div>
+  const handleRemoveFollowing = (followingId) => {
+    axios
+      .post("/api/user/removeFollowing", { followingId })
+      .then((response) => {
+        axios.get("/api/user/getFollowing").then((response) => {
+          setFollowingData(response.data.following);
+          setFollowingCount(response.data.followingCount);
+        });
+      })
+      .catch((error) => {
+        console.error("Error removing following:", error);
+      });
+  };
+  return (
+    <div id="FollowingProfile" className="fl_col gp40">
+      <p className="p20 title-block txt_center pd40-b">
+        Following {followingCount > 0 && `(${followingCount})`}
+      </p>
+      {loading || !followingData ? (
+        <p className="p20 txt_center">Loading...</p>
+      ) : (
+        <div className="listing-profiles">
+          {followingData.map((following, index) => (
+            <div key={index} className="user-data pd20 fl_row gp20 ai_c rd15">
+              <p
+                className="unfollow-user"
+                onClick={() => handleRemoveFollowing(following.userId)}
+              >
+                x
+              </p>
+              <img src={following.avatar} alt="" />
+              <p className="p14">{following.name}</p>
             </div>
+          ))}
         </div>
-    );
+      )}
+    </div>
+  );
 }
 
 export default FollowingProfile;

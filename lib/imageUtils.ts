@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-export function saveImage(imageBuffer: Buffer, userId: string, fileExtension: string): string | null {
+export function saveImage(imageBuffer: Buffer, userId: string, fileExtension: string, isCover: boolean = false): string | null {
     try {
         const validExtensions = ['jpg', 'png', 'gif', 'jpeg'];
 
@@ -15,7 +15,11 @@ export function saveImage(imageBuffer: Buffer, userId: string, fileExtension: st
             fs.mkdirSync(uploadDir, { recursive: true });
         }
 
-        const imagePath = path.join(uploadDir, `profile_${Date.now()}.${fileExtension}`);
+        let imagePath: string = path.join(uploadDir, `profile_${Date.now()}.${fileExtension}`);
+
+        if (isCover) {
+            imagePath = path.join(uploadDir, `cover_${Date.now()}.${fileExtension}`);
+        }
 
         fs.writeFileSync(imagePath, imageBuffer);
 

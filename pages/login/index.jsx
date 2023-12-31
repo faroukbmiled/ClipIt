@@ -4,7 +4,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import LoadingSpin from "react-loading-spin";
 import { setup } from "@lib/CustomCSRF";
 import { useRouter } from "next/router";
-import ClipiTLogo from "../../src/assets/imgs/ClipiT-logo.png";
+import ClipiTLogo from "../../src/assets/imgs/ClipitLogoBlack.png";
 import GmailIcon from "../../src/assets/Icons/google.svg";
 import Link from 'next/link'
 
