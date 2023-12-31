@@ -73,8 +73,19 @@ function UserInfo({ session, status, update }) {
           "Content-Type": "multipart/form-data",
         },
       });
+
       const { name, email, image, cover, country } = response.data.user;
-      update({ name, email, image, cover, country });
+      update({
+        ...session,
+        user: {
+          ...session?.user,
+          name,
+          email,
+          image,
+          cover,
+          country,
+        },
+      });
 
       console.log("Profile updated successfully", response);
     } catch (error) {
