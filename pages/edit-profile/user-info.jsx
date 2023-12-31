@@ -26,7 +26,6 @@ function UserInfo({ session, status, update }) {
       });
       setUsername(session?.user?.name);
       setEmail(session?.user?.email);
-      // setPassword(session?.user?.password); // TODO: Fix this
     }
   }, [session]);
 
@@ -74,7 +73,6 @@ function UserInfo({ session, status, update }) {
           "Content-Type": "multipart/form-data",
         },
       });
-
       const { name, email, image, cover, country } = response.data.user;
       update({ name, email, image, cover, country });
 

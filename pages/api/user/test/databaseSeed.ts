@@ -39,6 +39,7 @@ async function createTestUsersHandler(req: NextApiRequest, res: NextApiResponse)
                 errors.push(`Email ${email} is already in use`);
             } else {
                 const hashedPassword = await hashPassword(password);
+                const imageSize = Math.floor(Math.random() * (350 - 250 + 1)) + 250;
                 const user = await prisma.user.create({
                     data: {
                         name: name,
@@ -46,7 +47,7 @@ async function createTestUsersHandler(req: NextApiRequest, res: NextApiResponse)
                         password: hashedPassword,
                         role: role,
                         country: "Tunisia",
-                        image: "/userdata/default/default-avatar.jpg",
+                        image: `https://i.pravatar.cc/${imageSize}`,
                         cover: "/userdata/default/default-cover.png"
                     },
                 });
