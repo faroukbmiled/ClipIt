@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
 
 function FilterCategory({ videosData, onFilterChange }) {
-  const gameCategories = ["All", ...(videosData?.game_categories || [])];
+  let gameCategories = ["All", ...(videosData?.game_categories || [])];
+  const otherIndex = gameCategories.indexOf("Other");
+
+  if (otherIndex !== -1) {
+    gameCategories = [
+      ...gameCategories.slice(0, otherIndex),
+      ...gameCategories.slice(otherIndex + 1),
+      "Other",
+    ];
+  }
+
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleCategoryClick = (index) => {
