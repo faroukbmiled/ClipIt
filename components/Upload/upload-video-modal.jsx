@@ -22,6 +22,7 @@ function UploadVideoModal({ session, signOut }) {
   const [category, setCategory] = useState("");
   const [hashtag, setHashtag] = useState("");
   const [swiper, setSwiper] = useState(null);
+  const [UploadProgress, setUplaodProgress] = useState("0%");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -73,6 +74,7 @@ function UploadVideoModal({ session, signOut }) {
         },
         onUploadProgress: (progressEvent) => { // mahdouch use this to show upload progress
           const percentComplete = (progressEvent.loaded / progressEvent.total) * 100;
+          setUplaodProgress(`${percentComplete} %`)
           console.log("Upload Progress: " + percentComplete + "%");
         },
       });

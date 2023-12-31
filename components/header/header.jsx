@@ -15,7 +15,7 @@ function Header({ status, session, signOut }) {
   return (
     <div className="fl_row jc_s ai_c">
       <div className="logo">
-        <img src={logoWhite.src} alt="" />
+        <Link href={"/"}><img src={logoWhite.src} alt="" /></Link>
       </div>
       <div className="menu txt_white">
         <ul className="fl_row gp40 p14" tabIndex="-1">
