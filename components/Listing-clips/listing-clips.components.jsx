@@ -104,7 +104,7 @@ function ListingClipsComponents({ videosData, setVideosData }) {
                       {video.video_title}
                     </p>
                   </div>
-                  <div className="fl_row gp5 p12 txt_grey video-footer">
+                  <div className="fl_col gp5 p12 txt_grey video-footer">
                     <p className="username">{video.username}</p>
                     <div className="fl_row gp2">
                       <p className="video-views">{video.views} Views</p>

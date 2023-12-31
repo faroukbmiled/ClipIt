@@ -6,6 +6,7 @@ import { setup } from "@lib/CustomCSRF";
 import { useRouter } from "next/router";
 import ClipiTLogo from "../../src/assets/imgs/ClipiT-logo.png";
 import GmailIcon from "../../src/assets/Icons/google.svg";
+import Link from 'next/link'
 
 function Login() {
   const { data: session, status } = useSession();
@@ -124,9 +125,7 @@ function Login() {
                         </button>
                         <div className="fl_row jc_c p15 gp10 p14">
                           <p className="txt_grey">Not Registered Yet?</p>
-                          <a href="">
-                            <p className="txt_primary">Create an account</p>
-                          </a>
+                          <Link className="txt_primary" href="/register">Create an account</Link>
                         </div>
                       </form>
                     </>

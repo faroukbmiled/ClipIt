@@ -1,11 +1,12 @@
 .btn {
-  padding: $s10-d 4.86vw;
+  padding: $s10-d 1.86vw;
   border-width: $s2-d;
   border-radius: $s5-d;
   outline: unset;
   border-style: solid;
   cursor: pointer;
   width: fit-content;
+  text-align: center;
 }
 
 a {
@@ -29,6 +30,15 @@ img {
   align-items: center;
   border-color: $light-grey;
   background-color: transparent;
+}
+
+.btn-red {
+  color: $white-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color: $white-color;
+  background-color: $red-color;
 }
 
 .btn-grey {
@@ -69,8 +79,7 @@ img {
   }
 
   //Tablet & Mobile =>
-  @media (max-width: 992px) {
-  }
+  @media (max-width: 992px) {}
 
   //Tablet =>
   @media (min-width: 768px) and (max-width: 991px) {

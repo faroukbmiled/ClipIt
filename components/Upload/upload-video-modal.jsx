@@ -109,7 +109,7 @@ function UploadVideoModal({ session, signOut }) {
                 <div className="card-user fl_col gp10 h-100">
                   <div className="card-content">
                     <p className="p22 txt_center w-700 pd40-b">Upload Video</p>
-                    <div className="boxUploadSection fl_col gp20">
+                    <div className="boxUploadSection fl_col gp20 pd20">
                       <div className="boxupload txt_center">
                         <input
                           type="file"
@@ -134,6 +134,7 @@ function UploadVideoModal({ session, signOut }) {
                           <span className="txt_primary w-700">Thumbnail</span>
                         </p>
                         <input
+                          className="txt_center"
                           onChange={displayThubmnailImage}
                           type="file"
                           id="thumbnail"
@@ -155,7 +156,7 @@ function UploadVideoModal({ session, signOut }) {
                       </div>
                     </div>
                   </div>
-                  <div className="card-footer">
+                  <div className="card-footer fl_row jc_c">
                     <p
                       onClick={() => swiper.slideNext()}
                       className="p14 btn-next btn btn-primary txt_center"
@@ -168,7 +169,7 @@ function UploadVideoModal({ session, signOut }) {
               <SwiperSlide>
                 <div className="card-user fl_col gp20">
                   <div className="fl_col gp10">
-                    <p className="p22 txt_center w-700 pd40-b">
+                    <p className="p22 txt_center w-700">
                       Video Information
                     </p>
                     <div className="boxinputsSection light-input fl_col gp20 ">
@@ -211,7 +212,7 @@ function UploadVideoModal({ session, signOut }) {
                     </div>
                   </div>
 
-                  <div className="card-footer fl_col gp20">
+                  <div className="card-footer fl_row gp20">
                     <p
                       onClick={() => swiper.slidePrev()}
                       className="p14 btn txt_center btn-light fl-1"

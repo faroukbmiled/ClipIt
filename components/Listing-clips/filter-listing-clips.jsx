@@ -6,11 +6,12 @@ function FilterListingClips({ onSearch }) {
 
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
+    onSearch(event.target.value);
   };
 
-  const handleSearch = () => {
-    onSearch(searchQuery);
-  };
+  // const handleSearch = () => {
+  //   onSearch(searchQuery);
+  // };
 
   return (
     <div id="FilterListingClips">
@@ -23,7 +24,7 @@ function FilterListingClips({ onSearch }) {
             value={searchQuery}
             onChange={handleInputChange}
           />
-          <div className="btn-search rd10" onClick={handleSearch}>
+          <div className="btn-search rd10">
             <img src={searchFilterIcon.src} alt="" />
           </div>
         </div>

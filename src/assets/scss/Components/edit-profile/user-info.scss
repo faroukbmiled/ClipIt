@@ -1,0 +1,87 @@
+#UserInfo {
+
+
+
+    & .UserInfo-wrapper {
+        & .UserInfo-header {
+            padding-bottom: $s40-d;
+            border-bottom: $s2-d solid $primary-color;
+            // border-radius: $s25-d;
+        }
+
+        & .UserInfo-content {
+            & .media-user {
+                & .media-user-wrapper {
+                    & .img-edit {
+                        width: $s27-d;
+                        height: $s27-d;
+                        object-fit: cover;
+                        position: absolute;
+                        right: $s10-d;
+                        top: $s10-d;
+                    }
+
+                    & input {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        opacity: 0;
+                        z-index: 2;
+                        left: 0;
+                        top: 0;
+                        cursor: pointer;
+                    }
+
+                    & .data-img {
+                        border: $s2-d dashed $white-color;
+                    }
+
+                    & .avatar-user {
+                        & .data-upload {
+                            position: relative;
+
+                            & .data-img {
+                                width: 10vw;
+                                height: 10vw;
+                                object-fit: cover;
+                            }
+                        }
+
+                    }
+
+                    & .cover-user {
+
+                        & .data-upload {
+                            position: relative;
+
+                            & .data-img {
+                                width: 18vw;
+                                height: 10vw;
+                                object-fit: cover;
+                            }
+                        }
+                    }
+                }
+            }
+
+            & .light-input {
+                & label {
+                    color: $white-color !important;
+                }
+
+                & input {
+                    background-color: transparent !important;
+                    border: $s2-d solid $white-color !important;
+                }
+            }
+
+            & .user-fields {
+                & .country-select {
+                    #country {
+                        color: $black-color !important;
+                    }
+                }
+            }
+        }
+    }
+}
