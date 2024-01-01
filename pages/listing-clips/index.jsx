@@ -17,10 +17,14 @@ function ListingClipsPage() {
       setFilteredVideos(videosData);
     } else {
       if (videosData) {
-        const filtered = videosData?.filter((video) =>
-          Object.values(video).some((value) =>
-            String(value).toLowerCase().includes(searchQuery.toLowerCase())
-          )
+        const filtered = videosData?.filter(
+          (video) =>
+            String(video.video_title)
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            String(video.username)
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())
         );
         setFilteredVideos(filtered);
       }

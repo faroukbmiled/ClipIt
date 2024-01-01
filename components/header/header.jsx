@@ -5,17 +5,17 @@ import UserNav from "../user_bar/user_bar";
 
 function Header({ status, session, signOut }) {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
-  const [isAuthLoading, setisAuthLoading] = useState(false); // TODO: use for lazy loader
 
   useEffect(() => {
     setIsUserAuthenticated(status === "authenticated");
-    setisAuthLoading(status === "loading");
   }, [status]);
 
   return (
     <div className="fl_row jc_s ai_c">
       <div className="logo">
-        <Link href={"/"}><img src={logoWhite.src} alt="" /></Link>
+        <Link href={"/"} tabIndex="-1">
+          <img src={logoWhite.src} alt="" />
+        </Link>
       </div>
       <div className="menu txt_white">
         <ul className="fl_row gp40 p14" tabIndex="-1">
@@ -34,7 +34,11 @@ function Header({ status, session, signOut }) {
         </ul>
       </div>
       <div className="userNav">
-        {isUserAuthenticated ? (
+        {status === "loading" ? (
+          <div className="unregistred">
+            <p style={{ color: "white" }}>Loading...</p>
+          </div>
+        ) : isUserAuthenticated ? (
           <div className="registred">
             <UserNav session={session} signOut={signOut}></UserNav>
           </div>
