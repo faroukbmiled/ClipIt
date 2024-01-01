@@ -1,0 +1,41 @@
+#HeaderProfile {
+    height: 38vw;
+    display: flex;
+    align-items: flex-end;
+    width: -webkit-fill-available !important;
+    position: relative;
+    margin-top: -9vw;
+
+    & .HeaderProfile-wrapper {
+        & .user-box {
+            & .user-cover {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+
+                & img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            & .user-info {
+                & .user-avatar {
+                    & img {
+                        width: 5.56vw;
+                        height: 5.56vw;
+                        object-fit: cover;
+                    }
+                }
+
+                & .user-details {}
+            }
+
+            & .user-tabs {}
+        }
+    }
+}

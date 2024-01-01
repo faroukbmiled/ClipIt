@@ -18,13 +18,11 @@ function ListingClipsComponents({ videosData, setVideosData }) {
     const differenceInDaysValue = differenceInDays(now, new Date(creationDate));
 
     if (differenceInDaysValue > 7) {
-      return `${Math.floor(differenceInDaysValue / 7)} week${
-        Math.floor(differenceInDaysValue / 7) === 1 ? "" : "s"
-      } ago`;
+      return `${Math.floor(differenceInDaysValue / 7)} week${Math.floor(differenceInDaysValue / 7) === 1 ? "" : "s"
+        } ago`;
     } else if (differenceInDaysValue > 0) {
-      return `${differenceInDaysValue} day${
-        differenceInDaysValue === 1 ? "" : "s"
-      } ago`;
+      return `${differenceInDaysValue} day${differenceInDaysValue === 1 ? "" : "s"
+        } ago`;
     }
 
     const differenceInHoursValue = differenceInHours(
@@ -33,18 +31,16 @@ function ListingClipsComponents({ videosData, setVideosData }) {
     );
 
     if (differenceInHoursValue > 0) {
-      return `${differenceInHoursValue} hour${
-        differenceInHoursValue === 1 ? "" : "s"
-      } ago`;
+      return `${differenceInHoursValue} hour${differenceInHoursValue === 1 ? "" : "s"
+        } ago`;
     }
 
     const differenceInMinutesValue = differenceInMinutes(
       now,
       new Date(creationDate)
     );
-    return `${differenceInMinutesValue} minute${
-      differenceInMinutesValue === 1 ? "" : "s"
-    } ago`;
+    return `${differenceInMinutesValue} minute${differenceInMinutesValue === 1 ? "" : "s"
+      } ago`;
   };
 
   const handleMetadataLoaded = (videoIndex, duration) => {
@@ -62,7 +58,18 @@ function ListingClipsComponents({ videosData, setVideosData }) {
     <div id="ListingClips">
       <div className="ListingClips-wrapper fl_col gp22 pd40-r-l">
         <div className="clips-format-display fl_row jc_fe">
-          <img onClick={toggleListView} src={ListingFormatIcon.src} alt="" />
+          <svg onClick={toggleListView}
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="none"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill="#fff"
+              d="M12 0v4h4V0h-4zm3 3h-2V1h2v2zm-3 3v4h4V6h-4zm3 3h-2V7h2v2zM6 0v4h4V0H6zm3 3H7V1h2v2zM6 6v4h4V6H6zm3 3H7V7h2v2zm3 3v4h4v-4h-4zm3 3h-2v-2h2v2zm-9-3v4h4v-4H6zm3 3H7v-2h2v2zM0 0v4h4V0H0zm3 3H1V1h2v2zM0 6v4h4V6H0zm3 3H1V7h2v2zm-3 3v4h4v-4H0zm3 3H1v-2h2v2z"
+            ></path>
+          </svg>
         </div>
         <div className={`clips-listing ${isListView ? "List" : ""}`}>
           {videosData?.map((video, index) => (
