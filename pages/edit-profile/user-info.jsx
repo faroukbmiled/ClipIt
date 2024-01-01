@@ -21,8 +21,8 @@ function UserInfo({ session, status, update }) {
   useEffect(() => {
     if (session?.user) {
       setSelectedCountry({
-        value: getCode(session?.user?.country),
-        label: session?.user?.country,
+        value: session?.user?.country ? getCode(session?.user?.country) : "TN",
+        label: session?.user?.country || "Tunisia",
       });
       setUsername(session?.user?.name);
       setEmail(session?.user?.email);
