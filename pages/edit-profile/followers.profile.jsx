@@ -8,7 +8,7 @@ function FollowersProfile() {
 
   useEffect(() => {
     axios
-      .get("/api/user/getFollowers")
+      .get("/api/user/me/getFollowers")
       .then((response) => {
         setFollowersData(response.data.followers);
         setFollowersCount(response.data.followersCount);
@@ -22,9 +22,9 @@ function FollowersProfile() {
 
   const handleRemoveFollower = (followerId) => {
     axios
-      .post("/api/user/removeFollower", { followerId })
+      .post("/api/user/me/removeFollower", { followerId })
       .then((response) => {
-        axios.get("/api/user/getFollowers").then((response) => {
+        axios.get("/api/user/me/getFollowers").then((response) => {
           setFollowersData(response.data.followers);
           setFollowersCount(response.data.followersCount);
         });

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function FollowingProfile() {
+function FollowingProfile({ userId }) {
   const [followingData, setFollowingData] = useState([]);
   const [followingCount, setFollowingCount] = useState();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get("/api/user/me/getFollowing")
+      .get(`/api/user/getFollowing/${userId}`)
       .then((response) => {
         setFollowingData(response.data.following);
         setFollowingCount(response.data.followingCount);
@@ -35,7 +35,7 @@ function FollowingProfile() {
   };
   return (
     <div id="FollowingProfile" className="fl_col gp40">
-      <p className="p20 title-block txt_center pd40-b">
+      <p className="p20 title-block txt_center pd40-b txt_white">
         Following {followingCount > 0 && `(${followingCount})`}
       </p>
       {loading || !followingData ? (
@@ -45,13 +45,13 @@ function FollowingProfile() {
           {followingData.map((following, index) => (
             <div key={index} className="user-data pd20 fl_row gp20 ai_c rd15">
               <p
-                className="unfollow-user"
+                className="unfollow-user txt_white"
                 onClick={() => handleRemoveFollowing(following.userId)}
               >
                 x
               </p>
               <img src={following.avatar} alt="" />
-              <p className="p14">{following.name}</p>
+              <p className="p14 txt_white">{following.name}</p>
             </div>
           ))}
         </div>

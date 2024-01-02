@@ -20,6 +20,20 @@ function FollowersProfile({ userId }) {
       });
   }, []);
 
+  const handleRemoveFollower = (followerId) => {
+    axios
+      .post("/api/user/me/removeFollower", { followerId })
+      .then((response) => {
+        axios.get("/api/user/me/getFollowers").then((response) => {
+          setFollowersData(response.data.followers);
+          setFollowersCount(response.data.followersCount);
+        });
+      })
+      .catch((error) => {
+        console.error("Error removing follower:", error);
+      });
+  };
+
   return (
     <div id="FollowersProfile" className="fl_col gp40">
       <p className="p20 title-block txt_center pd40-b txt_white">
@@ -31,6 +45,12 @@ function FollowersProfile({ userId }) {
         <div className="listing-profiles">
           {followersData.map((follower, index) => (
             <div key={index} className="user-data pd20 fl_row gp20 ai_c rd15">
+              <p
+                className="unfollow-user"
+                onClick={() => handleRemoveFollower(follower.userId)}
+              >
+                x
+              </p>
               <img src={follower.avatar} alt="" />
               <p className="p14">{follower.name}</p>
             </div>

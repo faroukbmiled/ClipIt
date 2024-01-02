@@ -12,15 +12,17 @@ import FollowUser from "../../../src/assets/Icons/Follow-user.svg";
 const UserProfile = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const { userId, tab } = router.query;
+  const [userId, setuserId] = useState(session?.user?.id || null);
+  const { tab } = router.query;
   const [userData, setUserData] = useState(null);
   const [activeTab, setActiveTab] = useState(tab || "videos");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (userId) {
-          const response = await axios.get(`/api/user/${userId}`);
+        if (session?.user?.id) {
+          setuserId(session?.user?.id);
+          const response = await axios.get(`/api/user/${session?.user?.id}`);
           setUserData(response.data);
         }
       } catch (error) {
@@ -29,20 +31,14 @@ const UserProfile = () => {
     };
 
     fetchData();
-  }, [userId]);
+  }, [session?.user?.id]);
 
   useEffect(() => {
     setActiveTab(tab || "videos");
   }, [tab]);
 
-  useEffect(() => {
-    if (userId === session?.user?.id) {
-      router.push(`/user/me?tab=${tab || "videos"}`);
-    }
-  }, [userId, session, tab]);
-
   const handleTabClick = (tab) => {
-    router.push(`/user/${userId}?tab=${tab}`);
+    router.push(`/user/me?tab=${tab}`);
   };
 
   if (!userId) {
@@ -106,8 +102,8 @@ const UserProfile = () => {
               </div>
             </div>
             <div className="follow-box btn btn-primary fl_row gp10 ai_c rd20">
-              <img src={FollowUser.src} alt="" />
-              <p className="p17">Follow</p>
+              {/* <img src={FollowUser.src} alt="" /> */}
+              <p className="p17">Edit</p>
             </div>
           </div>
         </div>
