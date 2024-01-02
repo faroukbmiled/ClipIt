@@ -1,8 +1,13 @@
 .UserProfile-Page {
     position: relative;
+
     & #header {
         background: rgba(0, 0, 0, 0.70);
         padding-top: $s20-d;
         padding-bottom: $s20-d;
+
+    }
+    & .content-tabs {
+        min-height: 20vw;
     }
 }

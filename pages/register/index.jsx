@@ -2,7 +2,7 @@ import Head from "next/head";
 import LoadingSpin from "react-loading-spin";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import ClipiTLogo from "../../src/assets/imgs/ClipiT-logo.png";
+import ClipiTLogo from "../../src/assets/imgs/ClipitLogoBlack.png";
 import galleryadd from "../../src/assets/icons/galleryadd.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";

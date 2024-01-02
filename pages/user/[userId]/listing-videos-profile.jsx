@@ -58,7 +58,7 @@ function ListingVideosProfile() {
 
     return (
         <div id="ListingClips">
-            <div className="ListingClips-wrapper fl_col gp22 pd40-r-l">
+            <div className="ListingClips-wrapper fl_col gp40">
                 <div className="clips-format-display fl_row jc_fe">
                     <svg onClick={toggleListView}
                         xmlns="http://www.w3.org/2000/svg"

@@ -35,7 +35,29 @@
                 & .user-details {}
             }
 
-            & .user-tabs {}
+            & .user-tabs {
+                & .active-tab {
+                    position: relative;
+                    font-weight: 900;
+
+                    &::after {
+                        position: absolute;
+                        bottom: -0.7vw;
+                        left: 50%;
+                        content: "";
+                        width: 142%;
+                        height: 0.24vw;
+                        background-color: #AAAAAA;
+                        transform: translateX(-50%);
+                        border-radius: $s30-d;
+                    }
+                }
+
+                & li {
+                    cursor: pointer;
+                    transition: all 0.3s;
+                }
+            }
         }
     }
 }
