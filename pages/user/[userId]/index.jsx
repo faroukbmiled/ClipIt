@@ -36,8 +36,10 @@ const UserProfile = () => {
   }, [tab]);
 
   useEffect(() => {
-    if (userId === session?.user?.id) {
-      router.push(`/user/me?tab=${tab || "videos"}`);
+    if (userId && session?.user?.id) {
+      if (userId === session?.user?.id) {
+        router.push(`/user/me?tab=${tab || "videos"}`);
+      }
     }
   }, [userId, session, tab]);
 
