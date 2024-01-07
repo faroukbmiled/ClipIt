@@ -11,10 +11,10 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 
 async function getMostFollowedUsers(req: NextApiRequest, res: NextApiResponse) {
     try {
-
         const usersWithFollowers = await prisma.user.findMany({
             include: {
                 followers: true,
+                videos: true,
             },
         });
 
@@ -24,12 +24,25 @@ async function getMostFollowedUsers(req: NextApiRequest, res: NextApiResponse) {
 
         const topUsers = sortedUsers.slice(0, 8);
 
-        const mostFollowedUsers = topUsers.map((user) => ({
-            userId: user.id,
-            name: user.name,
-            avatar: user.image,
-            followersCount: user.followers.length,
-        }));
+        const mostFollowedUsers = await Promise.all(
+            topUsers.map(async (user) => {
+                const totalVideosCount = user.videos.length;
+
+                const totalVideosViews = user.videos.reduce(
+                    (totalViews, video) => totalViews + video.views,
+                    0
+                );
+
+                return {
+                    userId: user.id,
+                    name: user.name,
+                    avatar: user.image,
+                    followersCount: user.followers.length,
+                    totalVideosCount,
+                    totalVideosViews,
+                };
+            })
+        );
 
         return res.status(200).json({ mostFollowedUsers });
     } catch (error) {

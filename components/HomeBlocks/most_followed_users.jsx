@@ -5,7 +5,7 @@ import followers_icon from "../../src/assets/Icons/followers_icon.svg";
 import eye_icon from "../../src/assets/Icons/eye.svg";
 import videos_icon from "../../src/assets/Icons/videos.svg";
 import "swiper/css";
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function MostFollowedUsers() {
   const [mostFollowedUsers, setMostFollowedUsers] = useState([]);
@@ -43,11 +43,11 @@ export default function MostFollowedUsers() {
                         <p className="p24 ">{user.name}</p>
                         <div className="fl_row gp5 ai_c">
                           <img src={eye_icon.src} alt="" />
-                          <p className="p22">15 Videos</p>
+                          <p className="p22">{user.totalVideosCount}</p>
                         </div>
                         <div className="fl_row gp5 ai_c">
                           <img src={videos_icon.src} alt="" />
-                          <p className="p22">150 Views</p>
+                          <p className="p22">{user.totalVideosViews}</p>
                         </div>
                       </div>
                     </div>
@@ -58,13 +58,12 @@ export default function MostFollowedUsers() {
                       </p>
                     </div>
                   </div>
-
                 </SwiperSlide>
               ))}
             </Swiper>
           )}
         </div>
       </div>
-    </div >
+    </div>
   );
 }

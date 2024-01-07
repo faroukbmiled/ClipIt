@@ -55,7 +55,7 @@ function ListingClipsPage() {
             <div className="nav-bar">
               <NavOptions></NavOptions>
               <hr className="mg20-t-b rd25" />
-              <UserFollowingList></UserFollowingList>
+              <UserFollowingList session={session}></UserFollowingList>
             </div>
             <div className="listing-clips fl_col gp40">
               <FilterListingClips onSearch={handleSearch} />

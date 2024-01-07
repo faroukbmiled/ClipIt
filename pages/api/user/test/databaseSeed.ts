@@ -77,16 +77,6 @@ async function createTestUsersHandler(req: NextApiRequest, res: NextApiResponse)
                                 followingId: existingUser.id,
                             },
                         });
-
-                        await prisma.user.update({
-                            where: { id: user.id },
-                            data: { followingCount: { increment: 1 } },
-                        });
-
-                        await prisma.user.update({
-                            where: { id: existingUser.id },
-                            data: { followersCount: { increment: 1 } },
-                        });
                     }
                 }
 

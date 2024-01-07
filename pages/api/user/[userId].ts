@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { withAuth } from '@lib/authMiddleware';
 import prisma from '@lib/authPrisma';
 
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
@@ -13,7 +14,9 @@ async function getUserData(req: NextApiRequest, res: NextApiResponse) {
     try {
         const userId = req.query.userId as string;
 
-        const user = await prisma.user.findUnique({
+        const user = await withAuth(req, res, true, false, true);
+
+        const requser = await prisma.user.findUnique({
             where: { id: userId },
             include: {
                 followers: true,
@@ -29,17 +32,21 @@ async function getUserData(req: NextApiRequest, res: NextApiResponse) {
             },
         });
 
-        if (!user) {
+        if (!requser) {
             return res.status(404).json({ error: 'User not found' });
         }
 
+        const isFollowed = user && requser.followers.some(followedUser => followedUser.followingId === user.id);
+
         const formattedData = {
-            userId: user.id,
-            avatar: user.image,
-            cover: user.cover,
-            followers: user.followersCount,
-            username: user.name,
-            videos: user.videos.map((video) => ({
+            userId: requser.id,
+            avatar: requser.image,
+            cover: requser.cover,
+            followers: requser.followers.length,
+            username: requser.name,
+            isFollowed: isFollowed || false,
+            bio: requser.bio,
+            videos: requser.videos.map((video) => ({
                 username: video.user.name,
                 user_avatar: video.user.image,
                 game_category: video.category,

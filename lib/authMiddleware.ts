@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@lib/authConfig';
 
-export const withAuth = async (req: any, res: any, allowUsers: boolean = false, app_router: boolean = false) => {
+export const withAuth = async (req: any, res: any, allowUsers: boolean = false, app_router: boolean = false, allowNotAuthed: boolean = false) => {
     try {
 
         let session: any
@@ -11,6 +11,12 @@ export const withAuth = async (req: any, res: any, allowUsers: boolean = false, 
         }
         else {
             session = await getServerSession(authOptions as any);
+        }
+
+        if (allowNotAuthed) {
+            if (!session) {
+                return null;
+            }
         }
 
         if (!session) {

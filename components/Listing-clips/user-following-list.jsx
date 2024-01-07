@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import axios from "axios";
 
-function MostFollowedUsersListing() {
+function MostFollowedUsersListing({ session }) {
   const [followingData, setFollowingData] = useState([]);
   const [followingCount, setFollowingCount] = useState();
   const [loading, setLoading] = useState(true);
@@ -35,15 +36,21 @@ function MostFollowedUsersListing() {
             <p>Loading...</p>
           ) : (
             <div className="users-listing fl_col gp15">
-              {followingData.length > 0 ? (
-                followingData.map((user, index) => (
-                  <div className="card-user fl_row gp24 ai_c" key={index}>
-                    <img className="rd50" src={user.avatar} alt={user.name} />
-                    <p className="p14 txt_white">{user.name}</p>
-                  </div>
-                ))
+              {session?.user ? (
+                followingData.length > 0 ? (
+                  followingData.map((user, index) => (
+                    <div className="card-user fl_row gp24 ai_c" key={index}>
+                      <img className="rd50" src={user.avatar} alt={user.name} />
+                      <p className="p14 txt_white">{user.name}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="p10 txt_white">You are not following anyone</p>
+                )
               ) : (
-                <p className="p10 txt_white">You are not following anyone</p>
+                <p className="p10 txt_white">
+                  Please <Link href="/login">log in</Link> to view this content
+                </p>
               )}
             </div>
           )}

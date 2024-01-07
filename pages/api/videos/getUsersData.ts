@@ -30,7 +30,7 @@ async function getAllUsersData(req: NextApiRequest, res: NextApiResponse) {
             userId: user.id,
             avatar: user.image,
             cover: user.cover,
-            followers: user.followersCount,
+            followers: user.followers.length,
             username: user.name,
             videos: user.videos.map((video) => ({
                 userId: video.user.id,

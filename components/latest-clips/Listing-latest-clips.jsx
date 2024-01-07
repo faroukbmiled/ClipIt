@@ -1,18 +1,27 @@
 import React, { useState, useEffect } from "react";
 // import videoData from "../../data/data.json"; //tesing
+import { incrementView } from "@lib/incrementVideoView";
 import playVideo from "../../src/assets/Icons/play-video.svg";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Link from 'next/link'
+import Link from "next/link";
 
 function ListingLatestClips({ videosData }) {
   const [openModals, setOpenModals] = useState(
     Array(videosData?.length).fill(false)
   );
-  const handleOpen = (index) => {
+  const handleOpen = async (index) => {
     const newOpenModals = [...openModals];
     newOpenModals[index] = true;
     setOpenModals(newOpenModals);
+
+    try {
+      const updatedVideo = await incrementView(videos[index].id);
+
+      console.log("Views count incremented:", updatedVideo.views);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   const handleClose = (index) => {
@@ -86,7 +95,12 @@ function ListingLatestClips({ videosData }) {
           </div>
         ))}
       </div>
-        <Link href="listing-clips" className="show_more btn btn-grey p14 uper w-600">Show More</Link>
+      <Link
+        href="listing-clips"
+        className="show_more btn btn-grey p14 uper w-600"
+      >
+        Show More
+      </Link>
     </div>
   );
 }

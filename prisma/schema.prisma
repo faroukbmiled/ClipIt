@@ -36,24 +36,23 @@ model Session {
 }
 
 model User {
-  id             String      @id @default(cuid())
-  name           String?
-  email          String?     @unique
-  password       String
-  emailVerified  DateTime?
-  image          String?
-  cover          String?
-  role           String?     @default("user")
-  country        String?
-  accounts       Account[]
-  sessions       Session[]
-  videos         Video[]
-  likedVideos    VideoLike[]
-  followers      Follower[]  @relation("Following")
-  following      Follower[]  @relation("Followers")
-  followersCount Int         @default(0)
-  followingCount Int         @default(0)
-  createdAt      DateTime    @default(now())
+  id            String      @id @default(cuid())
+  name          String?
+  email         String?     @unique
+  password      String
+  emailVerified DateTime?
+  image         String?
+  cover         String?
+  role          String?     @default("user")
+  bio           String      @default("Gamer and content creator at ClipIt!")
+  country       String?
+  accounts      Account[]
+  sessions      Session[]
+  videos        Video[]
+  likedVideos   VideoLike[]
+  followers     Follower[]  @relation("Following")
+  following     Follower[]  @relation("Followers")
+  createdAt     DateTime    @default(now())
 
   @@unique([id, email])
 }

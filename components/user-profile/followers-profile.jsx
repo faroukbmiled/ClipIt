@@ -1,24 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
 
-function FollowersProfile({ userId }) {
-  const [followersData, setFollowersData] = useState();
-  const [followersCount, setFollowersCount] = useState();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    axios
-      .get(`/api/user/getFollowers/${userId}`)
-      .then((response) => {
-        setFollowersData(response.data.followers);
-        setFollowersCount(response.data.followersCount);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching followers:", error);
-        setLoading(false);
-      });
-  }, []);
+function FollowersProfile({
+  followersData,
+  followersCount,
+  loading,
+  isMe = false,
+  removeFollowerHandler,
+}) {
+  const handleRemoveFollower = (followerId) => {
+    if (isMe) {
+      removeFollowerHandler(followerId);
+    }
+  };
 
   return (
     <div id="FollowersProfile" className="fl_col gp40">
@@ -31,6 +25,14 @@ function FollowersProfile({ userId }) {
         <div className="listing-profiles">
           {followersData.map((follower, index) => (
             <div key={index} className="user-data pd20 fl_row gp20 ai_c rd15">
+              {isMe && (
+                <p
+                  className="unfollow-user"
+                  onClick={() => handleRemoveFollower(follower.userId)}
+                >
+                  x
+                </p>
+              )}
               <img src={follower.avatar} alt="" />
               <p className="p14 txt_white">{follower.name}</p>
             </div>
