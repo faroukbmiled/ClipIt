@@ -1,0 +1,36 @@
+{
+    "gameCategories": [
+        {
+            "id": 1,
+            "name": "Action"
+        },
+        {
+            "id": 2,
+            "name": "Adventure"
+        },
+        {
+            "id": 3,
+            "name": "First-person shooter"
+        },
+        {
+            "id": 4,
+            "name": "Strategy"
+        },
+        {
+            "id": 5,
+            "name": "Simulation"
+        },
+        {
+            "id": 6,
+            "name": "Sports"
+        },
+        {
+            "id": 8,
+            "name": "Horror"
+        },
+        {
+            "id": 9,
+            "name": "Others"
+        }
+    ]
+}

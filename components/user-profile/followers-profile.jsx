@@ -32,7 +32,7 @@ function FollowersProfile({ userId }) {
           {followersData.map((follower, index) => (
             <div key={index} className="user-data pd20 fl_row gp20 ai_c rd15">
               <img src={follower.avatar} alt="" />
-              <p className="p14">{follower.name}</p>
+              <p className="p14 txt_white">{follower.name}</p>
             </div>
           ))}
         </div>

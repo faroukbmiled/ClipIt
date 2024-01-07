@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import AddVideo from "../../src/assets/Icons/AddVideo.svg";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-
+import gameCategoriesData from "./categories.json";
 function UploadVideoModal({ session, signOut }) {
   const router = useRouter();
 
@@ -26,7 +26,10 @@ function UploadVideoModal({ session, signOut }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const [gameCategories, setGameCategories] = useState([]);
+  useEffect(() => {
+    setGameCategories(gameCategoriesData.gameCategories);
+  }, []);
   const handleFileChange = (event) => {
     const fileInput = event.target;
     const file = fileInput.files[0];
@@ -195,12 +198,25 @@ function UploadVideoModal({ session, signOut }) {
                       </div>
                       <div className="inp-col fl_col">
                         <label htmlFor="category">Category</label>
-                        <input
+                        {/* <input
                           type="text"
                           name="category"
                           placeholder="Category"
                           onChange={(e) => setCategory(e.target.value)}
-                        />
+                        /> */}
+                        <select
+                          name="category"
+                          onChange={(e) => setCategory(e.target.value)}
+                        >
+                          <option value="" disabled selected>
+                            Select Category
+                          </option>
+                          {gameCategories.map((category) => (
+                            <option key={category.id} value={category.name}>
+                              {category.name}
+                            </option>
+                          ))}
+                        </select>
                       </div>
                       <div className="inp-col fl_col">
                         <label htmlFor="hashtag">Hashtag</label>

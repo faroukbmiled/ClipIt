@@ -26,9 +26,6 @@ function Header({ status, session, signOut }) {
           <Link href="/listing-clips" tabIndex="-1">
             <li>Clips</li>
           </Link>
-          {/* <Link href="#" tabIndex="-1">
-            <li>Top Players</li>
-          </Link> */}
           <Link href="" tabIndex="-1">
             <li>Contact</li>
           </Link>
