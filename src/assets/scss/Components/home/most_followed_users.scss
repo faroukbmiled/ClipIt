@@ -6,22 +6,64 @@
             width: 100%;
 
             & .swiper-wrapper {
-                gap: $s20-d ;
+                // gap: $s20-d ;
 
-                & .card-user {
-                    & a {
-                        position: absolute;
-                        left: 0;
-                        top: 0;
-                        width: 100%;
-                        height: 100%;
-                        z-index: 2;
-                    }
-                    & .user-avatar {
-                        & img {
+                & .swiper-slide {
+                    & .card-user {
+
+
+                        & a {
+                            position: absolute;
+                            left: 0;
+                            top: 0;
                             width: 100%;
-                            aspect-ratio: 1/1;
-                            object-fit: cover;
+                            height: 100%;
+                            z-index: 2;
+                        }
+
+                        & .user-avatar {
+                            position: relative;
+                            overflow: hidden;
+                            border-radius: $s20-d;
+
+                            & .user-info {
+                                height: 250px;
+                                width: 100%;
+                                position: absolute;
+                                bottom: -100%;
+                                left: 0;
+                                background-image: url("../../../imgs/shadow.png");
+                                background-size: cover;
+                                background-repeat: no-repeat;
+                                transition: all 0.3s;
+                                border-radius: $s20-d;
+
+                                & img {
+                                    width: $s20-d;
+                                    height: $s20-d;
+                                }
+                            }
+
+                            & .user-img {
+                                width: 100%;
+                                aspect-ratio: 1/1;
+                                object-fit: cover;
+                                transition: all 0.3s;
+                            }
+                        }
+                    }
+
+
+
+                    &:hover {
+                        & .user-avatar {
+                            & .user-img {
+                                filter: blur(5px);
+                            }
+                        }
+
+                        & .user-info {
+                            bottom: 0% !important;
                         }
                     }
                 }
