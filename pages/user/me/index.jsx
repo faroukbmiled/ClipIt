@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import  ListingVideosProfile from "../../../components/user-profile/listing-videos-profile"
+import ListingVideosProfile from "../../../components/user-profile/listing-videos-profile"
 import FollowersProfile from "../../../components/user-profile/followers-profile";
 import FollowingProfile from "../../../components/user-profile/following-profile";
 import AboutProfile from "../../../components/user-profile/about-profile";
 import { useSession, signOut } from "next-auth/react";
 import Header from "../../../components/header/header";
 import FollowUser from "../../../src/assets/Icons/Follow-user.svg";
-
+import Link from "next/link";
 const UserProfile = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -103,7 +103,10 @@ const UserProfile = () => {
             </div>
             <div className="follow-box btn btn-primary fl_row gp10 ai_c rd20">
               {/* <img src={FollowUser.src} alt="" /> */}
-              <p className="p17">Edit</p>
+
+              <Link href="/edit-profile">
+                <p className="p17">Edit</p>
+              </Link>
             </div>
           </div>
         </div>

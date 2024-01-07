@@ -7,12 +7,25 @@ import {
 import ListingFormatIcon from "../../src/assets/Icons/Grid-format-videoIcon.svg";
 // import jsonData from "../data/data.json"; // testing
 import playvideoIcon from "../../src/assets/Icons/play-video.svg";
-
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
 function ListingClipsComponents({ videosData, setVideosData }) {
   //   const { DataForTesting } = jsonData; // testing
   const [videoDurations, setVideoDurations] = useState({});
   const [isListView, setIsListView] = useState(false);
-
+  const [openModals, setOpenModals] = useState(
+    Array(videosData?.length).fill(false)
+  );
+  const handleOpen = (index) => {
+    const newOpenModals = [...openModals];
+    newOpenModals[index] = true;
+    setOpenModals(newOpenModals);
+  };
+  const handleClose = (index) => {
+    const newOpenModals = [...openModals];
+    newOpenModals[index] = false;
+    setOpenModals(newOpenModals);
+  };
   const formatTimeAgo = (creationDate) => {
     const now = new Date();
     const differenceInDaysValue = differenceInDays(now, new Date(creationDate));
@@ -53,6 +66,13 @@ function ListingClipsComponents({ videosData, setVideosData }) {
   const toggleListView = () => {
     setIsListView((prevIsListView) => !prevIsListView);
   };
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "background.paper",
+  };
 
   return (
     <div id="ListingClips">
@@ -76,12 +96,28 @@ function ListingClipsComponents({ videosData, setVideosData }) {
             <div className="video-card fl_col gp10">
               <div className="video-clip">
                 <div className="video-display">
-                  <img src={playvideoIcon.src} alt="" className="play-video" />
+                  <img onClick={() => handleOpen(index)} src={playvideoIcon.src} alt="" className="play-video" />
                   <img
                     className="video-thumbnail rd10"
                     src={video.video_thumbnail}
                     alt=""
                   />
+                  <Modal
+                    className="popupDisplayVideo rd25"
+                    open={openModals[index]}
+                    onClose={() => handleClose(index)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={style}>
+                      <video
+                        controls
+                        autoPlay
+                        // muted
+                        src={video.video_url}
+                      ></video>
+                    </Box>
+                  </Modal>
                 </div>
                 <video
                   className="hide"
