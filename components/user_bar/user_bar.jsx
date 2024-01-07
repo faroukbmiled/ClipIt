@@ -9,10 +9,11 @@ function UserNav({ session, signOut }) {
         <img className="user-avatar rd50" src={session?.user?.image} alt="" />
         <div className="user-list-options pd20 fl_col gp10 rd10">
           <p className="p14">
-            <Link href="/edit-profile">My Profile</Link>
+            <Link href="/user/me?tab=videos">My Profile</Link>
           </p>
-          <p className="p14">Settings</p>
-          <p className="p14">Top Clips</p>
+          <p className="p14">
+            <Link href="/edit-profile">Settings</Link>
+          </p>
           <p className="p14" onClick={() => signOut()}>
             Logout
           </p>

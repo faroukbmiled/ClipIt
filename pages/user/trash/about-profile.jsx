@@ -6,4 +6,4 @@ function AboutProfile() {
   );
 }
 
-export default AboutProfile;
+// export default AboutProfile;

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import followers_icon from "../../src/assets/Icons/followers_icon.svg";
 import "swiper/css";
+import Link from 'next/link';
 
 export default function MostFollowedUsers() {
   const [mostFollowedUsers, setMostFollowedUsers] = useState([]);
@@ -33,6 +34,7 @@ export default function MostFollowedUsers() {
               {mostFollowedUsers.map((user) => (
                 <SwiperSlide key={user.userId}>
                   <div className="card-user fl_col gp10">
+                    <Link href={"/user/" + user.userId}></Link>
                     <div className="user-avatar">
                       <img className="rd20" src={user.avatar} alt="" />
                     </div>
@@ -49,6 +51,6 @@ export default function MostFollowedUsers() {
           )}
         </div>
       </div>
-    </div>
+    </div >
   );
 }

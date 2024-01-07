@@ -3,9 +3,11 @@
     position: relative;
     z-index: 999;
     padding-bottom: 7.08vw;
+
     & .menu {
         & .active {
             position: relative;
+
             &::after {
                 content: "";
                 position: absolute;
@@ -36,6 +38,7 @@
         }
 
     }
+
 
     & .logo {
         & img {

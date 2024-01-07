@@ -9,6 +9,10 @@
         & .body-wrapper {
             & .users-listing {
                 & .card-user {
+                    position: relative;
+
+
+
                     & img {
                         width: $s28-d;
                         height: $s28-d;

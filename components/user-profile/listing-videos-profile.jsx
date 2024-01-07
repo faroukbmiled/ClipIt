@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/react";
-import playVideo from "../../../src/assets/Icons/play-video.svg";
+import playVideo from "../../src/assets/Icons/play-video.svg";
 
 function ListingVideosProfile({ userId }) {
   const [userData, setUserData] = useState(null);

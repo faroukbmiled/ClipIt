@@ -6,9 +6,17 @@
             width: 100%;
 
             & .swiper-wrapper {
-                gap: $s20-d
-                ;
+                gap: $s20-d ;
+
                 & .card-user {
+                    & a {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 2;
+                    }
                     & .user-avatar {
                         & img {
                             width: 100%;

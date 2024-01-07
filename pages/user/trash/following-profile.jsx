@@ -60,4 +60,4 @@ function FollowingProfile({ userId }) {
   );
 }
 
-export default FollowingProfile;
+// export default FollowingProfile;

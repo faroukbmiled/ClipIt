@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import ListingVideosProfile from "./listing-videos-profile";
-import FollowersProfile from "./followers-profile";
-import FollowingProfile from "./following-profile";
-import AboutProfile from "./about-profile";
+import ListingVideosProfile from "../../../components/user-profile/listing-videos-profile"
+import FollowersProfile from "../../../components/user-profile/followers-profile";
+import FollowingProfile from "../../../components/user-profile/following-profile";
+import AboutProfile from "../../../components/user-profile/about-profile";
 import { useSession, signOut } from "next-auth/react";
 import Header from "../../../components/header/header";
 import FollowUser from "../../../src/assets/Icons/Follow-user.svg";
