@@ -43,11 +43,11 @@ export default function MostFollowedUsers() {
                         <p className="p24 ">{user.name}</p>
                         <div className="fl_row gp5 ai_c">
                           <img src={eye_icon.src} alt="" />
-                          <p className="p22">{user.totalVideosCount}</p>
+                          <p className="p22">{user.totalVideosViews}</p>
                         </div>
                         <div className="fl_row gp5 ai_c">
                           <img src={videos_icon.src} alt="" />
-                          <p className="p22">{user.totalVideosViews}</p>
+                          <p className="p22">{user.totalVideosCount}</p>
                         </div>
                       </div>
                     </div>
