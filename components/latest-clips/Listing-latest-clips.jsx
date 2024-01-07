@@ -14,9 +14,10 @@ function ListingLatestClips({ videosData }) {
     const newOpenModals = [...openModals];
     newOpenModals[index] = true;
     setOpenModals(newOpenModals);
+    console.log("index", index, "VideoData", videos[index].videoId);
 
     try {
-      const updatedVideo = await incrementView(videos[index].id);
+      const updatedVideo = await incrementView(videosData[index].videoId);
 
       console.log("Views count incremented:", updatedVideo.views);
     } catch (error) {
