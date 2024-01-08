@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import AddVideo from "../../src/assets/Icons/AddVideo.svg";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import LinearProgress from "@mui/material/LinearProgress";
 import gameCategoriesData from "./categories.json";
 function UploadVideoModal({ session, signOut }) {
   const router = useRouter();
@@ -22,7 +23,7 @@ function UploadVideoModal({ session, signOut }) {
   const [category, setCategory] = useState("");
   const [hashtag, setHashtag] = useState("");
   const [swiper, setSwiper] = useState(null);
-  const [UploadProgress, setUplaodProgress] = useState("0%");
+  const [UploadProgress, setUplaodProgress] = useState(0);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -75,9 +76,11 @@ function UploadVideoModal({ session, signOut }) {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        onUploadProgress: (progressEvent) => { // mahdouch use this to show upload progress
-          const percentComplete = (progressEvent.loaded / progressEvent.total) * 100;
-          setUplaodProgress(`${percentComplete} %`)
+        onUploadProgress: (progressEvent) => {
+          // mahdouch use this to show upload progress
+          const percentComplete =
+            (progressEvent.loaded / progressEvent.total) * 100;
+          setUplaodProgress(percentComplete);
           console.log("Upload Progress: " + percentComplete + "%");
         },
       });
@@ -174,9 +177,7 @@ function UploadVideoModal({ session, signOut }) {
               <SwiperSlide>
                 <div className="card-user fl_col gp20">
                   <div className="fl_col gp10">
-                    <p className="p22 txt_center w-700">
-                      Video Information
-                    </p>
+                    <p className="p22 txt_center w-700">Video Information</p>
                     <div className="boxinputsSection light-input fl_col gp20 ">
                       <div className="inp-col fl_col">
                         <label htmlFor="title">Title</label>
@@ -226,6 +227,12 @@ function UploadVideoModal({ session, signOut }) {
                           placeholder="Hashtag"
                           onChange={(e) => setHashtag(e.target.value)}
                         />
+                        {UploadProgress !== 0 && (
+                          <LinearProgress
+                            variant="determinate"
+                            value={parseFloat(UploadProgress)}
+                          />
+                        )}
                       </div>
                     </div>
                   </div>

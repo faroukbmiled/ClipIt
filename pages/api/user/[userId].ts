@@ -57,6 +57,7 @@ async function getUserData(req: NextApiRequest, res: NextApiResponse) {
                 video_title: video.title,
                 video_thumbnail: video.thumbnail,
                 video_url: video.videoLink,
+                videoId: video.id,
             })),
         };
 

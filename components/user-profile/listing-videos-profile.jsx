@@ -4,16 +4,17 @@ import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/react";
 import playVideo from "../../src/assets/Icons/play-video.svg";
 
-function ListingVideosProfile({ userId }) {
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
   const [openModals, setOpenModals] = useState([]);
   const [isListView, setIsListView] = useState(false);
   const [videoDurations, setVideoDurations] = useState({});
 
   const toggleListView = () => {
     setIsListView((prevIsListView) => !prevIsListView);
+  };
+
+  const HandleRemoveVideo = async (videoId) => {
+    await removeVideo(videoId);
   };
 
   const handleMetadataLoaded = (videoIndex, duration) => {
@@ -23,33 +24,15 @@ function ListingVideosProfile({ userId }) {
     }));
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (userId) {
-          const response = await axios.get(`/api/user/${userId}`);
-          setUserData(response.data);
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        setError("Error fetching user data");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [userId]);
-
-  if (loading) {
+  if (!userData) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>{error}</div>;
+  if (!userId && !userData) {
+    return <div>User not found</div>;
   }
 
-  if (!userId || !userData) {
+  if (!userId) {
     return <div>User not found</div>;
   }
 
@@ -120,6 +103,14 @@ function ListingVideosProfile({ userId }) {
                         {formatTimeAgo(video.creation_date)}
                       </p>
                     </div>
+                    {isMe && (
+                      <button
+                        className="remove-video-btn"
+                        onClick={() => HandleRemoveVideo(video.videoId)}
+                      >
+                        Remove Video
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

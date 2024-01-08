@@ -14,7 +14,6 @@ function ListingLatestClips({ videosData }) {
     const newOpenModals = [...openModals];
     newOpenModals[index] = true;
     setOpenModals(newOpenModals);
-    console.log("index", index, "VideoData", videos[index].videoId);
 
     try {
       const updatedVideo = await incrementView(videosData[index].videoId);
@@ -47,7 +46,11 @@ function ListingLatestClips({ videosData }) {
             <div className="wrapper-card fl_col txt_white h-100 jc_s">
               <div className="card-header pd20">
                 <div className="card-header-wrapper fl_row jc_s">
-                  <div className="user-info fl_row gp5">
+                  <div
+                    className="user-info fl_row gp5"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => (location.href = "/user/" + video.userId)}
+                  >
                     <img className="rd50" src={video.user_avatar} alt="" />
                     <div className="fl_col">
                       <p className="p18 w-800">{video.username}</p>

@@ -90,6 +90,18 @@ const UserProfile = () => {
       });
   };
 
+  const removeVideo = async (videoId) => {
+    try {
+      const response = await axios.post("/api/user/me/removeVideo", {
+        videoId,
+      });
+      console.log(response.data);
+      await fetchUserData();
+    } catch (error) {
+      console.error("Error removing video:", error);
+    }
+  };
+
   const handleTabClick = (tab) => {
     router.push(`/user/me?tab=${tab}`);
   };
@@ -183,7 +195,14 @@ const UserProfile = () => {
           </div>
         </div>
         <div className="content-tabs pd40">
-          {activeTab === "videos" && <ListingVideosProfile userId={userId} />}
+          {activeTab === "videos" && (
+            <ListingVideosProfile
+              userData={userData}
+              userId={userId}
+              removeVideo={removeVideo}
+              isMe={true}
+            />
+          )}
           {activeTab === "followers" && (
             <FollowersProfile
               followersData={followersData}

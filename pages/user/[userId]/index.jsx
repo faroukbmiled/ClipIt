@@ -166,7 +166,9 @@ const UserProfile = () => {
           </div>
         </div>
         <div className="content-tabs pd40">
-          {activeTab === "videos" && <ListingVideosProfile userId={userId} />}
+          {activeTab === "videos" && (
+            <ListingVideosProfile userData={userData} userId={userId} />
+          )}
           {activeTab === "followers" && (
             <FollowersProfile
               followersData={followersData}

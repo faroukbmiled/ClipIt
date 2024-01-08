@@ -39,7 +39,12 @@ function MostFollowedUsersListing({ session }) {
               {session?.user ? (
                 followingData.length > 0 ? (
                   followingData.map((user, index) => (
-                    <div className="card-user fl_row gp24 ai_c" key={index}>
+                    <div
+                      className="card-user fl_row gp24 ai_c"
+                      key={index}
+                      style={{ cursor: "pointer" }}
+                      onClick={() => (location.href = "/user/" + user.userId)}
+                    >
                       <img className="rd50" src={user.avatar} alt={user.name} />
                       <p className="p14 txt_white">{user.name}</p>
                     </div>
