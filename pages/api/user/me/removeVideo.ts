@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { deleteVideoAndThumbnail } from '@lib/videoUtils';
 import { withAuth } from '@lib/authMiddleware';
 import prisma from '@lib/authPrisma';
 
@@ -33,6 +34,9 @@ async function removeVideo(req: NextApiRequest, res: NextApiResponse) {
             return res.status(403).json({ message: 'Permission denied. You are not the owner of this video.' });
         }
 
+        const videoExtension = getFileExtension(video.videoLink) || "mp4";
+        const thumbnailExtension = video.thumbnail ? getFileExtension(video.thumbnail) : "jpg";
+
         await prisma.videoLike.deleteMany({
             where: {
                 videoId,
@@ -45,9 +49,19 @@ async function removeVideo(req: NextApiRequest, res: NextApiResponse) {
             },
         });
 
+        deleteVideoAndThumbnail(video.userId, videoId, videoExtension, thumbnailExtension || "jpg");
+
         return res.status(200).json({ message: 'Video removed successfully' });
     } catch (error) {
         console.error('Error removing video:', error);
         return res.status(500).json({ message: 'Internal Server Error' });
     }
+}
+
+function getFileExtension(filePath: string): string | null {
+    const parts = filePath.split('.');
+    if (parts.length > 1) {
+        return parts[parts.length - 1].toLowerCase();
+    }
+    return null;
 }
