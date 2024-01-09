@@ -1,7 +1,7 @@
-import homeIcon from "@assets/Icons/home-icon.svg";
-import YourvideosIcon from "@assets/Icons/Your-videos.svg";
-import SubscriptionsIcon from "@assets/Icons/Subscriptions-Icon.svg";
-import LikedVideosIcon from "@assets/Icons/Liked-VideosIcon.svg";
+import homeIcon from "@assets/icons/home-icon.svg";
+import YourvideosIcon from "@assets/icons/Your-videos.svg";
+import SubscriptionsIcon from "@assets/icons/Subscriptions-Icon.svg";
+import LikedVideosIcon from "@assets/icons/Liked-VideosIcon.svg";
 import Link from 'next/link'
 
 function NavOptions() {

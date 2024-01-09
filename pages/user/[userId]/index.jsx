@@ -7,7 +7,7 @@ import FollowingProfile from "../../../components/user-profile/following-profile
 import AboutProfile from "../../../components/user-profile/about-profile";
 import { useSession, signOut } from "next-auth/react";
 import Header from "../../../components/header/header";
-import FollowUser from "@assets/Icons/Follow-user.svg";
+import FollowUser from "@assets/icons/Follow-user.svg";
 
 const UserProfile = () => {
   const { data: session, status } = useSession();

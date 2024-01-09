@@ -5,7 +5,7 @@ import LoadingSpin from "react-loading-spin";
 import { setup } from "@lib/CustomCSRF";
 import { useRouter } from "next/router";
 import ClipiTLogo from "@assets/imgs/ClipitLogoBlack.png";
-import GmailIcon from "@assets/Icons/google.svg";
+import GmailIcon from "@assets/icons/google.svg";
 import Link from 'next/link'
 
 function Login() {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import searchFilterIcon from "@assets/Icons/search-filter.svg";
+import searchFilterIcon from "@assets/icons/search-filter.svg";
 
 function FilterListingClips({ onSearch }) {
   const [searchQuery, setSearchQuery] = useState("");

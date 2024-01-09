@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import videoData from "../../data/data.json"; //tesing
 import { incrementView } from "@lib/incrementVideoView";
-import playVideo from "@assets/Icons/play-video.svg";
+import playVideo from "@assets/icons/play-video.svg";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Link from "next/link";

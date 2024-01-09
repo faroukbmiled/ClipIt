@@ -4,10 +4,10 @@ import {
   differenceInHours,
   differenceInMinutes,
 } from "date-fns";
-import ListingFormatIcon from "@assets/Icons/Grid-format-videoIcon.svg";
+import ListingFormatIcon from "@assets/icons/Grid-format-videoIcon.svg";
 import { incrementView } from "@lib/incrementVideoView";
 // import jsonData from "../data/data.json"; // testing
-import playvideoIcon from "@assets/Icons/play-video.svg";
+import playvideoIcon from "@assets/icons/play-video.svg";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 function ListingClipsComponents({ videosData, setVideosData }) {
