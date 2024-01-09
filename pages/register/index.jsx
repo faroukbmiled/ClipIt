@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import ClipiTLogo from "@assets/imgs/ClipitLogoBlack.png";
 import galleryadd from "@assets/icons/galleryadd.svg";
 import Link from "next/link";
+import axios from "axios";
 import { useRouter } from "next/router";
 import Select from "react-select";
 import { getCode, getNames } from "country-list"; // Updated import
@@ -67,30 +68,29 @@ export default function Register({ csrfToken }) {
 
 
   const sendRegisterRequest = async (formData) => {
-    const headers = new Headers({
-      "X-CSRF-Token": csrfToken,
-    });
+    const headers = {
+      'X-CSRF-Token': csrfToken,
+      'Content-Type': 'multipart/form-data',
+    };
+
     try {
-      const response = await fetch("/api/user/signUp", {
-        method: "POST",
-        body: formData,
-        headers: headers
+      const response = await axios.post('/api/user/signUp', formData, {
+        headers: headers,
       });
-  
-      const result = await response.json();
-  
+
+      const result = response.data;
+
       if (result.created) {
-        router.push("/login");
+        router.push('/login');
       } else {
         console.error(result.errors);
-        toast.error(`Registration failed: ${result.errors.join(", ")}`);
+        toast.error(`Registration failed: ${result.errors.join(', ')}`);
       }
     } catch (error) {
-      console.error("Error during registration:", error);
-      toast.error("An unexpected error occurred. Please try again later.");
+      console.error('Error during registration:', error);
+      toast.error(error.response.data.errors.join(', '));
     }
   };
-  
 
   useEffect(() => {
     if (status === "authenticated") {
