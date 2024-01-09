@@ -90,7 +90,7 @@ async function createTestUsersHandler(req: NextApiRequest, res: NextApiResponse)
                         role: role,
                         country: "Tunisia",
                         image: `/userdata/data/avatar/${avatarFileName}`,
-                        cover: `/userdata/data/cover/${hashedPassword}`
+                        cover: `/userdata/data/cover/${coverFileName}`
                     },
                 });
 
