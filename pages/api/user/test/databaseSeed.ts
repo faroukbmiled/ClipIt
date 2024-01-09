@@ -7,6 +7,8 @@ import faker from "faker";
 import fs from "fs";
 import path from "path";
 
+const usedFiles: Record<string, Set<string>> = {};
+
 async function handle(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === "GET") {
         await createTestUsersHandler(req, res);
@@ -17,12 +19,22 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
 
 async function getRandomFile(folderPath: string): Promise<string | null> {
     try {
+        usedFiles[folderPath] = usedFiles[folderPath] || new Set();
+
         const files = await fs.promises.readdir(folderPath);
-        if (files.length === 0) {
+        const unusedFiles = files.filter((file) => !usedFiles[folderPath].has(file));
+
+        if (unusedFiles.length === 0) {
+            usedFiles[folderPath].clear();
             return null;
         }
-        const randomIndex = Math.floor(Math.random() * files.length);
-        return files[randomIndex];
+
+        const randomIndex = Math.floor(Math.random() * unusedFiles.length);
+        const selectedFile = unusedFiles[randomIndex];
+
+        usedFiles[folderPath].add(selectedFile);
+
+        return selectedFile;
     } catch (error) {
         console.error(`Error reading files from ${folderPath}:`, error);
         return null;
