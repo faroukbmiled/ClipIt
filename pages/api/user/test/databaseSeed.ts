@@ -25,8 +25,8 @@ async function getRandomFile(folderPath: string): Promise<string | null> {
         const unusedFiles = files.filter((file) => !usedFiles[folderPath].has(file));
 
         if (unusedFiles.length === 0) {
-            usedFiles[folderPath].clear();
-            return null;
+            const randomIndex = Math.floor(Math.random() * files.length);
+            return files[randomIndex];
         }
 
         const randomIndex = Math.floor(Math.random() * unusedFiles.length);
