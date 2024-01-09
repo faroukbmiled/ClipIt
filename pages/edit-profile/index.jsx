@@ -3,7 +3,7 @@ import { useSession, signOut, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import Link from "next/dist/client/link";
 import Header from "../../components/header/header";
-import LogoutIcon from "../../src/assets/Icons/LogoutIcon.svg";
+import LogoutIcon from "@assets/Icons/LogoutIcon.svg";
 import UserInfo from "./user-info";
 import FollowersProfile from "./followers.profile";
 import FollowingProfile from "./following.profile";

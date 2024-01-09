@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import logoWhite from "../../src/assets/imgs/ClipitLogoWhite.png";
+import logoWhite from "@assets/imgs/ClipitLogoWhite.png";
 import UserNav from "../user_bar/user_bar";
 import { useGlitch } from 'react-powerglitch'
 

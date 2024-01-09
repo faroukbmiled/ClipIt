@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
-import followers_icon from "../../src/assets/Icons/followers_icon.svg";
-import eye_icon from "../../src/assets/Icons/eye.svg";
-import videos_icon from "../../src/assets/Icons/videos.svg";
+import followers_icon from "@assets/Icons/followers_icon.svg";
+import eye_icon from "@assets/Icons/eye.svg";
+import videos_icon from "@assets/Icons/videos.svg";
 import "swiper/css";
 import Link from "next/link";
 

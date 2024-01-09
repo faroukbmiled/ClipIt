@@ -1,4 +1,4 @@
-import EditImageIcon from "../../src/assets/Icons/EditImageIcon.svg";
+import EditImageIcon from "@assets/Icons/EditImageIcon.svg";
 import Select from "react-select";
 import axios from "axios";
 import { useState, useEffect } from "react";

@@ -1,4 +1,4 @@
-import Joystick from "../../src/assets/imgs/joy_stick.png";
+import Joystick from "@assets/imgs/joy_stick.png";
 function PrimaryBlock() {
   return (
     <div id="PrimaryBlock">

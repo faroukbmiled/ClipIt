@@ -3,7 +3,6 @@ import prisma from '@lib/authPrisma';
 import { NextResponse as res } from 'next/server';
 import { withAuth } from '@lib/authMiddleware';
 
-export const bodyParser = false;
 
 export async function POST(req: Request, response: Response) {
 

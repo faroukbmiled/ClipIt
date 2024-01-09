@@ -4,7 +4,6 @@ import { Prisma } from '@prismaAuthClient';
 import { hashPassword } from '@lib/passwordUtils';
 import { saveImage } from '@lib/imageUtils';
 
-export const bodyParser = false;
 
 export async function POST(req: Request, res: Response) {
     if (req.method === 'POST') {

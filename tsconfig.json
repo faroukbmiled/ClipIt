@@ -1,23 +1,12 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "paths": {
-      "@prismaClient": [
-        "./prisma/generated/client"
-      ],
-      "@prismaAuthClient": [
-        "./prisma/generated/auth-client"
-      ],
-      "@lib/*": [
-        "./lib/*"
-      ],
-      "@UI/*": [
-        "./pages/Components/UI/*"
-      ]
+      "@prismaClient": ["./prisma/generated/client"],
+      "@prismaAuthClient": ["./prisma/generated/auth-client"],
+      "@lib/*": ["./lib/*"],
+      "@UI/*": ["./pages/Components/UI/*"],
+      "@assets/*": ["./src/assets/*"]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -45,9 +34,9 @@
     "**/*.tsx",
     "pages/login/index.jsx",
     "pages/register/index.jsx",
-    ".next/types/**/*.ts"
-, "components/user_bar/user_bar.jsx", "pages/user/[userId]/index.jsx"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    ".next/types/**/*.ts",
+    "components/user_bar/user_bar.jsx",
+    "pages/user/[userId]/index.jsx"
+  ],
+  "exclude": ["node_modules"]
 }
