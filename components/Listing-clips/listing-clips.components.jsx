@@ -14,6 +14,8 @@ function ListingClipsComponents({ videosData, setVideosData }) {
   //   const { DataForTesting } = jsonData; // testing
   const [videoDurations, setVideoDurations] = useState({});
   const [isListView, setIsListView] = useState(false);
+  const [visibleVideos, setVisibleVideos] = useState(16);
+
   const [openModals, setOpenModals] = useState(
     Array(videosData?.length).fill(false)
   );

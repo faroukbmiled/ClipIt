@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ResponsiveHoneycomb, Hexagon } from "react-honeycomb";
 
-const sideLength = 88;
-const amountOfUsers = 50;
+const sideLength = 80;
+const amountOfUsers = 82;
 
 function LatestUsersList() {
   const [users, setUsers] = useState([]);
@@ -30,7 +30,7 @@ function LatestUsersList() {
           Latest <span className="txt_primary">Registered </span>Users
         </p>
         <ResponsiveHoneycomb
-          defaultWidth={1024}
+          // defaultWidth={1024}
           size={sideLength}
           items={users}
           renderItem={(user) => (
@@ -41,8 +41,8 @@ function LatestUsersList() {
                 }}
                 src={user.avatar}
               />
-              <p>{user.username}</p>
-              <p>Followers: {user.followersCount}</p>
+              {/* <p>{user.username}</p>
+              <p>Followers: {user.followersCount}</p> */}
             </Hexagon>
           )}
         />

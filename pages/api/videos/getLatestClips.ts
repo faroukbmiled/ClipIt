@@ -18,7 +18,7 @@ async function getLatestClips(req: NextApiRequest, res: NextApiResponse) {
             orderBy: {
                 createdAt: 'desc',
             },
-            take: 6,
+            take: 8,
         });
 
         const gameCategories = Array.from(new Set(videos.map((video) => video.category)));

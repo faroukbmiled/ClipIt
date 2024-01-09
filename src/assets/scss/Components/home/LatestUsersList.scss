@@ -1,10 +1,15 @@
 #LatestUsersList {
+    overflow: hidden;
+
     & .wrapper {
         & img {
             filter: grayscale(1);
             transition: all 0.2s;
             cursor: pointer;
             object-fit: cover;
+            object-position: center;
+            width: 100%;
+            height: 100%;
 
             &:hover {
                 filter: grayscale(0);

@@ -5,6 +5,7 @@ import playVideo from "@assets/icons/play-video.svg";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Link from "next/link";
+import shadowCard from "@assets/imgs/shadow.png";
 
 function ListingLatestClips({ videosData }) {
   const [openModals, setOpenModals] = useState(
@@ -53,12 +54,12 @@ function ListingLatestClips({ videosData }) {
                   >
                     <img className="rd50" src={video.user_avatar} alt="" />
                     <div className="fl_col">
-                      <p className="p18 w-800">{video.username}</p>
-                      <p className="p14 w-300">#{video.hashtag}</p>
+                      <p className="p16 w-800">{video.username}</p>
+                      <p className="p12 w-300">#{video.hashtag}</p>
                     </div>
                   </div>
                   <div className="game_category pd5-t-b pd20-r-l rd30">
-                    <p className="p16 w-500 uper ">{video.game_category}</p>
+                    <p className="p12 w-500 uper ">{video.game_category}</p>
                   </div>
                 </div>
               </div>
@@ -92,10 +93,11 @@ function ListingLatestClips({ videosData }) {
                   </Box>
                 </Modal>
               </div>
-              <div className="card-footer pd20">
-                <p className="p30 w-700 mx2">{video.video_title}</p>
+              <div className="card-footer pd20-r-l">
+                <p className="p22 w-700 mx1">{video.video_title}</p>
               </div>
             </div>
+            <img className="shadow-card" src={shadowCard.src} alt="" />
           </div>
         ))}
       </div>
