@@ -1,10 +1,12 @@
 import { NextAuthOptions } from 'next-auth';
 import defaultAvatar from "../src/assets/imgs/default-avatar.jpg";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import { comparePassword } from "@lib/passwordUtils";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prismaAuthClient"
 import { exclude } from "@lib/filterUser";
+import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
 
@@ -20,8 +22,12 @@ interface User {
 }
 
 export const authOptions: NextAuthOptions = {
-    // adapter: PrismaAdapter(prisma),
+    adapter: PrismaAdapter(prisma),
     providers: [
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID || "",
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+        }),
         CredentialsProvider({
             name: "Credentials",
             credentials: {
@@ -48,7 +54,7 @@ export const authOptions: NextAuthOptions = {
 
                 if (
                     user &&
-                    (await comparePassword(credentials.password, _user.password))
+                    (await comparePassword(credentials.password, _user.password || ""))
                 ) {
                     return { ...user, rememberMe: credentials.rememberMe };
                 } else {
@@ -57,6 +63,9 @@ export const authOptions: NextAuthOptions = {
             },
         }),
     ],
+    pages: {
+        signIn: '/login',
+    },
     secret: process.env.NEXTAUTH_SECRET,
     session: {
         strategy: "jwt",
@@ -95,7 +104,11 @@ export const authOptions: NextAuthOptions = {
                     const publicFolderPath = path.join(process.cwd(), 'public');
                     if (session.user && session.user.image) {
                         const imagePath = path.join(publicFolderPath, session.user.image);
-                        if (!fs.existsSync(imagePath)) {
+                        let imageExistsAndValid: boolean = false;
+                        if (session.user.image.startsWith("http" || "https")) {
+                            imageExistsAndValid = await checkImageLink(session.user.image);
+                        }
+                        if (!fs.existsSync(imagePath) && !imageExistsAndValid) {
                             session.user.image = defaultAvatar.src;
                         }
                     }
@@ -107,3 +120,12 @@ export const authOptions: NextAuthOptions = {
         }
     },
 };
+
+async function checkImageLink(imageLink: string) {
+    try {
+        const response = await axios.head(imageLink);
+        return response.status === 200;
+    } catch (error) {
+        return false;
+    }
+}
