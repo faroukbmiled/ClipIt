@@ -8,6 +8,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Select from "react-select";
 import { getCode, getNames } from "country-list"; // Updated import
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const getServerSideProps = async ({ res }) => {
   const csrfToken = res.getHeader("x-csrf-token") || "missing";
@@ -74,20 +76,21 @@ export default function Register({ csrfToken }) {
         body: formData,
         headers: headers
       });
-
+  
       const result = await response.json();
-
+  
       if (result.created) {
-        // more
         router.push("/login");
       } else {
-        // Handle registration error
         console.error(result.errors);
+        toast.error(`Registration failed: ${result.errors.join(", ")}`);
       }
     } catch (error) {
       console.error("Error during registration:", error);
+      toast.error("An unexpected error occurred. Please try again later.");
     }
   };
+  
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -190,7 +193,7 @@ export default function Register({ csrfToken }) {
                       <div className="uploadImg inp_col fl_row fl-1 bg_primary rd10 txt_white jc_s ai_c pd28-r-l pd15-t-b">
                         <div className="fl_row ai_c gp10">
                           <img src={galleryadd.src} alt="" />
-                          <label htmlFor="file">Select an image</label>
+                          <label htmlFor="file">Select an avatar</label>
                         </div>
                         <input
                           type="file"
@@ -236,6 +239,7 @@ export default function Register({ csrfToken }) {
           )}
         </div>
       </main>
+      <ToastContainer />
     </div>
   );
 }
