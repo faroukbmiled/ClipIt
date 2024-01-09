@@ -4,12 +4,28 @@ import { Prisma } from "@prismaAuthClient";
 import { hashPassword } from "@lib/passwordUtils";
 import { csrf } from "@lib/CustomCSRF";
 import faker from "faker";
+import fs from "fs";
+import path from "path";
 
 async function handle(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === "GET") {
         await createTestUsersHandler(req, res);
     } else {
         return res.status(405).json({ message: "Method Not allowed" });
+    }
+}
+
+async function getRandomFile(folderPath: string): Promise<string | null> {
+    try {
+        const files = await fs.promises.readdir(folderPath);
+        if (files.length === 0) {
+            return null;
+        }
+        const randomIndex = Math.floor(Math.random() * files.length);
+        return files[randomIndex];
+    } catch (error) {
+        console.error(`Error reading files from ${folderPath}:`, error);
+        return null;
     }
 }
 
@@ -26,6 +42,11 @@ async function createTestUsersHandler(req: NextApiRequest, res: NextApiResponse)
         const numberOfUsers = 20;
         const categories = ["FPS", "RPG", "Other"];
 
+        const avatarFolder = path.join(process.cwd(), "public", "userdata", "data", "avatar");
+        const coverFolder = path.join(process.cwd(), "public", "userdata", "data", "cover");
+        const thumbnailFolder = path.join(process.cwd(), "public", "userdata", "data", "thumbnails");
+        const videoFolder = path.join(process.cwd(), "public", "userdata", "data", "videos");
+
         for (let i = 0; i < numberOfUsers; i++) {
             const existingUsers = await prisma.user.findMany();
 
@@ -34,6 +55,16 @@ async function createTestUsersHandler(req: NextApiRequest, res: NextApiResponse)
             const password = faker.internet.password();
 
             const existingUser = existingUsers.find((user) => user.email === email);
+
+            const avatarFileName = await getRandomFile(avatarFolder);
+            const coverFileName = await getRandomFile(coverFolder);
+            const thumbnailFileName = await getRandomFile(thumbnailFolder);
+            const videoFileName = await getRandomFile(videoFolder);
+
+            if (!avatarFileName || !coverFileName || !thumbnailFileName || !videoFileName) {
+                errors.push(`Error getting random files for user ${i + 1}`);
+                continue;
+            }
 
             if (existingUser) {
                 errors.push(`Email ${email} is already in use`);
@@ -47,8 +78,8 @@ async function createTestUsersHandler(req: NextApiRequest, res: NextApiResponse)
                         password: hashedPassword,
                         role: role,
                         country: "Tunisia",
-                        image: `https://i.pravatar.cc/${imageSize}`,
-                        cover: "/userdata/default/default-cover.png"
+                        image: `/userdata/data/avatar/${avatarFileName}`,
+                        cover: `/userdata/data/cover/${hashedPassword}`
                     },
                 });
 
@@ -59,8 +90,8 @@ async function createTestUsersHandler(req: NextApiRequest, res: NextApiResponse)
                         category: categories[Math.floor(Math.random() * categories.length)],
                         hashtag: "hashTest",
                         userId: user.id,
-                        videoLink: "/userdata/default/video/video.mp4",
-                        thumbnail: "/userdata/default/video/thumbnail.png",
+                        videoLink: `/userdata/data/videos/${videoFileName}`,
+                        thumbnail: `/userdata/data/thumbnails/${thumbnailFileName}`,
                     },
                 });
 
