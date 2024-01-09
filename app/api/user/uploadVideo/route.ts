@@ -1,4 +1,4 @@
-import { saveVideo, saveThumbnail, deleteVideoAndThumbnail } from '@lib/videoUtils';
+import { saveVideo, saveThumbnail, deleteVideoAndThumbnail, optimizeVideo } from '@lib/videoUtils';
 import prisma from '@lib/authPrisma';
 import { NextResponse as res } from 'next/server';
 import { withAuth } from '@lib/authMiddleware';
@@ -84,6 +84,8 @@ export async function POST(req: Request, response: Response) {
                 createdAt: true,
             }
         });
+
+        // await optimizeVideo(user.id.toString(), videoid, videoFileExtension);
 
         return res.json({ success: true, video: updatedVideo }, { status: 200 });
     } catch (error) {

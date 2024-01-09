@@ -6,7 +6,7 @@ import { setup } from "@lib/CustomCSRF";
 import { useRouter } from "next/router";
 import ClipiTLogo from "@assets/imgs/ClipitLogoBlack.png";
 import GmailIcon from "@assets/icons/google.svg";
-import Link from 'next/link'
+import Link from "next/link";
 
 function Login() {
   const { data: session, status } = useSession();
@@ -73,7 +73,10 @@ function Login() {
                               See what is going on with your business
                             </p>
                           </div>
-                          <button className="btn btn-light gp5">
+                          <button
+                            onClick={() => signIn("google")}
+                            className="btn btn-light gp5"
+                          >
                             <img src={GmailIcon.src} alt="" />
                             Continue with Google
                           </button>
@@ -125,7 +128,9 @@ function Login() {
                         </button>
                         <div className="fl_row jc_c p15 gp10 p14">
                           <p className="txt_grey">Not Registered Yet?</p>
-                          <Link className="txt_primary" href="/register">Create an account</Link>
+                          <Link className="txt_primary" href="/register">
+                            Create an account
+                          </Link>
                         </div>
                       </form>
                     </>

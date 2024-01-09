@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { spawn } from 'child_process';
 import path from 'path';
 
 export function saveVideo(videoBuffer: Buffer, userId: string, videoId: string, extension: string): string | null {
@@ -74,4 +75,31 @@ export function deleteVideoAndThumbnail(userId: string, videoId: string, videoEx
     if (fs.existsSync(folderPath)) {
         fs.rmdirSync(folderPath, { recursive: true });
     }
+}
+
+export function optimizeVideo(userId: string, videoId: string, videoExtension: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+        const pythonScriptPath = path.join(process.cwd(), 'optimize_video.py');
+        const args = [userId, videoId, videoExtension];
+
+        const pythonProcess = spawn('python', [pythonScriptPath, ...args]);
+
+        pythonProcess.stdout.on('data', (data) => {
+            console.log(`Python Script Output: ${data}`);
+        });
+
+        pythonProcess.stderr.on('data', (data) => {
+            console.error(`Python Script Error: ${data}`);
+            reject(data);
+        });
+
+        pythonProcess.on('close', (code) => {
+            if (code === 0) {
+                console.log('Python Script executed successfully');
+                resolve();
+            } else {
+                reject(`Python Script exited with code ${code}`);
+            }
+        });
+    });
 }
