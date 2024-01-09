@@ -20,6 +20,15 @@
 
                     & .card-header-wrapper {
                         & .user-info {
+                            & .hashtag_video {
+                                z-index: 3;
+                                cursor: pointer;
+
+                                &:hover {
+                                    color: $primary-color;
+                                }
+                            }
+
                             & img {
                                 width: $s45-d;
                                 height: $s45-d;

@@ -49,7 +49,7 @@ function Login() {
         <title>Login</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {status === "loading" ? (
+      {status === true ? (
         <div className="jc_c fl_row w-100vw h-100vh ai_c">
           <PreloaderSpin />
         </div>
