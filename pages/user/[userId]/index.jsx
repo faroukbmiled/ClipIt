@@ -86,6 +86,9 @@ const UserProfile = () => {
       }
     } catch (error) {
       console.error("Error following/unfollowing user:", error);
+      if (error.response && error.response.status === 401) {
+        router.push("/login");
+      }
     }
   };
 

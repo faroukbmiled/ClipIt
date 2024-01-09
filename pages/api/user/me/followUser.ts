@@ -6,7 +6,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
     if (req.method === 'POST') {
         const { followingId } = req.body;
         const user = await withAuth(req, res, true);
-        const followerId = user.id;
+        const followerId = user?.id || null;
 
         if (!followerId || !followingId) {
             return res.status(400).json({ message: 'Missing followerId or followingId in the request body' });
