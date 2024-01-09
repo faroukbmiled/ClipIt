@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React, { useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
-import LoadingSpin from "react-loading-spin";
+import preloaderSpin from "../../components/preloader";
 import { setup } from "@lib/CustomCSRF";
 import { useRouter } from "next/router";
 import ClipiTLogo from "@assets/imgs/ClipitLogoBlack.png";
@@ -35,7 +35,7 @@ function Login() {
       </Head>
       {status === "loading" ? (
         <div className="jc_c fl_row w-100vw h-100vh ai_c">
-          <LoadingSpin />
+          <preloaderSpin />
         </div>
       ) : (
         <>
