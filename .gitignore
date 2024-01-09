@@ -6,6 +6,7 @@
 .pnp.js
 
 # testing
+clipit.log
 /coverage
 
 # next.js
@@ -31,6 +32,7 @@ yarn-error.log*
 .env.production.local
 
 # prisma
+prismauth
 /prisma/generated/
 /prisma/generated
 /prisma/generated/*
