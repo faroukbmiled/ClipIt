@@ -14,26 +14,32 @@ async function getFollowers(req: NextApiRequest, res: NextApiResponse) {
     try {
         const user = await withAuth(req, res, true);
 
-        const userWithFollowers = await prisma.user.findUnique({
-            where: { id: user.id },
-            include: {
-                followers: {
-                    include: {
-                        following: { select: { id: true, image: true, name: true } },
+        if (user?.id) {
+
+            const userWithFollowers = await prisma.user.findUnique({
+                where: { id: user.id },
+                include: {
+                    followers: {
+                        include: {
+                            following: { select: { id: true, image: true, name: true } },
+                        },
                     },
                 },
-            },
-        });
+            });
 
-        const followers = userWithFollowers?.followers.map((follower) => ({
-            userId: follower.following.id,
-            name: follower.following.name,
-            avatar: follower.following.image,
-        }));
+            const followers = userWithFollowers?.followers.map((follower) => ({
+                userId: follower.following.id,
+                name: follower.following.name,
+                avatar: follower.following.image,
+            }));
 
-        const followersCount = followers?.length;
+            const followersCount = followers?.length;
 
-        return res.status(200).json({ followers, followersCount });
+            return res.status(200).json({ followers, followersCount });
+        }
+
+        return res.status(200).json({});
+
     } catch (error) {
         console.error('Error fetching followers:', error);
         return res.status(500).json({ message: 'Internal Server Error' });

@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import searchFilterIcon from "@assets/icons/search-filter.svg";
 
-function FilterListingClips({ onSearch }) {
-  const [searchQuery, setSearchQuery] = useState("");
-
+function FilterListingClips({ onSearch, searchQuery, setSearchQuery }) {
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
     onSearch(event.target.value);

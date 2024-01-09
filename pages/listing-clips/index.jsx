@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/react";
 import axios from "axios";
 import FilterListingClips from "../../components/Listing-clips/filter-listing-clips";
@@ -8,27 +9,49 @@ import NavOptions from "../../components/Listing-clips/nav-options";
 import Header from "../../components/header/header";
 
 function ListingClipsPage() {
+  const router = useRouter();
   const { data: session, status } = useSession();
   const [videosData, setVideosData] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = (searchQuery) => {
     if (searchQuery.trim() === "") {
       setFilteredVideos(videosData);
     } else {
       if (videosData) {
-        const filtered = videosData?.filter(
-          (video) =>
-            String(video.video_title)
+        if (searchQuery.toLowerCase().startsWith("hashtag:")) {
+          const hashtag = searchQuery.slice(8).trim();
+          const filtered = videosData?.filter((video) =>
+            String(video.hashtag).toLowerCase().includes(hashtag.toLowerCase())
+          );
+          setFilteredVideos(filtered);
+        } else if (searchQuery.toLowerCase().startsWith("category:")) {
+          const category = searchQuery.slice(9).trim();
+          const filtered = videosData?.filter((video) =>
+            String(video.game_category)
               .toLowerCase()
-              .includes(searchQuery.toLowerCase()) ||
-            String(video.username)
-              .toLowerCase()
-              .includes(searchQuery.toLowerCase())
-        );
-        setFilteredVideos(filtered);
+              .includes(category.toLowerCase())
+          );
+          setFilteredVideos(filtered);
+        } else {
+          const filtered = videosData?.filter(
+            (video) =>
+              String(video.video_title)
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase()) ||
+              String(video.username)
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase())
+          );
+          setFilteredVideos(filtered);
+        }
       }
     }
+    router.push({
+      pathname: router.pathname,
+      query: { search: searchQuery },
+    });
   };
   useEffect(() => {
     const fetchClips = async () => {
@@ -44,6 +67,14 @@ function ListingClipsPage() {
     fetchClips();
   }, []);
 
+  useEffect(() => {
+    const initialSearchQuery = router.query.search;
+    if (initialSearchQuery && filteredVideos) {
+      handleSearch(initialSearchQuery);
+      setSearchQuery(initialSearchQuery);
+    }
+  }, [router.query.search, videosData]);
+
   return (
     <div id="page-content" className="listingClips-Page ">
       <div className="pd40" id="header">
@@ -58,7 +89,11 @@ function ListingClipsPage() {
               <UserFollowingList session={session}></UserFollowingList>
             </div>
             <div className="listing-clips fl_col gp40">
-              <FilterListingClips onSearch={handleSearch} />
+              <FilterListingClips
+                onSearch={handleSearch}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+              />
               <ListingClipsComponents
                 videosData={filteredVideos}
                 setVideosData={setVideosData}

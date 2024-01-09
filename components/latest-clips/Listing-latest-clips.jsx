@@ -55,11 +55,29 @@ function ListingLatestClips({ videosData }) {
                     <img className="rd50" src={video.user_avatar} alt="" />
                     <div className="fl_col">
                       <p className="p16 w-800">{video.username}</p>
-                      <p className="p12 w-300">#{video.hashtag}</p>
+                      <p
+                        className="p12 w-300"
+                        onClick={() =>
+                          (location.href = `/listing-clips?search=hashtag:${encodeURIComponent(
+                            video.hashtag
+                          )}`)
+                        }
+                      >
+                        #{video.hashtag}
+                      </p>
                     </div>
                   </div>
                   <div className="game_category pd5-t-b pd20-r-l rd30">
-                    <p className="p12 w-500 uper ">{video.game_category}</p>
+                    <p
+                      className="p12 w-500 uper "
+                      onClick={() =>
+                        (location.href = `/listing-clips?search=category:${encodeURIComponent(
+                          video.game_category
+                        )}`)
+                      }
+                    >
+                      {video.game_category}
+                    </p>
                   </div>
                 </div>
               </div>
