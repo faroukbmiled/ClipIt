@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import PreloaderSpin from "../../components/preloader";
+import LoadingSpin from "react-loading-spin";
 import Link from "next/link";
 import logoWhite from "@assets/imgs/ClipitLogoWhite.png";
 import UserNav from "../user_bar/user_bar";
-import { useGlitch } from 'react-powerglitch'
+import { useGlitch } from "react-powerglitch";
 
 function Header({ status, session, signOut }) {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
@@ -34,7 +36,7 @@ function Header({ status, session, signOut }) {
       <div className="userNav">
         {status === "loading" ? (
           <div className="unregistred">
-            <p style={{ color: "white" }}>Loading...</p>
+            <LoadingSpin />
           </div>
         ) : isUserAuthenticated ? (
           <div className="registred">

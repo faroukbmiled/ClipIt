@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import PreloaderSpin from "../../components/preloader";
 
 function FollowingProfile({
   followingData,
@@ -20,7 +20,9 @@ function FollowingProfile({
         Following {followingCount > 0 && `(${followingCount})`}
       </p>
       {loading || !followingData ? (
-        <p className="p20 txt_center">Loading...</p>
+        <div className="jc_c fl_row w-100vw h-100vh ai_c">
+          <PreloaderSpin />
+        </div>
       ) : (
         <div className="listing-profiles">
           {followingData.map((following, index) => (

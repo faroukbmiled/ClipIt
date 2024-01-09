@@ -28,10 +28,14 @@ const UserProfile = () => {
       if (userId) {
         const response = await axios.get(`/api/user/${userId}`);
         setUserData(response.data);
+        if (!response.data || response.data.length === 0) {
+          router.push("/");
+        }
         console.log(response.data.isFollowed);
         setIsUserFollowed(response.data.isFollowed || false);
       }
     } catch (error) {
+      router.push("/404");
       console.error("Error fetching user data:", error);
     }
   };

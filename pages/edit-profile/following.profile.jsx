@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import LoadingSpin from "react-loading-spin";
 import axios from "axios";
 
 function FollowingProfile() {
@@ -39,7 +40,7 @@ function FollowingProfile() {
         Following {followingCount > 0 && `(${followingCount})`}
       </p>
       {loading || !followingData ? (
-        <p className="p20 txt_center">Loading...</p>
+        <LoadingSpin />
       ) : (
         <div className="listing-profiles">
           {followingData.map((following, index) => (

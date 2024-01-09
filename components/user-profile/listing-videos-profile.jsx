@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/react";
+import PreloaderSpin from "../../components/preloader";
 import playVideo from "@assets/icons/play-video.svg";
 
 function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
@@ -25,15 +26,27 @@ function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
   };
 
   if (!userData) {
-    return <div>Loading...</div>;
+    return (
+      <div className="jc_c fl_row w-100vw h-100vh ai_c">
+        <PreloaderSpin />
+      </div>
+    );
   }
 
   if (!userId && !userData) {
-    return <div>User not found</div>;
+    return (
+      <div className="jc_c fl_row w-100vw h-100vh ai_c">
+        <PreloaderSpin />
+      </div>
+    );
   }
 
   if (!userId) {
-    return <div>User not found</div>;
+    return (
+      <div className="jc_c fl_row w-100vw h-100vh ai_c">
+        <PreloaderSpin />
+      </div>
+    );
   }
 
   return (

@@ -5,6 +5,7 @@
       "@prismaClient": ["./prisma/generated/client"],
       "@prismaAuthClient": ["./prisma/generated/auth-client"],
       "@lib/*": ["./lib/*"],
+      "@comp": ["./components/*"],
       "@UI/*": ["./pages/Components/UI/*"],
       "@assets/*": ["./src/assets/*"]
     },

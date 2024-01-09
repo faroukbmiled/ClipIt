@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import LoadingSpin from "react-loading-spin";
 import Link from "next/link";
 import axios from "axios";
 
@@ -33,7 +34,7 @@ function MostFollowedUsersListing({ session }) {
         </div>
         <div className="body-wrapper">
           {loading ? (
-            <p>Loading...</p>
+            <LoadingSpin />
           ) : (
             <div className="users-listing fl_col gp15">
               {session?.user ? (

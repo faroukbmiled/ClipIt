@@ -1,7 +1,9 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import React, { useState, useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
-import preloaderSpin from "../../components/preloader";
+import PreloaderSpin from "../../components/preloader";
 import { setup } from "@lib/CustomCSRF";
 import { useRouter } from "next/router";
 import ClipiTLogo from "@assets/imgs/ClipitLogoBlack.png";
@@ -12,6 +14,20 @@ function Login() {
   const { data: session, status } = useSession();
   const [rememberMe, setRememberMe] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const errorParam = new URLSearchParams(window.location.search).get("error");
+    if (errorParam) {
+      toast.error("Login failed. Please check your credentials.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  }, []);
 
   function handleSignIn(event) {
     event.preventDefault();
@@ -35,7 +51,7 @@ function Login() {
       </Head>
       {status === "loading" ? (
         <div className="jc_c fl_row w-100vw h-100vh ai_c">
-          <preloaderSpin />
+          <PreloaderSpin />
         </div>
       ) : (
         <>
@@ -141,6 +157,7 @@ function Login() {
           </main>
         </>
       )}
+      <ToastContainer />
     </div>
   );
 }

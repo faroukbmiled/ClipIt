@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PreloaderSpin from "../../../components/preloader";
 import axios from "axios";
 import { useRouter } from "next/router";
 import ListingVideosProfile from "../../../components/user-profile/listing-videos-profile";
@@ -107,6 +108,14 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
+    if (status !== "loading") {
+      if (!session) {
+        router.push("/login");
+      }
+    }
+  }, [session, status]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         if (session?.user?.id) {
@@ -128,11 +137,19 @@ const UserProfile = () => {
   }, [tab]);
 
   if (!userId) {
-    return <div>Loading...</div>;
+    return (
+      <div className="jc_c fl_row w-100vw h-100vh ai_c">
+        <PreloaderSpin />
+      </div>
+    );
   }
 
   if (!userData) {
-    return <div>User not found</div>;
+    return (
+      <div className="jc_c fl_row w-100vw h-100vh ai_c">
+        <PreloaderSpin />
+      </div>
+    );
   }
 
   return (
