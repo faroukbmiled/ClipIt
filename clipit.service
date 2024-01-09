@@ -5,6 +5,7 @@ After=network.target
 [Service]
 Type=simple
 User=root
+Restart=always
 WorkingDirectory=/home/clipit
 ExecStart=/bin/bash -c '/usr/bin/npm start >> clipit.log 2>&1'
 
