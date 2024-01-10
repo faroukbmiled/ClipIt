@@ -1,11 +1,26 @@
 import React, { useState, useEffect } from "react";
 import searchFilterIcon from "@assets/icons/search-filter.svg";
 
-function FilterListingClips({ gameCategories, onSearch, searchQuery, setSearchQuery, hashtags }) {
-
+function FilterListingClips({
+  gameCategories,
+  onSearch,
+  searchQuery,
+  setSearchQuery,
+  hashtags,
+}) {
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
     onSearch(event.target.value);
+  };
+
+  const hashTagFilter = (hashtag) => {
+    setSearchQuery(`hashtag:${hashtag}`);
+    onSearch(`hashtag:${hashtag}`);
+  };
+
+  const gameCategoriesFilter = (cat) => {
+    setSearchQuery(`category:${cat}`);
+    onSearch(`category:${cat}`);
   };
 
   return (
@@ -29,7 +44,13 @@ function FilterListingClips({ gameCategories, onSearch, searchQuery, setSearchQu
               {gameCategories && gameCategories.length > 0 && (
                 <ul className="fl_row gp5 categories_list">
                   {gameCategories.map((category, index) => (
-                    <li key={index} className="p12 txt_white list-item pd5-t-b pd20-r-l rd30">{category}</li>
+                    <li
+                      key={index}
+                      onClick={() => gameCategoriesFilter(category)}
+                      className="p12 txt_white list-item pd5-t-b pd20-r-l rd30"
+                    >
+                      {category}
+                    </li>
                   ))}
                 </ul>
               )}
@@ -37,9 +58,16 @@ function FilterListingClips({ gameCategories, onSearch, searchQuery, setSearchQu
           </div>
           <div className="tags-filter pd20-t-b fl_row fl-1">
             <ul className="fl_row gp5 tags_list">
-              {hashtags && hashtags.map((tag, index) => (
-                <li key={index} className="p12 txt_white list-item pd5-t-b pd20-r-l rd30">#{tag}</li>
-              ))}
+              {hashtags &&
+                hashtags.map((tag, index) => (
+                  <li
+                    key={index}
+                    onClick={() => hashTagFilter(tag)}
+                    className="p12 txt_white list-item pd5-t-b pd20-r-l rd30"
+                  >
+                    #{tag}
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
