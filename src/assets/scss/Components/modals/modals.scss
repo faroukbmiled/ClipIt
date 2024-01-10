@@ -1,22 +1,30 @@
 .modal-post-upload {
     padding: $s20-d;
-    background-color: $white-color;
+    // background-color: $white-color;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 30vw;
-    min-height: 450px;
+    height: 38vw;
     z-index: 999;
     border: 0 !important;
     border-radius: $s25-d;
     outline: unset;
-
+    background: linear-gradient(237deg, #150832ad 0.82%, #0000007d 129.1%);
+    backdrop-filter: blur(7px);
+    box-shadow: 20px 10px 71px 65px rgb(255 255 255 / 10%);
 
     & .card-user {
         position: relative;
         width: 100%;
         height: 100%;
+        & .cardInfo {
+            height: 33.7vw;
+        }
+        & .light-input label {
+            color: $white-color !important;
+        }
 
         & .card-content {
             & .boxUploadSection {
@@ -95,9 +103,13 @@
             }
         }
 
-        & .btn-next {
-            // margin-top: $s40;
+        & .card-footer {
+            & .btn-next {
+                width: 100%;
+            }
         }
+
+
 
         & .boxinputsSection {
             & input {
