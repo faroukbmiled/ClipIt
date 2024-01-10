@@ -32,7 +32,7 @@ export default function MostFollowedUsers() {
         </div>
         <div className="users-listing fl_col">
           {mostFollowedUsers.length === 0 ? (
-            <LoadingSpin />
+            <LoadingSpin primaryColor="#7F56D9" secondaryColor="#fff"/>
           ) : (
             <Swiper slidesPerView={4} spaceBetween={20}>
               {mostFollowedUsers.map((user) => (

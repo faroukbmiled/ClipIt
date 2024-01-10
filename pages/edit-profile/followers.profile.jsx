@@ -41,7 +41,7 @@ function FollowersProfile() {
         Followers {followersCount > 0 && `(${followersCount})`}
       </p>
       {loading || !followersData ? (
-        <LoadingSpin />
+        <LoadingSpin primaryColor="#7F56D9" secondaryColor="#fff"/>
       ) : (
         <div className="listing-profiles">
           {followersData.map((follower, index) => (

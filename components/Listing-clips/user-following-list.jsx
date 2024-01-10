@@ -34,7 +34,7 @@ function MostFollowedUsersListing({ session }) {
         </div>
         <div className="body-wrapper">
           {loading ? (
-            <LoadingSpin />
+            <LoadingSpin primaryColor="#7F56D9" secondaryColor="#fff"/>
           ) : (
             <div className="users-listing fl_col gp15">
               {session?.user ? (

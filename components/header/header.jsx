@@ -41,7 +41,7 @@ function Header({ status, session, signOut }) {
       <div className="userNav">
         {status === "loading" ? (
           <div className="unregistred">
-            <LoadingSpin />
+            <LoadingSpin primaryColor="#7F56D9" secondaryColor="#fff"/>
           </div>
         ) : isUserAuthenticated ? (
           <div className="registred">
