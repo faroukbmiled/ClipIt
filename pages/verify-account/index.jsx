@@ -15,7 +15,12 @@ const verifyAccount = () => {
       try {
         res = await axios.post("/api/auth/newVerification", { token });
         if (res.status === 200) {
-          router.push("/login");
+          toast.success(
+            "Verification successful, redirecting to login page..."
+          );
+          setTimeout(() => {
+            router.push("/login");
+          }, 4000);
         }
       } catch (error) {
         console.log(error);
