@@ -81,14 +81,21 @@ export default function Register({ csrfToken }) {
       const result = response.data;
 
       if (result.created) {
-        router.push("/login");
+        toast.success(
+          "Registration successful! Please check your email for a verification link."
+        );
+        setTimeout(() => {
+          router.push("/login");
+        }, 6000);
       } else {
         console.error(result.errors);
         toast.error(`Registration failed: ${result.errors.join(", ")}`);
       }
     } catch (error) {
       console.error("Error during registration:", error);
-      toast.error(error.response.data.errors.join(", "));
+      if (error.response?.data?.errors) {
+        toast.error(error.response?.data?.errors?.join(", "));
+      }
     }
   };
 
@@ -250,7 +257,4 @@ export default function Register({ csrfToken }) {
       <ToastContainer />
     </div>
   );
-}
-function setSelectedCountry(selectedOption) {
-  throw new Error("Function not implemented.");
 }

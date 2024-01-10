@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { Prisma } from '@prismaAuthClient';
 import { hashPassword } from '@lib/passwordUtils';
 import { saveImage } from '@lib/imageUtils';
+import { generateVerificationToken } from '@lib/tokenGen';
+import { sendVerificationEmail } from '@lib/mailer';
 
 
 export async function POST(req: Request, res: Response) {
@@ -88,6 +90,9 @@ export async function POST(req: Request, res: Response) {
                     return NextResponse.json({ errors: ['Error saving the image'] }, { status: 500 });
                 }
             }
+
+            const verificationToken = await generateVerificationToken(email);
+            await sendVerificationEmail(verificationToken.email, verificationToken.token,);
 
             return NextResponse.json({ user, created: true }, { status: 201 });
 
