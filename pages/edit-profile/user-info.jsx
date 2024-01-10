@@ -14,6 +14,7 @@ function UserInfo({ session, status, update }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [bio, setBio] = useState("");
   const [password, setPassword] = useState("");
   const [coverFile, setCoverFile] = useState(null);
   const [imageFile, setImageFile] = useState(null);
@@ -151,9 +152,9 @@ function UserInfo({ session, status, update }) {
                 </div>
                 <div className="edit-bio inp_col fl_col fl-1 light-input fl_col gp20 jc_s">
                   <p className="p18">Bio</p>
-                  <textarea id="email"
-                    type="email"
-                    onChange={(e) => setEmail(e.target.value)}
+                  <textarea id="bio"
+                    type="text"
+                    onChange={(e) => setBio(e.target.value)}
                     value={session?.user?.bio} cols="30" rows="10">
                   </textarea>
                 </div>
@@ -228,3 +229,6 @@ function UserInfo({ session, status, update }) {
 }
 
 export default UserInfo;
+
+
+
