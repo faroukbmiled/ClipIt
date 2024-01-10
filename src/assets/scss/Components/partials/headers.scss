@@ -11,10 +11,10 @@
             &::after {
                 content: "";
                 position: absolute;
-                bottom: 0;
+                bottom: -0.2vw;
                 left: 0;
                 height: $s2-d;
-                width: 60%;
+                width: 100%;
                 background-color: $primary-color;
                 transition: all 0.3s;
                 border-radius: 30px;
@@ -32,7 +32,7 @@
             // }
             &:hover {
                 &::after {
-                    width: 100%;
+                    
                 }
             }
         }

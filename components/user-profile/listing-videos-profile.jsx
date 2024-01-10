@@ -74,7 +74,7 @@ function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
                 <div className="video-display">
                   <img src={playVideo.src} alt="" className="play-video" />
                   <img
-                    className="video-thumbnail rd10"
+                    className="video_thumbnail rd10"
                     src={video.video_thumbnail}
                     alt=""
                   />
