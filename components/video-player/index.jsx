@@ -15,14 +15,13 @@ export default function VideoPlayer({ src, title, date, views, likes }) {
                 <div className="box_video pd20-r-l pd10-t-b fl_row ai_c jc_s">
                     <div className="video_info fl_col gp10">
                         <p className="p18 txt_white">{title}</p>
-                        <div className='fl_row'>
+                        <div className='fl_row gp5'>
                             <p className="p14 txt_white views-video">{views} views</p>
                             .
                             <p className="p14 txt_white date-video">{date}</p>
                         </div>
                     </div>
                     <div className="video_tools fl_row gp20">
-                        {/* liked class for liked video */}
                         <div className="fl_row gp5 ai_c liked">
                             <img src={LikeIcon.src} alt="" />
                             <p className="p14 txt_white likes-video">{likes}</p>
