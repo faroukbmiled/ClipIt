@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import LazyImage from "../image";
 import axios from "axios";
 import { ResponsiveHoneycomb, Hexagon } from "react-honeycomb";
-
+import Link from "next/link";
 const sideLength = 80;
 const amountOfUsers = 82;
 
@@ -34,15 +35,13 @@ function LatestUsersList() {
           size={sideLength}
           items={users}
           renderItem={(user) => (
-            <Hexagon key={user.id}>
-              <img
-                onClick={() => {
-                  location.href = "user/" + user.id;
-                }}
-                src={user.avatar}
-              />
-              {/* <p>{user.username}</p>
-              <p>Followers: {user.followersCount}</p> */}
+            <Hexagon key={user?.id}>
+              <Link href={`/user/${user?.id}`}>
+                <LazyImage src={user?.avatar}
+                  width={600}
+                  height={600}
+                  />
+              </Link>
             </Hexagon>
           )}
         />

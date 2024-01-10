@@ -7,6 +7,7 @@ import eye_icon from "@assets/icons/eye.svg";
 import videos_icon from "@assets/icons/videos.svg";
 import "swiper/css";
 import Link from "next/link";
+import LazyImage from "../image";
 
 export default function MostFollowedUsers() {
   const [mostFollowedUsers, setMostFollowedUsers] = useState([]);
@@ -39,7 +40,7 @@ export default function MostFollowedUsers() {
                   <div className="card-user fl_col gp10">
                     <Link href={"/user/" + user.userId}></Link>
                     <div className="user-avatar">
-                      <img className="rd20 user-img" src={user.avatar} alt="" />
+                      <LazyImage className="rd20 user-img" src={user?.avatar}/>
                       <div className="user-info pd40 rd20 fl_col txt_white">
                         <p className="p24 ">{user.name}</p>
                         <div className="fl_row gp5 ai_c">
