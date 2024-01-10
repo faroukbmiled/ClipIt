@@ -45,10 +45,14 @@
                             }
 
                             & .user-img {
-                                width: 100%;
-                                aspect-ratio: 1/1;
-                                object-fit: cover;
-                                transition: all 0.3s;
+                                display: flex;
+
+                                & img {
+                                    width: 100%;
+                                    aspect-ratio: 1/1;
+                                    object-fit: cover;
+                                    transition: all 0.3s;
+                                }
                             }
                         }
                     }

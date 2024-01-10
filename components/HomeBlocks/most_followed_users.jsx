@@ -40,7 +40,8 @@ export default function MostFollowedUsers() {
                   <div className="card-user fl_col gp10">
                     <Link href={"/user/" + user.userId}></Link>
                     <div className="user-avatar">
-                      <LazyImage className="rd20 user-img" src={user?.avatar}/>
+                    <LazyImage src={{ src: user?.avatar }} className="rd20 user-img" />
+
                       <div className="user-info pd40 rd20 fl_col txt_white">
                         <p className="p24 ">{user.name}</p>
                         <div className="fl_row gp5 ai_c">

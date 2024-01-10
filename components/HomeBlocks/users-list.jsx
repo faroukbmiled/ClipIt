@@ -37,10 +37,7 @@ function LatestUsersList() {
           renderItem={(user) => (
             <Hexagon key={user?.id}>
               <Link href={`/user/${user?.id}`}>
-                <LazyImage src={user?.avatar}
-                  width={600}
-                  height={600}
-                  />
+              <LazyImage src={{ src: user?.avatar }} width={600} height={600} />
               </Link>
             </Hexagon>
           )}
