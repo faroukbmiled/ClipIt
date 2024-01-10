@@ -226,6 +226,7 @@ const UserProfile = () => {
               userData={userData}
               userId={userId}
               removeVideo={removeVideo}
+              setUserData={setUserData}
               isMe={true}
             />
           )}

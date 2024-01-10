@@ -11,11 +11,12 @@ export async function PUT(req: Request, response: Response) {
         try {
             const user = await withAuth(req, res, true, true);
             const formData = await req.formData();
-            const { name, email, password, country } = {
+            const { name, email, password, country, bio } = {
                 name: formData.get('name')?.toString() ?? '',
                 email: formData.get('email')?.toString() ?? '',
                 password: formData.get('password')?.toString() ?? '',
                 country: formData.get('country')?.toString() ?? '',
+                bio: formData.get('bio')?.toString() ?? '',
             };
 
             const existingUser = await prisma.user.findUnique({
@@ -43,6 +44,10 @@ export async function PUT(req: Request, response: Response) {
 
             if (country) {
                 updateData.country = country;
+            }
+
+            if (bio) {
+                updateData.bio = bio;
             }
 
             const cover_file = formData.get('cover');

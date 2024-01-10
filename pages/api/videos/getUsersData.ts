@@ -39,7 +39,7 @@ async function getAllUsersData(req: NextApiRequest, res: NextApiResponse) {
                 game_category: video.category,
                 hashtag: [video.hashtag],
                 views: video.views,
-                likes: video.likesConunt,
+                likes: video.likesCount,
                 creation_date: video.createdAt,
                 video_title: video.title,
                 video_thumbnail: video.thumbnail,

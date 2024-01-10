@@ -75,6 +75,16 @@ function ListingClipsComponents({ videosData, setVideosData }) {
     setIsListView((prevIsListView) => !prevIsListView);
   };
 
+  const handleLikeUpdate = (videoId, newLikesCount) => {
+    const videoIndex = videosData.findIndex((video) => video.videoId === videoId);
+    if (videoIndex !== -1) {
+      const updatedVideos = [...videosData];
+      updatedVideos[videoIndex].likes = newLikesCount;
+      console.log(updatedVideos)
+      setVideosData(updatedVideos);
+    }
+  };
+
   return (
     <div id="ListingClips">
       <div className="ListingClips-wrapper fl_col gp22 pd40-r-l">
@@ -94,7 +104,7 @@ function ListingClipsComponents({ videosData, setVideosData }) {
           </svg>
         </div>
         <div className={`clips-listing ${isListView ? "List" : "Grid"}`}>
-          {videosData?.map((video, index) => {
+          {videosData && videosData?.map((video, index) => {
             const creationDate = new Date(video.creation_date);
             const formattedDate = creationDate.toLocaleString("en-US", {
               month: "short",
@@ -139,6 +149,7 @@ function ListingClipsComponents({ videosData, setVideosData }) {
                           likes={video.likes}
                           src={video.video_url}
                           videoId={video.videoId}
+                          onLikeUpdate={handleLikeUpdate}
                         />
                       </Box>
                     </Modal>

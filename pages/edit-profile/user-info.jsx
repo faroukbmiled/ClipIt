@@ -12,9 +12,9 @@ overwrite([
 
 function UserInfo({ session, status, update }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [bio, setBio] = useState("");
+  const [username, setUsername] = useState(session?.user?.name);
+  const [email, setEmail] = useState(session?.user?.email);
+  const [bio, setBio] = useState(session?.user?.bio);
   const [password, setPassword] = useState("");
   const [coverFile, setCoverFile] = useState(null);
   const [imageFile, setImageFile] = useState(null);
@@ -59,6 +59,7 @@ function UserInfo({ session, status, update }) {
     formData.append("email", email);
     formData.append("password", password);
     formData.append("country", selectedCountry?.label || "");
+    formData.append("bio", bio);
 
     if (coverFile) {
       formData.append("cover", coverFile);
@@ -75,7 +76,7 @@ function UserInfo({ session, status, update }) {
         },
       });
 
-      const { name, email, image, cover, country } = response.data.user;
+      const { name, email, image, cover, country, bio } = response.data.user;
       update({
         ...session,
         user: {
@@ -85,6 +86,7 @@ function UserInfo({ session, status, update }) {
           image,
           cover,
           country,
+          bio,
         },
       });
 
@@ -93,6 +95,14 @@ function UserInfo({ session, status, update }) {
       console.error("Error updating profile", error);
     }
   };
+
+  useEffect(() => {
+    if (session?.user?.bio) {
+      setBio(session.user.bio);
+      setUsername(session?.user?.name);
+      setEmail(session?.user?.email);
+    }
+  }, [session]);
 
   return (
     <div id="UserInfo" className="rd12">
@@ -152,11 +162,14 @@ function UserInfo({ session, status, update }) {
                 </div>
                 <div className="edit-bio inp_col fl_col fl-1 light-input fl_col gp20 jc_s">
                   <p className="p18">Bio</p>
-                  <textarea id="bio"
+                  <textarea
+                    id="bio"
                     type="text"
                     onChange={(e) => setBio(e.target.value)}
-                    value={session?.user?.bio} cols="30" rows="10">
-                  </textarea>
+                    value={bio}
+                    cols="30"
+                    rows="10"
+                  ></textarea>
                 </div>
               </div>
               <div className="user-fields light-input fl_col gp10">
@@ -169,7 +182,7 @@ function UserInfo({ session, status, update }) {
                       id="username"
                       type="username"
                       onChange={(e) => setUsername(e.target.value)}
-                      value={session?.user?.name}
+                      value={username}
                     />
                   </div>
                   <div className="inp_col fl_col fl-1">
@@ -180,7 +193,7 @@ function UserInfo({ session, status, update }) {
                       id="email"
                       type="email"
                       onChange={(e) => setEmail(e.target.value)}
-                      value={session?.user?.email}
+                      value={email}
                     />
                   </div>
                 </div>
@@ -229,6 +242,3 @@ function UserInfo({ session, status, update }) {
 }
 
 export default UserInfo;
-
-
-

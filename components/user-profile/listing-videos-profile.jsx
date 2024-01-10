@@ -9,7 +9,13 @@ import Modal from "@mui/material/Modal";
 import VideoPlayer from "../../components/video-player";
 import binIcon from "@assets/icons/binIcon.svg";
 import binConfirmation from "@assets/icons/bin_confirmation.svg";
-function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
+function ListingVideosProfile({
+  userId,
+  userData,
+  removeVideo,
+  isMe = false,
+  setUserData,
+}) {
   const [openModals, setOpenModals] = useState([]);
   const [isListView, setIsListView] = useState(false);
   const [videoDurations, setVideoDurations] = useState({});
@@ -46,6 +52,22 @@ function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
     newOpenModals[index] = false;
     setOpenModals(newOpenModals);
   };
+
+  const handleLikeUpdate = (videoId, newLikesCount) => {
+    const videoIndex = userData.videos.findIndex(
+      (video) => video.videoId === videoId
+    );
+    if (videoIndex !== -1) {
+      const updatedVideos = [...userData.videos];
+      updatedVideos[videoIndex].likes = newLikesCount;
+      const updatedUserData = { ...userData, videos: updatedVideos };
+      console.log(updatedUserData);
+      setUserData(updatedUserData);
+      return updatedUserData;
+    }
+    return userData;
+  };
+
   if (!userData) {
     return (
       <div className="jc_c fl_row w-100vw h-100vh ai_c">
@@ -90,10 +112,19 @@ function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
         </div>
         <div className={`clips-listing ${isListView ? "List" : ""}`}>
           {userData.videos?.map((video, index) => (
-            <div style={{ position: "relative" }} className="video-card fl_col gp10" key={index}>
+            <div
+              style={{ position: "relative" }}
+              className="video-card fl_col gp10"
+              key={index}
+            >
               <div className="video-clip">
                 <div className="video-display">
-                  <img src={playVideo.src} alt="" className="play-video" onClick={() => handleOpen(index)} />
+                  <img
+                    src={playVideo.src}
+                    alt=""
+                    className="play-video"
+                    onClick={() => handleOpen(index)}
+                  />
                   <img
                     className="video_thumbnail rd10"
                     src={video.video_thumbnail}
@@ -107,12 +138,14 @@ function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                   >
-                    <Box sx={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "50%",
-                      transform: "translate(-50%, -50%)",
-                    }}>
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    >
                       <VideoPlayer
                         title={video.video_title}
                         date={"formattedDate"}
@@ -120,6 +153,7 @@ function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
                         likes={video.likes}
                         src={video.video_url}
                         videoId={video.videoId}
+                        onLikeUpdate={handleLikeUpdate}
                       />
                     </Box>
                   </Modal>
@@ -163,7 +197,11 @@ function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
                     </div>
                     {isMe && (
                       <div className="removeVideo">
-                        <img className="delete_video" src={binIcon.src} onClick={() => handleOpen(removeVideo)} />
+                        <img
+                          className="delete_video"
+                          src={binIcon.src}
+                          onClick={() => handleOpen(removeVideo)}
+                        />
                         <Modal
                           tabIndex={-1}
                           className="rd25"
@@ -172,30 +210,44 @@ function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
                           aria-labelledby="modal-modal-title"
                           aria-describedby="modal-modal-description"
                         >
-                          <Box sx={{
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            transform: "translate(-50%, -50%)",
-                            width: "34vw",
-                            height: "20vw",
-                          }}>
-
+                          <Box
+                            sx={{
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              transform: "translate(-50%, -50%)",
+                              width: "34vw",
+                              height: "20vw",
+                            }}
+                          >
                             <div className="popup_delete">
                               <div className="wrapper pd20 fl_col gp20 ai_c">
                                 <div>
                                   <img src={binConfirmation.src} alt="" />
                                 </div>
-                                <p className="p24 txt_center">Are you sure you want to delete the Video ?</p>
+                                <p className="p24 txt_center">
+                                  Are you sure you want to delete the Video ?
+                                </p>
                                 <div className="fl_row gp20 w-100">
-                                  <p className="btn btn-lighGrey fl-1" onClick={handleClose}>Cancel</p>
-                                  <p className="btn btn-red fl-1" onClick={() => HandleRemoveVideo(video.videoId)}>Delete permanently</p>
+                                  <p
+                                    className="btn btn-lighGrey fl-1"
+                                    onClick={handleClose}
+                                  >
+                                    Cancel
+                                  </p>
+                                  <p
+                                    className="btn btn-red fl-1"
+                                    onClick={() =>
+                                      HandleRemoveVideo(video.videoId)
+                                    }
+                                  >
+                                    Delete permanently
+                                  </p>
                                 </div>
                               </div>
                             </div>
                           </Box>
                         </Modal>
-
                       </div>
                     )}
                   </div>

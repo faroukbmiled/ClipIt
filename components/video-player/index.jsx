@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import { likeVideo, isVideoLiked } from "@lib/likeVideo";
+import React, { use, useEffect, useState } from "react";
+import { likeVideo, isVideoLiked, removeLikedVideo } from "@lib/likeVideo";
 import LikeIcon from "@assets/icons/LikeIcon.svg";
 import ShareIcon from "@assets/icons/shareIcon.svg";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function VideoPlayer({
   src,
@@ -11,16 +12,33 @@ export default function VideoPlayer({
   views,
   likes,
   videoId,
+  onLikeUpdate,
 }) {
   const [videoLiked, setVideoLiked] = useState(isVideoLiked(videoId));
+  const [vlikes, setLikes] = useState();
   const likeVideoReq = async () => {
     const res = await likeVideo(videoId);
-    if (res) {
-      setVideoLiked(true);
+    if (res || res === 0) {
+      onLikeUpdate(videoId, res);
+      setLikes(res);
+      if (videoLiked) {
+        setVideoLiked(false);
+        removeLikedVideo(videoId);
+      } else {
+        setVideoLiked(true);
+      }
     } else {
+      removeLikedVideo(videoId);
       setVideoLiked(false);
     }
   };
+
+  useEffect(() => {
+    if (likes) {
+      setLikes(likes);
+    }
+  }, [likes]);
+
   return (
     <div className="display_video_popup">
       <div className="video-wrapper">
@@ -39,7 +57,7 @@ export default function VideoPlayer({
             <div className="fl_row gp5 ai_c liked" onClick={likeVideoReq}>
               <img src={LikeIcon.src} alt="" />
               <p className={`p14 txt_white ${videoLiked ? "likes-video" : ""}`}>
-                {likes}
+                {vlikes || 0}
               </p>
             </div>
             <div className="fl_row gp5 ai_c">
