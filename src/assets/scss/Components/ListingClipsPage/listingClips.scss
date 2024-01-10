@@ -15,7 +15,11 @@
 
         & .List {
             transition: all 0.3s;
+            display: grid;
             grid-template-columns: repeat(2, 1fr) !important;
+            row-gap: $s40-d;
+            column-gap: $s20-d;
+            margin-bottom: 2vw;
 
             & .video-card {
                 & .video-clip {
@@ -30,13 +34,29 @@
             }
         }
 
-        & .clips-listing {
+        & .Grid {
             transition: all 0.3s;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             row-gap: $s40-d;
             column-gap: $s20-d;
             margin-bottom: 2vw;
+
+            & .video-card {
+                & .video-clip {
+                    & .video-display {
+                        & .video_thumbnail {
+                            & img {
+                                height: 10.76vw !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        & .clips-listing {
+
 
             & .video-card {
                 & .video-clip {
@@ -65,7 +85,6 @@
                             width: 100%;
 
                             & img {
-                                height: 10.76vw;
                                 object-fit: cover;
                             }
 

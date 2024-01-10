@@ -93,7 +93,7 @@ function ListingClipsComponents({ videosData, setVideosData }) {
             ></path>
           </svg>
         </div>
-        <div className={`clips-listing ${isListView ? "List" : ""}`}>
+        <div className={`clips-listing ${isListView ? "List" : "Grid"}`}>
           {videosData?.map((video, index) => {
             const creationDate = new Date(video.creation_date);
             const formattedDate = creationDate.toLocaleString("en-US", {

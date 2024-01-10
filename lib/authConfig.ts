@@ -84,7 +84,7 @@ export const authOptions: NextAuthOptions = {
                 },
             });
 
-            if (!existingUser?.emailVerified) return false;
+            if (!existingUser?.emailVerified) return true;
 
             return true;
         },
