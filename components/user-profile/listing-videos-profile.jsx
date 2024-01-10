@@ -268,9 +268,9 @@ function formatVideoTime(duration) {
   return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 }
 
-// Helper function to format time ago (replace with your implementation)
+
 function formatTimeAgo(creationDate) {
-  // Implement your logic to calculate time ago
+  
   return "1 day ago";
 }
 

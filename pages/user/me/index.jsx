@@ -9,7 +9,7 @@ import AboutProfile from "../../../components/user-profile/about-profile";
 import { useSession, signOut } from "next-auth/react";
 import Header from "../../../components/header/header";
 import Link from "next/link";
-
+import LiedVideosMyProfile from "../../../components/user-profile/liked-videos";
 const UserProfile = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -190,7 +190,13 @@ const UserProfile = () => {
                     onClick={() => handleTabClick("videos")}
                     className={activeTab === "videos" ? "active-tab" : ""}
                   >
-                    Videos
+                    My Videos
+                  </li>
+                  <li
+                    onClick={() => handleTabClick("liked_videos")}
+                    className={activeTab === "liked_videos" ? "active-tab" : ""}
+                  >
+                    Liked Videos
                   </li>
                   <li
                     onClick={() => handleTabClick("followers")}
@@ -226,6 +232,14 @@ const UserProfile = () => {
               userData={userData}
               userId={userId}
               removeVideo={removeVideo}
+              setUserData={setUserData}
+              isMe={true}
+            />
+          )}
+          {activeTab === "liked_videos" && (
+            <LiedVideosMyProfile
+              userData={userData}
+              userId={userId}
               setUserData={setUserData}
               isMe={true}
             />
