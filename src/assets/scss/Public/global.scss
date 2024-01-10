@@ -50,6 +50,14 @@ img {
   background-color: #2d2343;
 }
 
+.btn-lighGrey {
+  color: $white-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: grey;
+}
+
 .inp_col {
   gap: $s5-d;
 }
@@ -63,7 +71,8 @@ img {
     color: $placeholder-color;
   }
 
-  & input, select {
+  & input,
+  select {
     color: $grey-color;
     text-transform: lowercase;
     border-radius: $s10-d;
@@ -73,7 +82,8 @@ img {
   @media (min-width: 992px) {
     font-size: $s14-d;
 
-    & input, select {
+    & input,
+    select {
       padding: $s13-d $s10-d;
     }
   }
@@ -85,7 +95,8 @@ img {
   @media (min-width: 768px) and (max-width: 991px) {
     font-size: $s14-t;
 
-    & input, select {
+    & input,
+    select {
       padding: $s13-t $s10-t;
     }
   }
@@ -94,7 +105,8 @@ img {
   @media (max-width: 767px) {
     font-size: $s14-m;
 
-    & input, select {
+    & input,
+    select {
       padding: $s13-m $s10-m;
     }
   }

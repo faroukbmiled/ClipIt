@@ -37,6 +37,8 @@
             column-gap: $s20-d;
 
             & .video-card {
+                position: relative;
+
                 & .video-clip {
                     position: relative;
 
@@ -79,6 +81,7 @@
                     }
                 }
 
+
                 & .video-info {
                     & .user-avatar {
                         & img {
@@ -105,4 +108,31 @@
         }
     }
 
+}
+
+.removeVideo {
+    position: absolute;
+    right: $s5-d;
+    top: $s5-d;
+
+    & .delete_video {
+        width: 1.5vw;
+        z-index: 2;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+
+    & .css-3hcm5q {
+        background-color: red !important;
+    }
+}
+
+.popup_delete {
+    background-color: $white-color;
+    height: 100%;
+    height: 100%;
 }
