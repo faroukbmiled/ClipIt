@@ -7,16 +7,26 @@ import axios from "axios";
 
 const verifyAccount = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
   const newVerification = async () => {
     if (token) {
       try {
+        setLoading(true);
         res = await axios.post("/api/auth/newVerification", { token });
         if (res.status === 200) {
           toast.success(
-            "Verification successful, redirecting to login page..."
+            "Verification successful, redirecting to login page...",
+            {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            }
           );
           setTimeout(() => {
             router.push("/login");
@@ -27,14 +37,23 @@ const verifyAccount = () => {
         if (error.response?.data?.error) {
           toast.error(error.response?.data?.error);
         }
+      } finally {
+        setLoading(false);
       }
+    } else {
+      toast.error("Verification token not found, redirecting to login page...");
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
     }
   };
 
   return (
     <>
       <div>
-        <button onClick={newVerification}>verify account</button>
+        <button disabled={loading} onClick={newVerification}>
+          verify account
+        </button>
       </div>
       <ToastContainer />
     </>
