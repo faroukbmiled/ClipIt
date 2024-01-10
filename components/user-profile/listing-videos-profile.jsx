@@ -110,7 +110,7 @@ function ListingVideosProfile({
             ></path>
           </svg>
         </div>
-        <div className={`clips-listing ${isListView ? "List" : ""}`}>
+        <div className={`clips-listing ${isListView ? "List" : "Grid"}`}>
           {userData.videos?.map((video, index) => (
             <div
               style={{ position: "relative" }}
