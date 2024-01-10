@@ -19,8 +19,11 @@
         }
 
         & .List {
-            transition: all 0.3s;
+            display: grid;
             grid-template-columns: repeat(2, 1fr) !important;
+            transition: all 0.3s;
+            row-gap: $s40-d;
+            column-gap: $s20-d;
 
             & .video-display {
                 & .video-thumbnail {
@@ -29,12 +32,37 @@
             }
         }
 
-        & .clips-listing {
+        & .List {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr) !important;
+            transition: all 0.3s;
+            row-gap: $s40-d;
+            column-gap: $s20-d;
+
+            & .video-display {
+                & .video-thumbnail {
+                    height: 20vw !important;
+                }
+            }
+        }
+
+        & .Grid {
             transition: all 0.3s;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             row-gap: $s40-d;
             column-gap: $s20-d;
+
+            & .video-thumbnail {
+                width: 100%;
+                height: 10.76vw;
+                object-fit: cover;
+
+                & video {}
+            }
+        }
+
+        & .clips-listing {
 
             & .video-card {
                 position: relative;
@@ -62,7 +90,7 @@
 
                         & .video-thumbnail {
                             width: 100%;
-                            height: 10.76vw;
+                            // height: 10.76vw;
                             object-fit: cover;
 
                             & video {}

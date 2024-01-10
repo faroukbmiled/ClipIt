@@ -88,7 +88,7 @@ function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
             ></path>
           </svg>
         </div>
-        <div className={`clips-listing ${isListView ? "List" : ""}`}>
+        <div className={`clips-listing ${isListView ? "List" : "Grid"}`}>
           {userData.videos?.map((video, index) => (
             <div style={{ position: "relative" }} className="video-card fl_col gp10" key={index}>
               <div className="video-clip">
