@@ -106,6 +106,7 @@ function ListingLatestClips({ videosData }) {
                         views={video.views}
                         likes={video.likes}
                         src={video.video_url}
+                        videoId={video.videoId}
                       />
                     </Box>
                   </Modal>

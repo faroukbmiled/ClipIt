@@ -119,6 +119,7 @@ function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
                         views={video.views}
                         likes={video.likes}
                         src={video.video_url}
+                        videoId={video.videoId}
                       />
                     </Box>
                   </Modal>
