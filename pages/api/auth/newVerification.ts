@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { token } = req.body;
 
     if (!token) {
-        return res.status(400).json({ error: 'Email is required' });
+        return res.status(400).json({ error: 'Token is required' });
     }
 
     try {
