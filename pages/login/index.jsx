@@ -18,21 +18,24 @@ function Login() {
 
   useEffect(() => {
     const errorParam = new URLSearchParams(window.location.search).get("error");
-    if (errorParam) {
-      toast.error("Login failed. Please check your credentials.", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-    }
+
     const timeoutId = setTimeout(() => {
       setShowPreloader(false);
+      if (errorParam) {
+        toast.error("Login failed. Please check your credentials.", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
     }, 1500);
 
-    return () => clearTimeout(timeoutId);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   function handleSignIn(event) {

@@ -38,6 +38,6 @@
     ".next/types/**/*.ts",
     "components/user_bar/user_bar.jsx",
     "pages/user/[userId]/index.jsx"
-  ],
+, "next.config.mjs"  ],
   "exclude": ["node_modules"]
 }
