@@ -12,6 +12,7 @@ import Link from "next/link";
 
 function Login() {
   const { data: session, status } = useSession();
+  const [showPreloader, setShowPreloader] = useState(true);
   const [rememberMe, setRememberMe] = useState(false);
   const router = useRouter();
 
@@ -27,6 +28,11 @@ function Login() {
         draggable: true,
       });
     }
+    const timeoutId = setTimeout(() => {
+      setShowPreloader(false);
+    }, 1500);
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   function handleSignIn(event) {
@@ -49,7 +55,7 @@ function Login() {
         <title>Login</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {status === true ? (
+      {status === "loading" || showPreloader ? (
         <div className="jc_c fl_row w-100vw h-100vh ai_c">
           <PreloaderSpin />
         </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import PreloaderSpin from "../../../components/preloader";
 import ListingVideosProfile from "../../../components/user-profile/listing-videos-profile";
 import FollowersProfile from "../../../components/user-profile/followers-profile";
 import FollowingProfile from "../../../components/user-profile/following-profile";
@@ -16,6 +17,7 @@ const UserProfile = () => {
   const [userData, setUserData] = useState(null);
   const [activeTab, setActiveTab] = useState(tab || "videos");
   const [isUserFollowed, setIsUserFollowed] = useState(false);
+  const [showPreloader, setShowPreloader] = useState(true);
   const [followersData, setFollowersData] = useState();
   const [followersCount, setFollowersCount] = useState();
   const [loadingFollowers, setLoadingFollowers] = useState(true);
@@ -109,6 +111,22 @@ const UserProfile = () => {
       }
     }
   }, [userId, session, tab]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShowPreloader(false);
+    }, 1500);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  if (!userData || showPreloader) {
+    return (
+      <div className="body fl_row w-100vw">
+        <PreloaderSpin />
+      </div>
+    );
+  }
 
   return (
     <div id="page-content" className="UserProfile-Page">

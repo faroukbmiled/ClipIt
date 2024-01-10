@@ -1,5 +1,5 @@
 import Head from "next/head";
-import LoadingSpin from "react-loading-spin";
+import PreloaderSpin from "../../components/preloader";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import ClipiTLogo from "@assets/imgs/ClipitLogoBlack.png";
@@ -9,8 +9,8 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Select from "react-select";
 import { getCode, getNames } from "country-list"; // Updated import
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const getServerSideProps = async ({ res }) => {
   const csrfToken = res.getHeader("x-csrf-token") || "missing";
@@ -20,6 +20,7 @@ export const getServerSideProps = async ({ res }) => {
 export default function Register({ csrfToken }) {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const [showPreloader, setShowPreloader] = useState(true);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -66,29 +67,28 @@ export default function Register({ csrfToken }) {
     sendRegisterRequest(formData);
   };
 
-
   const sendRegisterRequest = async (formData) => {
     const headers = {
-      'X-CSRF-Token': csrfToken,
-      'Content-Type': 'multipart/form-data',
+      "X-CSRF-Token": csrfToken,
+      "Content-Type": "multipart/form-data",
     };
 
     try {
-      const response = await axios.post('/api/user/signUp', formData, {
+      const response = await axios.post("/api/user/signUp", formData, {
         headers: headers,
       });
 
       const result = response.data;
 
       if (result.created) {
-        router.push('/login');
+        router.push("/login");
       } else {
         console.error(result.errors);
-        toast.error(`Registration failed: ${result.errors.join(', ')}`);
+        toast.error(`Registration failed: ${result.errors.join(", ")}`);
       }
     } catch (error) {
-      console.error('Error during registration:', error);
-      toast.error(error.response.data.errors.join(', '));
+      console.error("Error during registration:", error);
+      toast.error(error.response.data.errors.join(", "));
     }
   };
 
@@ -98,6 +98,14 @@ export default function Register({ csrfToken }) {
     }
   }, [status]);
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShowPreloader(false);
+    }, 1500);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
   return (
     <div className="body fl_row w-100vw">
       <Head>
@@ -106,9 +114,9 @@ export default function Register({ csrfToken }) {
       </Head>
       <main id="register-auth" className="auth-layout w-100vw">
         <div className="auth-wrapper fl_row h-100vh">
-          {status == "loading" ? (
+          {status == "loading" || showPreloader ? (
             <div className="jc_c fl_row w-100vw h-100vh ai_c">
-              <LoadingSpin />
+              <PreloaderSpin />
             </div>
           ) : (
             <>

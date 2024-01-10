@@ -15,6 +15,7 @@ const UserProfile = () => {
   const router = useRouter();
   const [userId, setUserId] = useState(session?.user?.id || null);
   const { tab } = router.query;
+  const [showPreloader, setShowPreloader] = useState(true);
   const [userData, setUserData] = useState(null);
   const [activeTab, setActiveTab] = useState(tab || "videos");
   const [followersData, setFollowersData] = useState([]);
@@ -136,6 +137,14 @@ const UserProfile = () => {
     setActiveTab(tab || "videos");
   }, [tab]);
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShowPreloader(false);
+    }, 1500);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
   if (!userId) {
     return (
       <div className="jc_c fl_row w-100vw h-100vh ai_c">
@@ -144,7 +153,7 @@ const UserProfile = () => {
     );
   }
 
-  if (!userData) {
+  if (!userData || showPreloader) {
     return (
       <div className="jc_c fl_row w-100vw h-100vh ai_c">
         <PreloaderSpin />
