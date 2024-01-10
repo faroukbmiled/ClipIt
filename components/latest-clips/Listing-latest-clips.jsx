@@ -42,11 +42,41 @@ function ListingLatestClips({ videosData }) {
             day: 'numeric',
             year: 'numeric',
           });
-
           return (
             <div className="card-video rd25" key={index}>
               <div className="wrapper-card fl_col txt_white h-100 jc_s">
-                {/* ... (your existing code) ... */}
+                <div className="card-header pd20">
+                  <div className="card-header-wrapper fl_row jc_s">
+                    <div
+                      className="user-info fl_row gp5"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <img onClick={() => (location.href = "/user/" + video.userId)} className="rd50" src={video.user_avatar} alt="" />
+                      <div className="fl_col" >
+                        <p className="p16 w-800" onClick={() => (location.href = "/user/" + video.userId)}>{video.username}</p>
+                        <p
+                          className="p12 w-300 hashtag_video"
+                          onClick={() =>
+                          (location.href = `/listing-clips?search=hashtag:${encodeURIComponent(
+                            video.hashtag
+                          )}`)
+                          }
+                        >
+                          #{video.hashtag}
+                        </p>
+                      </div>
+                    </div>
+                    <div onClick={() =>
+                    (location.href = `/listing-clips?search=category:${encodeURIComponent(
+                      video.game_category
+                    )}`)
+                    } className="game_category pd5-t-b pd20-r-l rd30">
+                      <p className="p12 w-500 uper " >
+                        {video.game_category}
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <div className="card-video-src">
                   <div className="playVideo">
                     <img
