@@ -95,6 +95,8 @@ export default function Register({ csrfToken }) {
       console.error("Error during registration:", error);
       if (error.response?.data?.errors) {
         toast.error(error.response?.data?.errors?.join(", "));
+      } else {
+        toast.error("An error occurred.");
       }
     }
   };
