@@ -21,7 +21,7 @@ function Login() {
 
     const timeoutId = setTimeout(() => {
       setShowPreloader(false);
-      if (errorParam) {
+      if (errorParam === "CredentialsSignin") {
         toast.error("Login failed. Please check your credentials.", {
           position: "top-center",
           autoClose: 5000,
@@ -30,7 +30,18 @@ function Login() {
           pauseOnHover: true,
           draggable: true,
         });
+      } else if (errorParam === "AccessDenied") {
+        toast.error("Please verify your email address to proceed.", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       }
+      const urlWithoutError = window.location.href.split("?")[0];
+      history.replaceState({}, document.title, urlWithoutError);
     }, 1500);
 
     return () => {

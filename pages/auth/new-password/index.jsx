@@ -7,6 +7,7 @@ import axios from "axios";
 
 const newPassword = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState(null);
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
@@ -14,13 +15,22 @@ const newPassword = () => {
   const newPasswordReq = async () => {
     if (token) {
       try {
+        setLoading(true);
         res = await axios.post("/api/auth/newPassword", {
           token,
           password,
         });
         if (res.status === 200) {
           toast.success(
-            "Password reset successful, redirecting to login page..."
+            "Password reset successful, redirecting to login page...",
+            {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            }
           );
           setTimeout(() => {
             router.push("/login");
@@ -31,7 +41,14 @@ const newPassword = () => {
         if (error.response?.data?.error) {
           toast.error(error.response?.data?.error);
         }
+      } finally {
+        setLoading(false);
       }
+    } else {
+      toast.error("Verification token not found, redirecting to login page...");
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
     }
   };
 
@@ -53,7 +70,9 @@ const newPassword = () => {
             <input type="password" name="" id="" />
           </div>
         </form>
-        <button onClick={newPasswordReq}>Confirm</button>
+        <button disabled={loading} onClick={newPasswordReq}>
+          Confirm
+        </button>
       </div>
       <ToastContainer />
     </>
