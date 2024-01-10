@@ -9,7 +9,10 @@ import LazyImage from "../image";
 import VideoPlayer from "../video-player";
 
 function ListingLatestClips({ videosData }) {
-  const [openModals, setOpenModals] = useState(Array(videosData?.length).fill(false));
+  const [openModals, setOpenModals] = useState(
+    Array(videosData?.length).fill(false)
+  );
+  const [videos, setVideosData] = useState([]);
 
   const handleOpen = async (index) => {
     const newOpenModals = [...openModals];
@@ -30,17 +33,32 @@ function ListingLatestClips({ videosData }) {
     setOpenModals(newOpenModals);
   };
 
-  const videos = videosData || [];
+  const handleLikeUpdate = (videoId, newLikesCount) => {
+    const videoIndex = videos.findIndex((video) => video.videoId === videoId);
+    if (videoIndex !== -1) {
+      const updatedVideos = [...videos];
+      updatedVideos[videoIndex].likes = newLikesCount;
+      console.log(updatedVideos)
+      setVideosData(updatedVideos);
+    }
+  };
+
+  useEffect(() => {
+    if (videosData) {
+      setVideosData(videosData);
+    }
+  }, [videosData]);
+
 
   return (
     <div className="fl_col gp40" id="ListingLatestClips">
       <div className="wrapper gp20">
         {videos.map((video, index) => {
           const creationDate = new Date(video.creation_date);
-          const formattedDate = creationDate.toLocaleString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric',
+          const formattedDate = creationDate.toLocaleString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
           });
           return (
             <div className="card-video rd25" key={index}>
@@ -51,29 +69,44 @@ function ListingLatestClips({ videosData }) {
                       className="user-info fl_row gp5"
                       style={{ cursor: "pointer" }}
                     >
-                      <img onClick={() => (location.href = "/user/" + video.userId)} className="rd50" src={video.user_avatar} alt="" />
-                      <div className="fl_col" >
-                        <p className="p16 w-800" onClick={() => (location.href = "/user/" + video.userId)}>{video.username}</p>
+                      <img
+                        onClick={() =>
+                          (location.href = "/user/" + video.userId)
+                        }
+                        className="rd50"
+                        src={video.user_avatar}
+                        alt=""
+                      />
+                      <div className="fl_col">
+                        <p
+                          className="p16 w-800"
+                          onClick={() =>
+                            (location.href = "/user/" + video.userId)
+                          }
+                        >
+                          {video.username}
+                        </p>
                         <p
                           className="p12 w-300 hashtag_video"
                           onClick={() =>
-                          (location.href = `/listing-clips?search=hashtag:${encodeURIComponent(
-                            video.hashtag
-                          )}`)
+                            (location.href = `/listing-clips?search=hashtag:${encodeURIComponent(
+                              video.hashtag
+                            )}`)
                           }
                         >
                           #{video.hashtag}
                         </p>
                       </div>
                     </div>
-                    <div onClick={() =>
-                    (location.href = `/listing-clips?search=category:${encodeURIComponent(
-                      video.game_category
-                    )}`)
-                    } className="game_category pd5-t-b pd20-r-l rd30">
-                      <p className="p12 w-500 uper " >
-                        {video.game_category}
-                      </p>
+                    <div
+                      onClick={() =>
+                        (location.href = `/listing-clips?search=category:${encodeURIComponent(
+                          video.game_category
+                        )}`)
+                      }
+                      className="game_category pd5-t-b pd20-r-l rd30"
+                    >
+                      <p className="p12 w-500 uper ">{video.game_category}</p>
                     </div>
                   </div>
                 </div>
@@ -85,7 +118,10 @@ function ListingLatestClips({ videosData }) {
                       alt=""
                     />
                   </div>
-                  <LazyImage src={video.video_thumbnail} className="lazy_img video_thumbnail" />
+                  <LazyImage
+                    src={video.video_thumbnail}
+                    className="lazy_img video_thumbnail"
+                  />
                   <Modal
                     tabIndex={-1}
                     className="popupDisplayVideo rd25"
@@ -94,12 +130,14 @@ function ListingLatestClips({ videosData }) {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                   >
-                    <Box sx={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "50%",
-                      transform: "translate(-50%, -50%)",
-                    }}>
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    >
                       <VideoPlayer
                         title={video.video_title}
                         date={formattedDate}
@@ -107,6 +145,7 @@ function ListingLatestClips({ videosData }) {
                         likes={video.likes}
                         src={video.video_url}
                         videoId={video.videoId}
+                        onLikeUpdate={handleLikeUpdate}
                       />
                     </Box>
                   </Modal>
@@ -120,7 +159,10 @@ function ListingLatestClips({ videosData }) {
           );
         })}
       </div>
-      <Link href="listing-clips" className="show_more btn btn-grey p14 uper w-600">
+      <Link
+        href="listing-clips"
+        className="show_more btn btn-grey p14 uper w-600"
+      >
         Show More
       </Link>
     </div>

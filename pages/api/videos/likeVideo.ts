@@ -13,14 +13,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 return res.status(401).json({ error: 'Unauthorized' });
             }
 
-            const video = await prisma.video.findUnique({
+            const existingLike = await prisma.videoLike.findFirst({
                 where: {
-                    id: videoId,
+                    userId: user.id,
+                    videoId: videoId,
                 },
             });
 
-            if (!video) {
-                return res.status(404).json({ error: 'Video not found' });
+            if (existingLike) {
+                const video = await prisma.video.update({
+                    where: {
+                        id: videoId,
+                    },
+                    data: {
+                        likesCount: { decrement: 1 },
+                        likes: { deleteMany: { userId: user.id } },
+                    },
+                });
+
+                if (!video) {
+                    return res.status(404).json({ error: 'Video not found' });
+                }
+
+                return res.status(200).json(video);
             }
 
             const updatedVideo = await prisma.video.update({
@@ -28,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     id: videoId,
                 },
                 data: {
-                    likesConunt: { increment: 1 },
+                    likesCount: { increment: 1 },
                     likes: { create: { userId: user.id } },
                 },
             });

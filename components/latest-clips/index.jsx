@@ -45,7 +45,7 @@ function LatestClipsComponent() {
           />
         </div>
         <div className="Listing-clips">
-          <ListingLatestClips videosData={filteredVideos}></ListingLatestClips>
+          <ListingLatestClips videosData={filteredVideos} setVideosData={setVideosData}></ListingLatestClips>
         </div>
       </div>
     </div>

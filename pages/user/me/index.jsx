@@ -226,6 +226,7 @@ const UserProfile = () => {
               userData={userData}
               userId={userId}
               removeVideo={removeVideo}
+              setUserData={setUserData}
               isMe={true}
             />
           )}
@@ -247,7 +248,9 @@ const UserProfile = () => {
               removeFollowingHandler={handleRemoveFollowing}
             />
           )}
-          {activeTab === "about" && <AboutProfile userId={userId} />}
+          {activeTab === "about" && (
+            <AboutProfile userId={userId} bioData={userData?.bio} />
+          )}
         </div>
       </div>
       <div id="footer">
