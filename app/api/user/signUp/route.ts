@@ -48,6 +48,7 @@ export async function POST(req: Request, res: Response) {
                     name: name,
                     email: email,
                     password: hashedPassword,
+                    cover: "/userdata/default/default-cover.png",
                     role: 'user',
                     country: country,
                 },
