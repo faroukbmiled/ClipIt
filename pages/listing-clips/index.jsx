@@ -12,6 +12,8 @@ function ListingClipsPage() {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [videosData, setVideosData] = useState([]);
+  const [gameCategories, setGameCategories] = useState();
+  const [hashtags, setHashtags] = useState();
   const [filteredVideos, setFilteredVideos] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -59,6 +61,14 @@ function ListingClipsPage() {
         const response = await axios.get("/api/videos/getClips");
         setVideosData(response.data.videos);
         setFilteredVideos(response.data.videos);
+        setGameCategories(response.data.game_categories);
+        const hashtags = response.data.videos.reduce((allHashtags, video) => {
+          const videoHashtags = video.hashtag || [];
+          return allHashtags.concat(videoHashtags);
+        }, []);
+        const uniqueHashtags = Array.from(new Set(hashtags));
+        setHashtags(uniqueHashtags);
+
       } catch (error) {
         console.error("Error fetching latest clips:", error);
       }
@@ -88,12 +98,19 @@ function ListingClipsPage() {
               <hr className="mg20-t-b rd25" />
               <UserFollowingList session={session}></UserFollowingList>
             </div>
-            <div className="listing-clips fl_col gp40">
-              <FilterListingClips
-                onSearch={handleSearch}
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-              />
+            <div className="listing-clips fl_col gp20">
+              {gameCategories && gameCategories.length > 0 ? (
+                <FilterListingClips
+                  gameCategories={gameCategories}
+                  hashtags={hashtags}
+                  onSearch={handleSearch}
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
+                />
+              ) : (
+                null
+              )}
+
               <ListingClipsComponents
                 videosData={filteredVideos}
                 setVideosData={setVideosData}

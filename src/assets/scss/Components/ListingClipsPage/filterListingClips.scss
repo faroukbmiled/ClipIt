@@ -27,5 +27,33 @@
                 border-bottom-left-radius: unset;
             }
         }
+
+        .categories-filter,
+        .tags_list {
+            // max-width: 35vw;
+            // overflow: hidden;
+            flex-wrap: wrap;
+            & .categories_list {
+            flex-wrap: wrap;
+
+            }
+            &:active {
+                cursor: grabbing;
+            }
+
+            .list-item {
+                background-color: #dadaf766;
+                height: fit-content;
+                cursor: pointer;
+                transition: all 0.3s;
+                width: fit-content;
+                text-align: center;
+
+                &:hover {
+                    background-color: $primary-color;
+                }
+            }
+        }
+
     }
 }

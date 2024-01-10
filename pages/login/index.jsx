@@ -111,7 +111,7 @@ function Login() {
                           </div>
                           <button
                             onClick={() => signIn("google")}
-                            className="btn btn-light gp5"
+                            className="btn btn-light gp5 w-100"
                           >
                             <img src={GmailIcon.src} alt="" />
                             Continue with Google
