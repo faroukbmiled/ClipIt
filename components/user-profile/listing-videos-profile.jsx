@@ -4,7 +4,9 @@ import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/react";
 import PreloaderSpin from "../../components/preloader";
 import playVideo from "@assets/icons/play-video.svg";
-
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import VideoPlayer from "../../components/video-player"
 function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
   const [openModals, setOpenModals] = useState([]);
   const [isListView, setIsListView] = useState(false);
@@ -24,7 +26,24 @@ function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
       [videoIndex]: duration,
     }));
   };
+  const handleOpen = async (index) => {
+    const newOpenModals = [...openModals];
+    newOpenModals[index] = true;
+    setOpenModals(newOpenModals);
 
+    try {
+      const updatedVideo = await incrementView(videosData[index].videoId);
+      console.log("Views count incremented:", updatedVideo.views);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const handleClose = (index) => {
+    const newOpenModals = [...openModals];
+    newOpenModals[index] = false;
+    setOpenModals(newOpenModals);
+  };
   if (!userData) {
     return (
       <div className="jc_c fl_row w-100vw h-100vh ai_c">
@@ -72,12 +91,35 @@ function ListingVideosProfile({ userId, userData, removeVideo, isMe = false }) {
             <div className="video-card fl_col gp10" key={index}>
               <div className="video-clip">
                 <div className="video-display">
-                  <img src={playVideo.src} alt="" className="play-video" />
+                  <img src={playVideo.src} alt="" className="play-video" onClick={() => handleOpen(index)}/>
                   <img
                     className="video_thumbnail rd10"
                     src={video.video_thumbnail}
                     alt=""
                   />
+                  <Modal
+                    tabIndex={-1}
+                    className="popupDisplayVideo rd25"
+                    open={openModals[index]}
+                    onClose={() => handleClose(index)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={{
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)",
+                    }}>
+                      <VideoPlayer
+                        title={video.video_title}
+                        date={"formattedDate"}
+                        views={video.views}
+                        likes={video.likes}
+                        src={video.video_url}
+                      />
+                    </Box>
+                  </Modal>
                 </div>
                 <video
                   className="hide"

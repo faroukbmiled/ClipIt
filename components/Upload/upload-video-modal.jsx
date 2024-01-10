@@ -227,6 +227,9 @@ function UploadVideoModal({ session, signOut }) {
                           placeholder="Hashtag"
                           onChange={(e) => setHashtag(e.target.value)}
                         />
+                      </div>
+                    </div>
+                      <div className="UploadProgress">
                         {UploadProgress !== 0 && (
                           <LinearProgress
                             variant="determinate"
@@ -234,7 +237,6 @@ function UploadVideoModal({ session, signOut }) {
                           />
                         )}
                       </div>
-                    </div>
                   </div>
 
                   <div className="card-footer fl_row gp20">

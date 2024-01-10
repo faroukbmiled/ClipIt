@@ -19,9 +19,11 @@
         position: relative;
         width: 100%;
         height: 100%;
+
         & .cardInfo {
             height: 33.7vw;
         }
+
         & .light-input label {
             color: $white-color !important;
         }
@@ -103,6 +105,19 @@
             }
         }
 
+        & .UploadProgress {
+            & .MuiLinearProgress-colorPrimary {
+                background-color: #7f56d91f !important;
+                border-radius: 1.73vw;
+                height: 1vw !important;
+                transform: translateY(1.3vw);
+
+                & .css-5xe99f-MuiLinearProgress-bar1 {
+                    background-color: $primary-color !important;
+                }
+            }
+        }
+
         & .card-footer {
             & .btn-next {
                 width: 100%;
@@ -152,10 +167,67 @@
     background-color: transparent !important;
 
     & video {
-        width: 90vw;
-        height: 90vh;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
         border: unset !important;
 
     }
+}
+
+.display_video_popup {
+    // background-color: red;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000f2;
+    border-radius: unset !important;
+
+    & .video-wrapper {
+        width: 60vw;
+        height: 40vw;
+
+        & .box_video {
+            background-color: $black-color;
+        }
+
+        & .video_tools {
+            & .liked {
+                .likes-video {
+                    position: relative;
+
+                    &::before {
+                        content: url("../../../icons/LikedIcon.svg");
+                        position: absolute;
+                        top: 0.2vw;
+                        left: -1.6vw;
+                        z-index: 2;
+                        width: 1.2vw;
+                    }
+                }
+            }
+
+            & img {
+                width: 1.2vw;
+                transition: all 0.3s;
+                cursor: pointer;
+
+                &:hover {
+                    transform: rotate(-30deg) scale(1.2);
+                }
+            }
+        }
+    }
+}
+
+.MuiBox-root {
+    background-color: #000000c4 !important;
+    border: $s7-d solid #ffffff0f;
+    width: 60vw;
+    height: 40vw;
+    overflow: hidden;
+    border-radius: $s15-d;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
