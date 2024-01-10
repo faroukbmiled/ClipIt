@@ -248,7 +248,9 @@ const UserProfile = () => {
               removeFollowingHandler={handleRemoveFollowing}
             />
           )}
-          {activeTab === "about" && <AboutProfile userId={userId} />}
+          {activeTab === "about" && (
+            <AboutProfile userId={userId} bioData={userData?.bio} />
+          )}
         </div>
       </div>
       <div id="footer">
