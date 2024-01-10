@@ -17,9 +17,15 @@
             transition: all 0.3s;
             grid-template-columns: repeat(2, 1fr) !important;
 
-            & .video-display {
-                & .video-thumbnail {
-                    height: 20vw !important;
+            & .video-card {
+                & .video-clip {
+                    & .video-display {
+                        & .video_thumbnail {
+                            & img {
+                                height: 20vw !important;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -30,6 +36,7 @@
             grid-template-columns: repeat(4, 1fr);
             row-gap: $s40-d;
             column-gap: $s20-d;
+            margin-bottom: 2vw;
 
             & .video-card {
                 & .video-clip {
@@ -53,13 +60,19 @@
                             }
                         }
 
-                        & .video-thumbnail {
+                        & .video_thumbnail {
+                            overflow: hidden;
                             width: 100%;
-                            height: 10.76vw;
-                            object-fit: cover;
+
+                            & img {
+                                height: 10.76vw !important;
+                                object-fit: cover;
+                            }
 
                             & video {}
                         }
+
+
                     }
 
                     & .video-time {

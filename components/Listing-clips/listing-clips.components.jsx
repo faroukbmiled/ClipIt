@@ -10,6 +10,7 @@ import { incrementView } from "@lib/incrementVideoView";
 import playvideoIcon from "@assets/icons/play-video.svg";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import LazyImage from "../image";
 function ListingClipsComponents({ videosData, setVideosData }) {
   //   const { DataForTesting } = jsonData; // testing
   const [videoDurations, setVideoDurations] = useState({});
@@ -117,11 +118,12 @@ function ListingClipsComponents({ videosData, setVideosData }) {
                     alt=""
                     className="play-video"
                   />
-                  <img
+                  {/* <img
                     className="video-thumbnail rd10"
                     src={video.video_thumbnail}
                     alt=""
-                  />
+                  /> */}
+                  <LazyImage src={video.video_thumbnail} className="lazy_img video_thumbnail rd10"/>
                   <Modal
                     className="popupDisplayVideo rd25"
                     open={openModals[index]}
