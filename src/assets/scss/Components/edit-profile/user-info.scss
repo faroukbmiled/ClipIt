@@ -1,6 +1,15 @@
 #UserInfo {
 
+    & .light-input {
 
+        & input,
+        select,
+        textarea {
+            color: $white-color;
+            text-transform: capitalize;
+            border: 0.14vw solid white !important;
+        }
+    }
 
     & .UserInfo-wrapper {
         & .UserInfo-header {
@@ -59,6 +68,12 @@
                                 height: 10vw;
                                 object-fit: cover;
                             }
+                        }
+                    }
+
+                    & .edit-bio {
+                        & textarea {
+                            background-color: transparent;
                         }
                     }
                 }

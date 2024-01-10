@@ -72,7 +72,7 @@ img {
   }
 
   & input,
-  select {
+  select,textarea {
     color: $grey-color;
     text-transform: lowercase;
     border-radius: $s10-d;
@@ -83,7 +83,7 @@ img {
     font-size: $s14-d;
 
     & input,
-    select {
+    select,textarea {
       padding: $s13-d $s10-d;
     }
   }
@@ -96,7 +96,7 @@ img {
     font-size: $s14-t;
 
     & input,
-    select {
+    select,textarea {
       padding: $s13-t $s10-t;
     }
   }
@@ -106,7 +106,7 @@ img {
     font-size: $s14-m;
 
     & input,
-    select {
+    select,textarea {
       padding: $s13-m $s10-m;
     }
   }

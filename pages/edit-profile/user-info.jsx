@@ -14,6 +14,7 @@ function UserInfo({ session, status, update }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [bio, setBio] = useState("");
   const [password, setPassword] = useState("");
   const [coverFile, setCoverFile] = useState(null);
   const [imageFile, setImageFile] = useState(null);
@@ -109,41 +110,53 @@ function UserInfo({ session, status, update }) {
           </div>
           <div className="UserInfo-content">
             <div className="media-user fl_col gp40 pd40-t-b">
-              <div className="media-user-wrapper fl_col gp20">
-                <p className="p18">Media</p>
-                <div className="fl_row gp20">
-                  <div className="avatar-user fl_col gp10">
-                    <p className="p14">Avatar</p>
-                    <div className="data-upload">
-                      <img
-                        className="img-edit"
-                        src={EditImageIcon.src}
-                        alt=""
-                      />
-                      <img
-                        className="data-img rd10"
-                        src={session?.user?.image}
-                        alt=""
-                      />
-                      <input type="file" onChange={handleImageChange} />
+              <div className="media-user-wrapper fl_row jc_s gp20">
+                <div className="fl_col gp20 fl-1">
+                  <p className="p18">Media</p>
+                  <div className="fl_row gp20">
+                    <div className="avatar-user fl_row jc_s">
+                      <div className="fl_col gp10">
+                        <p className="p14">Avatar</p>
+                        <div className="data-upload">
+                          <img
+                            className="img-edit"
+                            src={EditImageIcon.src}
+                            alt=""
+                          />
+                          <img
+                            className="data-img rd10"
+                            src={session?.user?.image}
+                            alt=""
+                          />
+                          <input type="file" onChange={handleImageChange} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="cover-user fl_col gp10">
+                      <p className="p14">Cover photo</p>
+                      <div className="data-upload">
+                        <img
+                          className="img-edit"
+                          src={EditImageIcon.src}
+                          alt=""
+                        />
+                        <img
+                          className="data-img rd10"
+                          src={session?.user?.cover}
+                          alt=""
+                        />
+                        <input type="file" onChange={handleCoverChange} />
+                      </div>
                     </div>
                   </div>
-                  <div className="cover-user fl_col gp10">
-                    <p className="p14">Cover photo</p>
-                    <div className="data-upload">
-                      <img
-                        className="img-edit"
-                        src={EditImageIcon.src}
-                        alt=""
-                      />
-                      <img
-                        className="data-img rd10"
-                        src={session?.user?.cover}
-                        alt=""
-                      />
-                      <input type="file" onChange={handleCoverChange} />
-                    </div>
-                  </div>
+                </div>
+                <div className="edit-bio inp_col fl_col fl-1 light-input fl_col gp20 jc_s">
+                  <p className="p18">Bio</p>
+                  <textarea id="bio"
+                    type="text"
+                    onChange={(e) => setBio(e.target.value)}
+                    value={session?.user?.bio} cols="30" rows="10">
+                  </textarea>
                 </div>
               </div>
               <div className="user-fields light-input fl_col gp10">
@@ -156,7 +169,7 @@ function UserInfo({ session, status, update }) {
                       id="username"
                       type="username"
                       onChange={(e) => setUsername(e.target.value)}
-                      placeholder={session?.user?.name}
+                      value={session?.user?.name}
                     />
                   </div>
                   <div className="inp_col fl_col fl-1">
@@ -167,7 +180,7 @@ function UserInfo({ session, status, update }) {
                       id="email"
                       type="email"
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder={session?.user?.email}
+                      value={session?.user?.email}
                     />
                   </div>
                 </div>
@@ -216,3 +229,6 @@ function UserInfo({ session, status, update }) {
 }
 
 export default UserInfo;
+
+
+
