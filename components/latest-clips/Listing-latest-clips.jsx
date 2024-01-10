@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Link from "next/link";
 import shadowCard from "@assets/imgs/shadow.png";
-
+import LazyImage from "../image";
 function ListingLatestClips({ videosData }) {
   const [openModals, setOpenModals] = useState(
     Array(videosData?.length).fill(false)
@@ -85,11 +85,13 @@ function ListingLatestClips({ videosData }) {
                     alt=""
                   />
                 </div>
-                <img
+                {/* <img
                   className="video_thumbnail"
                   src={video.video_thumbnail}
                   alt=""
-                />
+                /> */}
+                  <LazyImage src={video.video_thumbnail} className="lazy_img video_thumbnail"/>
+
                 <Modal
                   className="popupDisplayVideo rd25"
                   open={openModals[index]}

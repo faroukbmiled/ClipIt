@@ -31,13 +31,14 @@ function LatestUsersList() {
           Latest <span className="txt_primary">Registered </span>Users
         </p>
         <ResponsiveHoneycomb
-          // defaultWidth={1024}
           size={sideLength}
           items={users}
           renderItem={(user) => (
             <Hexagon key={user?.id}>
               <Link href={`/user/${user?.id}`}>
-              <LazyImage src={{ src: user?.avatar }} width={600} height={600} />
+              {/* <LazyImage src={{ src: user?.avatar }} width={600} height={600} /> */}
+              <LazyImage src={user?.avatar} className="lazy_img"/>
+
               </Link>
             </Hexagon>
           )}

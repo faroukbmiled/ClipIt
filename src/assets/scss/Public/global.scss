@@ -109,3 +109,14 @@ img {
     flex-direction: column;
   }
 }
+
+.lazy_img {
+  display: flex;
+  width: 100% !important;
+  height: 100% !important;
+
+  & img {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
