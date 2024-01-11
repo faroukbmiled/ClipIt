@@ -98,6 +98,7 @@ function Login() {
                   <div className="fl_row jc_c">
                     <img
                       className="logo"
+                      style={{ cursor: "pointer" }}
                       src={ClipiTLogo.src}
                       onClick={() => (location.href = "/")}
                       alt=""

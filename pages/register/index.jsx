@@ -148,7 +148,13 @@ export default function Register({ csrfToken }) {
               <div className="right-side fl-1 h-100  fl_col ai_c jc_c">
                 <div className="right-side-wrapper w-100 fl_col gp30">
                   <div className="fl_row jc_c">
-                    <img className="logo" src={ClipiTLogo.src} alt="" />
+                    <img
+                      className="logo"
+                      style={{ cursor: "pointer" }}
+                      src={ClipiTLogo.src}
+                      onClick={() => (location.href = "/")}
+                      alt=""
+                    />
                   </div>
                   <div className="form-header fl_col gp2 txt_grey txt_left">
                     <div className="fl_col gp32">
