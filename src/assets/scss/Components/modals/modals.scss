@@ -5,7 +5,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30vw;
+    width: 35vw !important;
     height: 38vw;
     z-index: 999;
     border: 0 !important;
@@ -13,7 +13,7 @@
     outline: unset;
     background: linear-gradient(237deg, #150832ad 0.82%, #0000007d 129.1%);
     backdrop-filter: blur(7px);
-    box-shadow: 20px 10px 71px 65px rgb(255 255 255 / 10%);
+    box-shadow: 6px 0px 68px 37px rgb(255 255 255 / 10%) !important;
 
     & .card-user {
         position: relative;
@@ -221,6 +221,7 @@
         }
     }
 }
+
 .MuiBox-root {
     background-color: #000000c4 !important;
     border: $s7-d solid #ffffff0f;
