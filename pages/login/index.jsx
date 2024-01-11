@@ -72,7 +72,7 @@ function Login() {
   return (
     <div className="body fl_row w-100vw">
       <Head>
-        <title>Login</title>
+        <title>Clipit - Login</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {status === "loading" || showPreloader ? (

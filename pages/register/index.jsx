@@ -124,7 +124,7 @@ export default function Register({ csrfToken }) {
   return (
     <div className="body fl_row w-100vw">
       <Head>
-        <title>register</title>
+        <title>Clipit - Register</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main id="register-auth" className="auth-layout w-100vw">
