@@ -92,6 +92,16 @@ function ListingVideosProfile({
     );
   }
 
+  if (!userData || !userData.videos || userData.videos.length === 0) {
+    return (
+      <div id="ListingClips">
+        <div className="fl_row w-100vw">
+          <p className="txt_white">No videos found.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div id="ListingClips">
       <div className="ListingClips-wrapper fl_col gp40">
@@ -268,9 +278,7 @@ function formatVideoTime(duration) {
   return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 }
 
-
 function formatTimeAgo(creationDate) {
-  
   return "1 day ago";
 }
 
