@@ -7,7 +7,7 @@ function PrimaryBlock() {
           <p className="p20 w-700 txt_primary">Gaming Memories</p>
           <p className="p50 txt_white ">Share Your Gaming Clips</p>
           <p className="p16 txt_white ">
-            Clip is a platform for gamers to share and explore exciting gaming moments. Capture your best plays, upload them, and connect with a vibrant gaming community. Dive into a world of epic wins, funny fails, and memorable experiences. Join Clip today and showcase your gaming prowess!
+            ClipIt is a platform for gamers to share and explore exciting gaming moments. Capture your best plays, upload them, and connect with a vibrant gaming community. Dive into a world of epic wins, funny fails, and memorable experiences. Join Clip today and showcase your gaming prowess!
           </p>
         </div>
         <div className="joystick">
