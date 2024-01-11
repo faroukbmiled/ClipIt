@@ -164,7 +164,7 @@ function Login() {
                               />
                               <label htmlFor="remmeberme">Remember Me</label>
                             </div>
-                            <a href="">
+                            <a href="/auth/reset-password">
                               <p className="p12 txt_primary">
                                 Forgot Password?
                               </p>

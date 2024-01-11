@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams } from "next/navigation";
 import Head from "next/head";
 import axios from "axios";
+import ClipitLogoWhite from "@assets/imgs/ClipitLogoWhite.png";
 
 const resetPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -43,21 +44,28 @@ const resetPassword = () => {
         <title>Clipit - Reset Password</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        <form action="">
-          <div>
-            <label for=""></label>
-            <input
-              type="email"
-              name=""
-              id=""
-              onChange={(e) => setEmail(e.target.value)}
-            />
+      <div className="auth_user">
+      <img className="logo-header" src={ClipitLogoWhite.src} alt="" />
+        <div className="auth-wrapper fl_col gp20">
+          <p className="p40 txt_white">Reset Password</p>
+          <div className="fl_row">
+            <form action="">
+              <div className="light-input">
+                <label for=""></label>
+                <input
+                  type="email"
+                  name=""
+                  id=""
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="clip@clipit.tn"
+                />
+              </div>
+            </form>
+            <button className="btn btn-primary" disabled={loading} onClick={resetPasswordReq}>
+              Request
+            </button>
           </div>
-        </form>
-        <button disabled={loading} onClick={resetPasswordReq}>
-          Request
-        </button>
+        </div>
       </div>
       <ToastContainer />
     </>

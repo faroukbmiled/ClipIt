@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import Head from "next/head";
+import ClipitLogoWhite from "@assets/imgs/ClipitLogoWhite.png";
 
 const newPassword = () => {
   const router = useRouter();
@@ -59,25 +60,30 @@ const newPassword = () => {
         <title>Clipit - New Password</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        <form action="">
-          <div>
-            <label for=""></label>
-            <input
-              type="password"
-              name=""
-              id=""
-              onChange={(e) => setPassword(e.target.value)}
-            />
+      <div className="auth_user new_password">
+        <img className="logo-header" src={ClipitLogoWhite.src} alt="" />
+        <div className="auth-wrapper fl_col gp20">
+          <p className="p40 txt_white">New Password</p>
+          <div className="fl_col gp20 ai_c light-input">
+            <form className="fl_col gp5" action="">
+              <div className="">
+                <input
+                  type="password"
+                  name=""
+                  id=""
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="New Password"
+                />
+              </div>
+              <div>
+                <input type="password" name="" id="" placeholder="Repeat Password" />
+              </div>
+            </form>
+            <button className="btn btn-primary" disabled={loading} onClick={newPasswordReq}>
+              Confirm
+            </button>
           </div>
-          <div>
-            <label for=""></label>
-            <input type="password" name="" id="" />
-          </div>
-        </form>
-        <button disabled={loading} onClick={newPasswordReq}>
-          Confirm
-        </button>
+        </div>
       </div>
       <ToastContainer />
     </>

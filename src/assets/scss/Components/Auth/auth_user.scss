@@ -1,0 +1,48 @@
+.auth_user {
+    background: linear-gradient(181deg, #150832 0.82%, #000 129.1%);
+    backdrop-filter: blur(7px);
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & .logo-header {
+        position: fixed;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    & .auth-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 40vw;
+
+
+        & input {
+            width: 20vw;
+            border-top-right-radius: unset;
+            border-bottom-right-radius: unset;
+        }
+
+        & .btn {
+            border-top-left-radius: unset;
+            border-bottom-left-radius: unset;
+            transition: all 0.3s;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+    }
+}
+
+ .new_password {
+    & .auth-wrapper {
+        & input,.btn {
+            border-radius: $s10-d;
+        }
+    }
+}

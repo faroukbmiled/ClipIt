@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import Head from "next/head";
+import ClipitLogoWhite from "@assets/imgs/ClipitLogoWhite.png";
 
 const verifyAccount = () => {
   const router = useRouter();
@@ -55,10 +56,14 @@ const verifyAccount = () => {
         <title>Clipit - Verify Account</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        <button disabled={loading} onClick={newVerification}>
-          verify account
-        </button>
+      <div className="auth_user">
+        <img className="logo-header" src={ClipitLogoWhite.src} alt="" />
+        <div className="fl_col ai_c gp20">
+          <p className="p12 txt_center txt_white">Kindly verify your account to <br />complete your account registration.</p>
+          <button className="btn btn-primary" disabled={loading} onClick={newVerification}>
+            verify account
+          </button>
+        </div>
       </div>
       <ToastContainer />
     </>
