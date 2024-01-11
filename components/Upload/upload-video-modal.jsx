@@ -14,6 +14,7 @@ import Modal from "@mui/material/Modal";
 import LinearProgress from "@mui/material/LinearProgress";
 import gameCategoriesData from "./categories.json";
 import { ToastContainer, toast } from "react-toastify";
+import BeatLoader from "react-spinners/BeatLoader";
 import "react-toastify/dist/ReactToastify.css";
 
 function UploadVideoModal({ session, signOut }) {
@@ -292,7 +293,11 @@ function UploadVideoModal({ session, signOut }) {
                       type="submit"
                       disabled={UploadProgress !== 0}
                     >
-                      Submit
+                      {UploadProgress !== 0 ? (
+                        <BeatLoader color="white" />
+                      ) : (
+                        "Submit"
+                      )}
                     </button>
                   </div>
                   <ToastContainer pauseOnFocusLoss draggable autoClose={2000} />
