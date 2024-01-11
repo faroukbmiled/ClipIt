@@ -21,7 +21,7 @@ const newPassword = () => {
           token,
           password,
         });
-        if (res.status === 200) {
+        if (res.data.success) {
           toast.success(
             "Password reset successful, redirecting to login page...",
             {
