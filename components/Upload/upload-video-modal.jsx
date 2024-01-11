@@ -160,6 +160,7 @@ function UploadVideoModal({ session, signOut }) {
                           name="video"
                           accept="video/mp4, video/webm"
                           onChange={handleFileChange}
+                          required
                         />
                         <img src={UploadVideoIcon.src} alt="" />
                         <p className="p16">
@@ -178,6 +179,7 @@ function UploadVideoModal({ session, signOut }) {
                         </p>
                         <input
                           className="txt_center"
+                          required
                           onChange={displayThubmnailImage}
                           type="file"
                           id="thumbnail"
@@ -222,6 +224,7 @@ function UploadVideoModal({ session, signOut }) {
                           type="text"
                           name="title"
                           placeholder="Title"
+                          required
                           onChange={(e) => setTitle(e.target.value)}
                           disabled={UploadProgress !== 0}
                         />
@@ -232,6 +235,7 @@ function UploadVideoModal({ session, signOut }) {
                           type="text"
                           name="description"
                           placeholder="Description"
+                          required
                           disabled={UploadProgress !== 0}
                           onChange={(e) => setDescription(e.target.value)}
                         />
@@ -246,8 +250,8 @@ function UploadVideoModal({ session, signOut }) {
                         /> */}
                         <select
                           name="category"
+                          required
                           disabled={UploadProgress !== 0}
-                          s
                           onChange={(e) => setCategory(e.target.value)}
                         >
                           <option value="" disabled selected>
@@ -265,6 +269,7 @@ function UploadVideoModal({ session, signOut }) {
                         <input
                           type="text"
                           name="hashtag"
+                          required
                           placeholder="Hashtag"
                           disabled={UploadProgress !== 0}
                           onChange={(e) => setHashtag(e.target.value)}
