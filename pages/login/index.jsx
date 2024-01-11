@@ -86,10 +86,7 @@ function Login() {
               <div className="left-side fl-1 h-100 fl_col gp25 ai_c jc_fe ">
                 <div className="left-side-wrapper txt_center pd40-r-l">
                   <p className="p40 w-700 txt_white">
-                    Turn your ideas into reality.
-                  </p>
-                  <p className="p22 w-300 txt_white">
-                    Start for free and get attractive offers from the community
+                    Sign in to your Clipit Account
                   </p>
                 </div>
               </div>
@@ -117,9 +114,6 @@ function Login() {
                         <div className="fl_col gp32">
                           <div className="fl_col">
                             <p className="p36">Login to your Account</p>
-                            <p className="p16">
-                              See what is going on with your business
-                            </p>
                           </div>
                           <button
                             onClick={() => signIn("google")}
