@@ -17,7 +17,7 @@ const newPassword = () => {
     if (token) {
       try {
         setLoading(true);
-        res = await axios.post("/api/auth/newPassword", {
+        const res = await axios.post("/api/auth/newPassword", {
           token,
           password,
         });

@@ -16,7 +16,7 @@ const verifyAccount = () => {
     if (token) {
       try {
         setLoading(true);
-        res = await axios.post("/api/auth/newVerification", { token });
+        const res = await axios.post("/api/auth/newVerification", { token });
         if (res.data.success) {
           toast.success(
             "Verification successful, redirecting to login page...",

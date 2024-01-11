@@ -15,7 +15,7 @@ const resetPassword = () => {
     if (email) {
       try {
         setLoading(true);
-        res = await axios.post("/api/auth/resetPassword", {
+        const res = await axios.post("/api/auth/resetPassword", {
           email,
         });
       } catch (error) {
