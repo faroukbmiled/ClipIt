@@ -28,6 +28,8 @@ function UploadVideoModal({ session, signOut }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [gameCategories, setGameCategories] = useState([]);
+  const cancelTokenSource = axios.CancelToken.source();
+
   useEffect(() => {
     setGameCategories(gameCategoriesData.gameCategories);
   }, []);
@@ -83,6 +85,7 @@ function UploadVideoModal({ session, signOut }) {
           setUplaodProgress(percentComplete);
           console.log("Upload Progress: " + percentComplete + "%");
         },
+        cancelToken: cancelTokenSource.token,
       });
 
       if (response.status === 200) {
@@ -95,6 +98,14 @@ function UploadVideoModal({ session, signOut }) {
     } catch (error) {
       console.error("Error uploading video:", error.message);
     }
+  };
+
+  const handlePrevious = () => {
+    if (UploadProgress !== 0) {
+      cancelTokenSource.cancel("Upload canceled by user");
+      setUplaodProgress(0);
+    }
+    swiper.slidePrev();
   };
 
   return (
@@ -116,7 +127,9 @@ function UploadVideoModal({ session, signOut }) {
               <SwiperSlide>
                 <div className="card-user fl_col gp10 h-100">
                   <div className="card-content">
-                    <p className="p22 txt_center w-700 pd40-b txt_white">Upload Video</p>
+                    <p className="p22 txt_center w-700 pd40-b txt_white">
+                      Upload Video
+                    </p>
                     <div className="boxUploadSection fl_col gp20 pd20">
                       <div className="boxupload txt_center">
                         <input
@@ -177,7 +190,9 @@ function UploadVideoModal({ session, signOut }) {
               <SwiperSlide>
                 <div className="card-user fl_col gp20">
                   <div className="fl_col gp10 cardInfo">
-                    <p className="p22 txt_center w-700 txt_white">Video Information</p>
+                    <p className="p22 txt_center w-700 txt_white">
+                      Video Information
+                    </p>
                     <div className="boxinputsSection light-input fl_col gp20 ">
                       <div className="inp-col fl_col">
                         <label htmlFor="title">Title</label>
@@ -186,6 +201,7 @@ function UploadVideoModal({ session, signOut }) {
                           name="title"
                           placeholder="Title"
                           onChange={(e) => setTitle(e.target.value)}
+                          disabled={UploadProgress !== 0}
                         />
                       </div>
                       <div className="inp-col fl_col">
@@ -194,6 +210,7 @@ function UploadVideoModal({ session, signOut }) {
                           type="text"
                           name="description"
                           placeholder="Description"
+                          disabled={UploadProgress !== 0}
                           onChange={(e) => setDescription(e.target.value)}
                         />
                       </div>
@@ -225,30 +242,32 @@ function UploadVideoModal({ session, signOut }) {
                           type="text"
                           name="hashtag"
                           placeholder="Hashtag"
+                          disabled={UploadProgress !== 0}
                           onChange={(e) => setHashtag(e.target.value)}
                         />
                       </div>
                     </div>
-                      <div className="UploadProgress">
-                        {UploadProgress !== 0 && (
-                          <LinearProgress
-                            variant="determinate"
-                            value={parseFloat(UploadProgress)}
-                          />
-                        )}
-                      </div>
+                    <div className="UploadProgress">
+                      {UploadProgress !== 0 && (
+                        <LinearProgress
+                          variant="determinate"
+                          value={parseFloat(UploadProgress)}
+                        />
+                      )}
+                    </div>
                   </div>
 
                   <div className="card-footer fl_row gp20">
                     <p
-                      onClick={() => swiper.slidePrev()}
+                      onClick={handlePrevious}
                       className="p14 btn txt_center btn-light fl-1 txt_white"
                     >
-                      Previous
+                      {UploadProgress !== 0 ? "Cancel" : "Previous"}
                     </p>
                     <button
                       className="p14 btn btn-primary txt_center fl-1"
                       type="submit"
+                      disabled={UploadProgress !== 0}
                     >
                       Submit
                     </button>

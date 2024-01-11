@@ -25,25 +25,29 @@ function FollowersProfile({
         </div>
       ) : (
         <div className="listing-profiles">
-          {followersData.map((follower, index) => (
-            <div
-              style={{ cursor: "pointer" }}
-              onClick={() => (location.href = "/user/" + follower.userId)}
-              key={index}
-              className="user-data pd20 fl_row gp20 ai_c rd15"
-            >
-              {isMe && (
-                <p
-                  className="unfollow-user"
-                  onClick={() => handleRemoveFollower(follower.userId)}
-                >
-                  x
-                </p>
-              )}
-              <img src={follower.avatar} alt="" />
-              <p className="p14 txt_white">{follower.name}</p>
-            </div>
-          ))}
+          {followersData.length > 0 ? (
+            followersData.map((follower, index) => (
+              <div
+                style={{ cursor: "pointer" }}
+                onClick={() => (location.href = "/user/" + follower.userId)}
+                key={index}
+                className="user-data pd20 fl_row gp20 ai_c rd15"
+              >
+                {isMe && (
+                  <p
+                    className="unfollow-user"
+                    onClick={() => handleRemoveFollower(follower.userId)}
+                  >
+                    x
+                  </p>
+                )}
+                <img src={follower.avatar} alt="" />
+                <p className="p14 txt_white">{follower.name}</p>
+              </div>
+            ))
+          ) : (
+            <p className="txt_white">No followers found.</p>
+          )}
         </div>
       )}
     </div>

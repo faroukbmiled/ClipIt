@@ -63,6 +63,12 @@ function Login() {
     });
   }
 
+  useEffect(() => {
+    if (session?.user) {
+      router.push("/");
+    }
+  }, [session]);
+
   return (
     <div className="body fl_row w-100vw">
       <Head>
@@ -90,14 +96,19 @@ function Login() {
               <div className="right-side fl-1 h-100  fl_col ai_c jc_c">
                 <div className="right-side-wrapper w-100 fl_col gp30">
                   <div className="fl_row jc_c">
-                    <img className="logo" src={ClipiTLogo.src} alt="" />
+                    <img
+                      className="logo"
+                      src={ClipiTLogo.src}
+                      onClick={() => (location.href = "/")}
+                      alt=""
+                    />
                   </div>
                   {session ? (
                     <>
-                      <p>Welcome, {session.user.name}!</p>
+                      {/* <p>Welcome, {session.user.name}!</p>
                       <img className="logo" src={session.user.image} alt="" />
-                      <button onClick={() => signOut()}>Sign out</button>
-                      {/* {router.push("/")} */}
+                      <button onClick={() => signOut()}>Sign out</button> */}
+                      {router.push("/")}
                     </>
                   ) : (
                     <>

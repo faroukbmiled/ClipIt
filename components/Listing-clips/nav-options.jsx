@@ -26,7 +26,7 @@ function NavOptions() {
                     </li>
                     <li className="fl_row ai_c gp24 txt_white pd10-t-b pd28-r-l p14">
                         <img src={LikedVideosIcon.src} alt="LikedVideosIcon" />
-                        <Link href="/Liked-Videos"></Link>
+                        <Link href="/user/me?tab=liked_videos"></Link>
                         <p className="p14">Liked Videos</p>
                     </li>
                 </ul>
