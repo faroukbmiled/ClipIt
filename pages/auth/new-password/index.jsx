@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
+import Head from "next/head";
 
 const newPassword = () => {
   const router = useRouter();
@@ -54,6 +55,10 @@ const newPassword = () => {
 
   return (
     <>
+      <Head>
+        <title>Clipit - New Password</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div>
         <form action="">
           <div>

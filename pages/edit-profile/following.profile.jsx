@@ -40,7 +40,7 @@ function FollowingProfile() {
         Following {followingCount > 0 && `(${followingCount})`}
       </p>
       {loading || !followingData ? (
-        <LoadingSpin primaryColor="#7F56D9" secondaryColor="#fff"/>
+        <LoadingSpin primaryColor="#7F56D9" secondaryColor="#fff" />
       ) : (
         <div className="listing-profiles">
           {followingData.map((following, index) => (
@@ -51,8 +51,17 @@ function FollowingProfile() {
               >
                 x
               </p>
-              <img src={following.avatar} alt="" />
-              <p className="p14">{following.name}</p>
+              <img
+                src={following.avatar}
+                alt=""
+                onClick={() => (location.href = "/user/" + following.userId)}
+              />
+              <p
+                className="p14"
+                onClick={() => (location.href = "/user/" + following.userId)}
+              >
+                {following.name}
+              </p>
             </div>
           ))}
         </div>

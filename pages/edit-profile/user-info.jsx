@@ -3,6 +3,9 @@ import Select from "react-select";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { getCode, getNames, overwrite } from "country-list";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 overwrite([
   {
     code: "IL",
@@ -89,9 +92,15 @@ function UserInfo({ session, status, update }) {
           bio,
         },
       });
+      toast.success("Profile updated successfully");
 
       console.log("Profile updated successfully", response);
     } catch (error) {
+      if (error.response?.data?.errors) {
+        toast.error(error.response?.data?.errors.join(","));
+      } else {
+        toast.error("Error updating profile");
+      }
       console.error("Error updating profile", error);
     }
   };
@@ -237,6 +246,7 @@ function UserInfo({ session, status, update }) {
           </div>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams } from "next/navigation";
+import Head from "next/head";
 import axios from "axios";
 
 const resetPassword = () => {
@@ -38,6 +39,10 @@ const resetPassword = () => {
 
   return (
     <>
+      <Head>
+        <title>Clipit - Reset Password</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div>
         <form action="">
           <div>

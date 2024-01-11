@@ -13,6 +13,9 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import LinearProgress from "@mui/material/LinearProgress";
 import gameCategoriesData from "./categories.json";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function UploadVideoModal({ session, signOut }) {
   const router = useRouter();
 
@@ -91,13 +94,26 @@ function UploadVideoModal({ session, signOut }) {
 
       if (response.status === 200) {
         const result = response.data;
+        toast.success("Video uploaded successfully");
         console.log(result);
         router.reload();
       } else {
+        if (response?.data?.error) {
+          toast.error(error.response?.data?.error);
+        } else {
+          toast.error("Error uploading video");
+        }
         console.error("Error uploading video:", response.statusText);
       }
     } catch (error) {
+      if (error.response?.data?.errors) {
+        toast.error(error.response?.data?.errors.join(","));
+      } else {
+        toast.error("Error uploading video");
+      }
       console.error("Error uploading video:", error.message);
+    } finally {
+      setUplaodProgress(0);
     }
   };
 
@@ -279,6 +295,7 @@ function UploadVideoModal({ session, signOut }) {
                       Submit
                     </button>
                   </div>
+                  <ToastContainer pauseOnFocusLoss draggable autoClose={2000} />
                 </div>
               </SwiperSlide>
             </Swiper>

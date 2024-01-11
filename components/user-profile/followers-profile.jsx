@@ -29,7 +29,6 @@ function FollowersProfile({
             followersData.map((follower, index) => (
               <div
                 style={{ cursor: "pointer" }}
-                onClick={() => (location.href = "/user/" + follower.userId)}
                 key={index}
                 className="user-data pd20 fl_row gp20 ai_c rd15"
               >
@@ -41,8 +40,17 @@ function FollowersProfile({
                     x
                   </p>
                 )}
-                <img src={follower.avatar} alt="" />
-                <p className="p14 txt_white">{follower.name}</p>
+                <img
+                  src={follower.avatar}
+                  alt=""
+                  onClick={() => (location.href = "/user/" + follower.userId)}
+                />
+                <p
+                  className="p14 txt_white"
+                  onClick={() => (location.href = "/user/" + follower.userId)}
+                >
+                  {follower.name}{" "}
+                </p>
               </div>
             ))
           ) : (

@@ -41,7 +41,7 @@ function FollowersProfile() {
         Followers {followersCount > 0 && `(${followersCount})`}
       </p>
       {loading || !followersData ? (
-        <LoadingSpin primaryColor="#7F56D9" secondaryColor="#fff"/>
+        <LoadingSpin primaryColor="#7F56D9" secondaryColor="#fff" />
       ) : (
         <div className="listing-profiles">
           {followersData.map((follower, index) => (
@@ -52,8 +52,17 @@ function FollowersProfile() {
               >
                 x
               </p>
-              <img src={follower.avatar} alt="" />
-              <p className="p14">{follower.name}</p>
+              <img
+                src={follower.avatar}
+                alt=""
+                onClick={() => (location.href = "/user/" + follower.userId)}
+              />
+              <p
+                className="p14"
+                onClick={() => (location.href = "/user/" + follower.userId)}
+              >
+                {follower.name}
+              </p>
             </div>
           ))}
         </div>

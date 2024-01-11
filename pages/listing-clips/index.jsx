@@ -7,6 +7,7 @@ import ListingClipsComponents from "../../components/Listing-clips/listing-clips
 import UserFollowingList from "../../components/Listing-clips/user-following-list";
 import NavOptions from "../../components/Listing-clips/nav-options";
 import Header from "../../components/header/header";
+import Head from "next/head";
 
 function ListingClipsPage() {
   const router = useRouter();
@@ -68,7 +69,6 @@ function ListingClipsPage() {
         }, []);
         const uniqueHashtags = Array.from(new Set(hashtags));
         setHashtags(uniqueHashtags);
-
       } catch (error) {
         console.error("Error fetching latest clips:", error);
       }
@@ -86,41 +86,45 @@ function ListingClipsPage() {
   }, [router.query.search, videosData]);
 
   return (
-    <div id="page-content" className="listingClips-Page ">
-      <div className="pd40" id="header">
-        <Header session={session} status={status} signOut={signOut}></Header>
-      </div>
-      <div id="body">
-        <div id="ListingClips">
-          <div className="ListingClips-wrapper fl_row gp24">
-            <div className="nav-bar">
-              <NavOptions></NavOptions>
-              <hr className="mg20-t-b rd25" />
-              <UserFollowingList session={session}></UserFollowingList>
-            </div>
-            <div className="listing-clips fl_col gp20">
-              {gameCategories && gameCategories.length > 0 ? (
-                <FilterListingClips
-                  gameCategories={gameCategories}
-                  hashtags={hashtags}
-                  onSearch={handleSearch}
-                  searchQuery={searchQuery}
-                  setSearchQuery={setSearchQuery}
-                />
-              ) : (
-                null
-              )}
+    <>
+      <Head>
+        <title>Clipit - Clips</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <div id="page-content" className="listingClips-Page ">
+        <div className="pd40" id="header">
+          <Header session={session} status={status} signOut={signOut}></Header>
+        </div>
+        <div id="body">
+          <div id="ListingClips">
+            <div className="ListingClips-wrapper fl_row gp24">
+              <div className="nav-bar">
+                <NavOptions></NavOptions>
+                <hr className="mg20-t-b rd25" />
+                <UserFollowingList session={session}></UserFollowingList>
+              </div>
+              <div className="listing-clips fl_col gp20">
+                {gameCategories && gameCategories.length > 0 ? (
+                  <FilterListingClips
+                    gameCategories={gameCategories}
+                    hashtags={hashtags}
+                    onSearch={handleSearch}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                  />
+                ) : null}
 
-              <ListingClipsComponents
-                videosData={filteredVideos}
-                setVideosData={setVideosData}
-              ></ListingClipsComponents>
+                <ListingClipsComponents
+                  videosData={filteredVideos}
+                  setVideosData={setVideosData}
+                ></ListingClipsComponents>
+              </div>
             </div>
           </div>
         </div>
+        <div id="footer"></div>
       </div>
-      <div id="footer"></div>
-    </div>
+    </>
   );
 }
 

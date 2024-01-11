@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
+import Head from "next/head";
 
 const verifyAccount = () => {
   const router = useRouter();
@@ -50,6 +51,10 @@ const verifyAccount = () => {
 
   return (
     <>
+      <Head>
+        <title>Clipit - Verify Account</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div>
         <button disabled={loading} onClick={newVerification}>
           verify account
