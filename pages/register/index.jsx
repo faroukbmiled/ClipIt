@@ -245,12 +245,6 @@ export default function Register({ csrfToken }) {
                           onChange={handleCountryChange}
                         />
                       </div>
-
-                      <div className="fl_row jc_s">
-                        <a href="">
-                          <p className="p12 txt_primary">Forgot Password?</p>
-                        </a>
-                      </div>
                     </div>
                     <button
                       disabled={isLoading}

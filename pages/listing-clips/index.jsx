@@ -17,6 +17,7 @@ function ListingClipsPage() {
   const [hashtags, setHashtags] = useState();
   const [filteredVideos, setFilteredVideos] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  // const [videoId, setVideoId] = useState(null);
 
   const handleSearch = (searchQuery) => {
     if (searchQuery.trim() === "") {
