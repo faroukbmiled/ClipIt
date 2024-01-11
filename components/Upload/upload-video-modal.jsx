@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -28,7 +28,7 @@ function UploadVideoModal({ session, signOut }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [gameCategories, setGameCategories] = useState([]);
-  const cancelTokenSource = axios.CancelToken.source();
+  const cancelTokenSourceRef = useRef(axios.CancelToken.source());
 
   useEffect(() => {
     setGameCategories(gameCategoriesData.gameCategories);
@@ -73,6 +73,7 @@ function UploadVideoModal({ session, signOut }) {
       formData.append("hashtag", hashtag);
       formData.append("video", event.target.elements.video.files[0]);
       formData.append("thumbnail", event.target.elements.thumbnail.files[0]);
+      cancelTokenSourceRef.current = axios.CancelToken.source();
 
       const response = await axios.post("/api/user/uploadVideo", formData, {
         headers: {
@@ -85,7 +86,7 @@ function UploadVideoModal({ session, signOut }) {
           setUplaodProgress(percentComplete);
           console.log("Upload Progress: " + percentComplete + "%");
         },
-        cancelToken: cancelTokenSource.token,
+        cancelToken: cancelTokenSourceRef.current.token,
       });
 
       if (response.status === 200) {
@@ -100,11 +101,15 @@ function UploadVideoModal({ session, signOut }) {
     }
   };
 
-  const handlePrevious = () => {
+  const cancelUpload = () => {
     if (UploadProgress !== 0) {
-      cancelTokenSource.cancel("Upload canceled by user");
+      cancelTokenSourceRef.current.cancel("Upload canceled by user");
       setUplaodProgress(0);
     }
+  };
+
+  const handlePrevious = () => {
+    cancelUpload();
     swiper.slidePrev();
   };
 
@@ -224,6 +229,8 @@ function UploadVideoModal({ session, signOut }) {
                         /> */}
                         <select
                           name="category"
+                          disabled={UploadProgress !== 0}
+                          s
                           onChange={(e) => setCategory(e.target.value)}
                         >
                           <option value="" disabled selected>
