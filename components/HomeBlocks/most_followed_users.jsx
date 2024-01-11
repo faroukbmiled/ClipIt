@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import LoadingSpin from "react-loading-spin";
+import PulseLoader from "react-spinners/PulseLoader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import followers_icon from "@assets/icons/followers_icon.svg";
 import eye_icon from "@assets/icons/eye.svg";
@@ -32,7 +32,7 @@ export default function MostFollowedUsers() {
         </div>
         <div className="users-listing fl_col">
           {mostFollowedUsers.length === 0 ? (
-            <LoadingSpin primaryColor="#7F56D9" secondaryColor="#fff"/>
+            <PulseLoader color="#7F56D9"/>
           ) : (
             <Swiper slidesPerView={4} spaceBetween={20}>
               {mostFollowedUsers.map((user) => (

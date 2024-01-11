@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import LoadingSpin from "react-loading-spin";
+import PulseLoader from "react-spinners/PulseLoader";
 import Link from "next/link";
 import axios from "axios";
 
@@ -34,7 +34,7 @@ function MostFollowedUsersListing({ session }) {
         </div>
         <div className="body-wrapper">
           {loading ? (
-            <LoadingSpin primaryColor="#7F56D9" secondaryColor="#fff"/>
+            <PulseLoader color="#7F56D9"/>
           ) : (
             <div className="users-listing fl_col gp15">
               {session?.user ? (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import LoadingSpin from "react-loading-spin";
+import PulseLoader from "react-spinners/PulseLoader";
 import axios from "axios";
 
 function FollowingProfile() {
@@ -40,7 +40,7 @@ function FollowingProfile() {
         Following {followingCount > 0 && `(${followingCount})`}
       </p>
       {loading || !followingData ? (
-        <LoadingSpin primaryColor="#7F56D9" secondaryColor="#fff" />
+        <PulseLoader color="#7F56D9" />
       ) : (
         <div className="listing-profiles">
           {followingData.map((following, index) => (
