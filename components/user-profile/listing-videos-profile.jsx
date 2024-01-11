@@ -25,6 +25,7 @@ function ListingVideosProfile({
   };
 
   const HandleRemoveVideo = async (videoId) => {
+    handleClose();
     await removeVideo(videoId);
   };
 
