@@ -8,7 +8,8 @@ import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Select from "react-select";
-import { getCode, getNames } from "country-list"; // Updated import
+import { getCode, getNames } from "country-list";
+import BeatLoader from "react-spinners/BeatLoader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -28,6 +29,7 @@ export default function Register({ csrfToken }) {
   const [selectedFileName, setSelectedFileName] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const displayFileName = (event) => {
     const fileInput = event.target;
@@ -53,6 +55,7 @@ export default function Register({ csrfToken }) {
   };
 
   const handleRegister = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
 
     const formData = new FormData();
@@ -63,8 +66,11 @@ export default function Register({ csrfToken }) {
     if (selectedImage) {
       formData.append("image", selectedImage);
     }
-
-    sendRegisterRequest(formData);
+    try {
+      await sendRegisterRequest(formData);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const sendRegisterRequest = async (formData) => {
@@ -240,8 +246,11 @@ export default function Register({ csrfToken }) {
                         </a>
                       </div>
                     </div>
-                    <button className="fl_row btn btn-primary p18 mg35-t-b txt_center w-100 jc_c w-500">
-                      Register
+                    <button
+                      disabled={isLoading}
+                      className="fl_row btn btn-primary p18 mg35-t-b txt_center w-100 jc_c w-500"
+                    >
+                      {isLoading ? <BeatLoader color="white" /> : "Register"}
                     </button>
                     <div className="fl_row jc_c p15 gp10 p14">
                       <p className="txt_grey">Have an Account ?</p>
