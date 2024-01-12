@@ -64,7 +64,7 @@ export async function PUT(req: Request, response: Response) {
                     const fileExtension = cover_file.type.split('/').pop() || "invalid";
                     const buffer = Buffer.from(await cover_file.arrayBuffer());
                     const imagePath = saveImage(buffer, user.id.toString(), fileExtension);
-                    updateData.cover = imagePath;
+                    updateData.cover = imagePath ? imagePath : "/userdata/default/default-cover.png";
                 } catch (error) {
                     await prisma.user.delete({ where: { id: user.id } });
                     console.error('Error saving the image:', error);
@@ -86,7 +86,7 @@ export async function PUT(req: Request, response: Response) {
                     const fileExtension = image_file.type.split('/').pop() || "invalid";
                     const buffer = Buffer.from(await image_file.arrayBuffer());
                     const imagePath = saveImage(buffer, user.id.toString(), fileExtension);
-                    updateData.image = imagePath;
+                    updateData.image = imagePath ? imagePath : "/userdata/default/default-avatar.jpg";
                 } catch (error) {
                     await prisma.user.delete({ where: { id: user.id } });
                     console.error('Error saving the image:', error);

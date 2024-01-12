@@ -54,11 +54,22 @@ function LiedVideosMyProfile() {
     }
     return userData;
   };
+
   const handleMetadataLoaded = (videoIndex, duration) => {
     setVideoDurations((prevDurations) => ({
       ...prevDurations,
       [videoIndex]: duration,
     }));
+  };
+
+  const formatDate = (creation_date) => {
+    const creationDate = new Date(creation_date);
+    const formattedDate = creationDate.toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+    return formattedDate;
   };
 
   return (
@@ -102,7 +113,7 @@ function LiedVideosMyProfile() {
                     >
                       <VideoPlayer
                         title={video.video_title}
-                        date={"formattedDate"}
+                        date={formatDate(video.creation_date)}
                         views={video.views}
                         likes={video.likes}
                         src={video.video_url}

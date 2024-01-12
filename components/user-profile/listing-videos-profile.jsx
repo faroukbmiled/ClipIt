@@ -69,6 +69,16 @@ function ListingVideosProfile({
     return userData;
   };
 
+  const formatDate = (creation_date) => {
+    const creationDate = new Date(creation_date);
+    const formattedDate = creationDate.toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+    return formattedDate;
+  };
+
   if (!userData) {
     return (
       <div className="jc_c fl_row w-100vw h-100vh ai_c">
@@ -159,7 +169,7 @@ function ListingVideosProfile({
                     >
                       <VideoPlayer
                         title={video.video_title}
-                        date={"formattedDate"}
+                        date={formatDate(video.creation_date)}
                         views={video.views}
                         likes={video.likes}
                         src={video.video_url}

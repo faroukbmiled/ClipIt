@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { getCode, getNames, overwrite } from "country-list";
 import { ToastContainer, toast } from "react-toastify";
+import BeatLoader from "react-spinners/BeatLoader";
 import "react-toastify/dist/ReactToastify.css";
 
 overwrite([
@@ -21,6 +22,7 @@ function UserInfo({ session, status, update }) {
   const [password, setPassword] = useState("");
   const [coverFile, setCoverFile] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (session?.user) {
@@ -56,6 +58,7 @@ function UserInfo({ session, status, update }) {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const formData = new FormData();
     formData.append("name", username);
@@ -64,11 +67,11 @@ function UserInfo({ session, status, update }) {
     formData.append("country", selectedCountry?.label || "");
     formData.append("bio", bio);
 
-    if (coverFile) {
+    if (coverFile && isImage(coverFile)) {
       formData.append("cover", coverFile);
     }
 
-    if (imageFile) {
+    if (imageFile && isImage(imageFile)) {
       formData.append("image", imageFile);
     }
 
@@ -102,6 +105,18 @@ function UserInfo({ session, status, update }) {
         toast.error("Error updating profile");
       }
       console.error("Error updating profile", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchAndSetFile = async (url, setterFunction) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      setterFunction(new File([blob], "file"));
+    } catch (error) {
+      console.error("Error fetching and setting file:", error);
     }
   };
 
@@ -110,6 +125,12 @@ function UserInfo({ session, status, update }) {
       setBio(session.user.bio);
       setUsername(session?.user?.name);
       setEmail(session?.user?.email);
+      if (session?.user?.image) {
+        fetchAndSetFile(session?.user?.image, setImageFile);
+      }
+      if (session?.user?.cover) {
+        fetchAndSetFile(session?.user?.cover, setCoverFile);
+      }
     }
   }, [session]);
 
@@ -124,7 +145,7 @@ function UserInfo({ session, status, update }) {
               onClick={(e) => handleFormSubmit(e)}
               className="btn btn-primary"
             >
-              Save Settings
+              {isLoading ? <BeatLoader color="white" /> : "Save Settings"}
             </button>
           </div>
           <div className="UserInfo-content">
@@ -144,10 +165,18 @@ function UserInfo({ session, status, update }) {
                           />
                           <img
                             className="data-img rd10"
-                            src={session?.user?.image}
+                            src={
+                              imageFile
+                                ? URL.createObjectURL(imageFile)
+                                : "/userdata/default/default-avatar.jpg"
+                            }
                             alt=""
                           />
-                          <input type="file" onChange={handleImageChange} />
+                          <input
+                            disabled={isLoading}
+                            type="file"
+                            onChange={handleImageChange}
+                          />
                         </div>
                       </div>
                     </div>
@@ -161,10 +190,18 @@ function UserInfo({ session, status, update }) {
                         />
                         <img
                           className="data-img rd10"
-                          src={session?.user?.cover}
+                          src={
+                            coverFile
+                              ? URL.createObjectURL(coverFile)
+                              : "/userdata/default/default-cover.png"
+                          }
                           alt=""
                         />
-                        <input type="file" onChange={handleCoverChange} />
+                        <input
+                          disabled={isLoading}
+                          type="file"
+                          onChange={handleCoverChange}
+                        />
                       </div>
                     </div>
                   </div>
@@ -178,6 +215,7 @@ function UserInfo({ session, status, update }) {
                     value={bio}
                     cols="30"
                     rows="10"
+                    disabled={isLoading}
                   ></textarea>
                 </div>
               </div>
@@ -192,6 +230,7 @@ function UserInfo({ session, status, update }) {
                       type="username"
                       onChange={(e) => setUsername(e.target.value)}
                       value={username}
+                      disabled={isLoading}
                     />
                   </div>
                   <div className="inp_col fl_col fl-1">
@@ -203,6 +242,7 @@ function UserInfo({ session, status, update }) {
                       type="email"
                       onChange={(e) => setEmail(e.target.value)}
                       value={email}
+                      disabled={isLoading}
                     />
                   </div>
                 </div>
@@ -216,6 +256,7 @@ function UserInfo({ session, status, update }) {
                       type="password"
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="*****************"
+                      disabled={isLoading}
                     />
                   </div>
                   <div className="inp_col fl_col fl-1">
@@ -226,6 +267,7 @@ function UserInfo({ session, status, update }) {
                       id="password"
                       type="password"
                       placeholder="*****************"
+                      disabled={isLoading}
                     />
                   </div>
                 </div>
@@ -239,6 +281,7 @@ function UserInfo({ session, status, update }) {
                     {...countryOptions}
                     value={selectedCountry}
                     onChange={handleCountryChange}
+                    disabled={isLoading}
                   />
                 </div>
               </div>
@@ -252,3 +295,12 @@ function UserInfo({ session, status, update }) {
 }
 
 export default UserInfo;
+
+function isImage(file) {
+  if (!file) {
+    return false;
+  }
+  const fileType = file.type;
+  const validImageTypes = ["image/jpeg", "image/png", "image/gif", "image/bmp"];
+  return validImageTypes.includes(fileType);
+}
