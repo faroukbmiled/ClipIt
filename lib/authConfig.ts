@@ -6,11 +6,11 @@ import { comparePassword } from "@lib/passwordUtils";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prismaAuthClient"
 import { exclude } from "@lib/filterUser";
+import prisma from "@lib/authPrisma";
 import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
 
-const prisma = new PrismaClient()
 
 interface User {
     id?: string;
