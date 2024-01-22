@@ -20,7 +20,8 @@ export const withAuth = async (req: any, res: any, allowUsers: boolean = false, 
         }
 
         if (!session) {
-            return res.status(401).json({ error: 'Unauthorized' });
+            res.status(401).json({ error: 'Unauthorized' });
+            throw new Error('Unauthorized');
         }
 
         const { user } = session as {
@@ -33,12 +34,14 @@ export const withAuth = async (req: any, res: any, allowUsers: boolean = false, 
         };
 
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            res.status(404).json({ message: 'User not found' });
+            throw new Error('Unauthorized');
         }
 
         if (!allowUsers) {
             if (!user || (user && user.role !== 'admin')) {
                 res.status(403).json({ error: 'You are not authorized to access this resource.' });
+                throw new Error('Unauthorized');
             }
         }
 
@@ -47,5 +50,6 @@ export const withAuth = async (req: any, res: any, allowUsers: boolean = false, 
     } catch (error) {
         console.error('Error authenticating user:', error);
         res.status(500).json({ error: 'Internal Server Error' });
+        throw new Error('Unauthorized');
     }
 };
