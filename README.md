@@ -22,7 +22,7 @@ npm run start
 
 # Preview
 
-#### Take a tour of the deployed version at server
+#### Take a tour of the deployed version
 
 -> [clip-it](https://clip-it.cloud)
 
