@@ -20,15 +20,34 @@ npm run build
 npm run start
 ```
 
+# Preview
+
+#### Take a tour of the deployed version at server
+
+-> [clip-it](https://clip-it.cloud)
+
+### - Landing page
+![image](https://github.com/faroukbmiled/ClipIt/assets/51106560/090235ea-67da-4dcf-a5bc-637e6274985c)
+![image](https://github.com/faroukbmiled/ClipIt/assets/51106560/2a6d09b5-b873-47e5-a718-6e58154fbe54)
+![image](https://github.com/faroukbmiled/ClipIt/assets/51106560/5fef7c89-1d94-4dac-9052-87fb68ff64f3)
+![image](https://github.com/faroukbmiled/ClipIt/assets/51106560/4fe86a76-0300-4015-afbd-68720ab40ea1)
+
+### - Clips page
+![image](https://github.com/faroukbmiled/ClipIt/assets/51106560/c32ed759-4c10-459a-9761-6ee81a997d72)
+### - Profile page
+![image](https://github.com/faroukbmiled/ClipIt/assets/51106560/c75f1466-3f62-409b-8119-587ed686f4ff)
+![image](https://github.com/faroukbmiled/ClipIt/assets/51106560/9ba1d4da-c5e2-4b44-b1a6-38af6039dcac)
+### - Video player (pop up)
+![image](https://github.com/faroukbmiled/ClipIt/assets/51106560/2a22cc81-4bc4-47e7-bbd7-da12ca47d200)
 
 
-
+### And more available when logged in (edit profile, your own profile page...)
 
 ## Contribution
 
-Contributions play a pivotal role in shaping the vitality of our open-source community, fostering an environment of learning, inspiration, and innovation. Your contributions are truly invaluable and greatly appreciated.
+Contributions play a pivotal role in shaping the vitality of our open-source community, fostering an environment of learning, inspiration, and innovation.
 
-Should you have suggestions to enhance this project, we invite you to fork the repository and submit a pull request. Alternatively, you can share your ideas by opening an issue, labeled as "enhancement." Don't forget to show your support by giving the project a star! Thank you once again for your ongoing contributions!
+Should you have suggestions to enhance this project, we invite you to fork the repository and submit a pull request. Alternatively, you can share your ideas by opening an issue, labeled as "enhancement."
 
 - Fork the Project
 - Create your Feature Branch ```git checkout -b feature/Something```
