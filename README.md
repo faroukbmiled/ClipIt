@@ -8,11 +8,17 @@
 <div align="left">
 <br />
 
-## Introduction:
+## Introduction
 Meet "Clip It": It's a cool website for gamers to show off and check out awesome gaming Clips. With Clip It, you can record your best game moments and share them. Join the fun gaming community, where you can see epic wins, funny fails, and other cool stuff. It's a place to connect with gamers. Start using Clip It now to brag about your gaming skills!
 
+## Context
+This project was made as an End Of Education Project at Holberton School
 
-## Instalation:
+## The Team / Authors
+* Farouk B'Miled [@faroukbmiled](https://github.com/faroukbmiled) - Backend and DevOps Engineer
+* Mahdi Abid [@mahdiabid](https://github.com/mahdixabid) - Designer and frontend developer
+
+## Instalation
 ```
 git clone https://github.com/faroukbmiled/ClipIt.git
 npm i
@@ -43,6 +49,9 @@ npm run start
 
 ### And more available when logged in (edit profile, your own profile page...)
 
+## Architecture
+![image](https://github.com/faroukbmiled/ClipIt/assets/51106560/2b88db22-441d-484c-ae8c-d1102b09a690)
+
 ## Contribution
 
 Contributions play a pivotal role in shaping the vitality of our open-source community, fostering an environment of learning, inspiration, and innovation.
@@ -54,3 +63,8 @@ Should you have suggestions to enhance this project, we invite you to fork the r
 - Commit your Changes ```git commit -m 'Add some changes for Something''```
 - Push to the Branch ```git push origin feature/Something```
 - Open a Pull Request
+
+## License
+Free To use <br/>
+ <br/>
+[MIT](./LICENSE)
