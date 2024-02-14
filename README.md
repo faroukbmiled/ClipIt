@@ -1,6 +1,5 @@
 <div align="center">
-
-  <img src="https://clip-it.cloud/_next/static/media/ClipitLogoWhite.77f42450.png" alt="logo" width="200" height="auto" />
+  <img src="https://github.com/faroukbmiled/ClipIt/assets/51106560/85a36e36-4cb0-475a-b486-6ecb03761be9" alt="logo" width="200" height="auto" />
 <p>
 <div/>
  
